@@ -1,0 +1,39 @@
+
+Timeline: ¡Two months!
+
+End may: Framework / stub
+
+June (end): Draft
+
+
+‣ No page limit
+
+‣ 30% New content on top of MSR paper
+
+‣ Incorporate all of the review feedback
+‣ Section on data collection
+‣ Comprehensive contribution to research and practice
+	‣ Relevance for software development
+‣ Models of innovation (why choose Bass?)
+‣ Extensive literature review
+	‣ Look into litterature on innovation and if it has been applied to software
+	‣ Innovation relating to software packages / opens source (MSc Thesis)
+
+
+‣ More stuff to make it a better paper
+
+
+
+NOT:
+‣ Bigger data set
+‣ Statical perfection
+
+
+
+D(t)
+
+
+D(t) = 0   t < 2004
+
+max(D(t)) > 30
+

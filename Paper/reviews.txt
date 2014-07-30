@@ -1,0 +1,227 @@
+
+
+----------------------- REVIEW 1 ---------------------
+PAPER: 177
+TITLE: Gentoo Package Dependencies over Time
+AUTHORS: Remco Bloemen and Chintan Amrit
+
+
+----------- REVIEW -----------
+The paper describes a dataset of monthly snapshots of Gentoo package dependencies. The dataset covers the period from the beginning of the Gentoo project in 2000 to the first quarter of 2012. My main concern pertaining to this paper is the relation between the data described and the data stored in the compressed filesystem. The data stored in the compressed file system contains pre-processed ebuild files, suggesting that the dataset represents the data available after the parsing step (Section 2.1). However, this data should have been in "154 snapshots of the package database, in a simplified text based format", while the unpacked dataset contains 141 snapshots. Similarly, it is not clear whether the file graphs.bip "that contains all of the graphs in a custom format" corresponds to the 29MB file mentioned at the end of p.2.  
+
+Data availability:
+* "The shear scale of the resulting dataset, 1.3 million packages and 6.9 million dependency relations required a solution to store efficiently. Therefore, we developed a compressed format that only stores the changes between the historical snapshots instead of storing the complete snapshot." First of all, I wonder whether NoSQL databases such as MongoDB can manage this amount of data as well. Second, the solution proposed suggests that retrieving a specific snapshot will take longer: have you evaluated the retrieval times?  
+
+Data collection:
+* Decisions made during the collection process are not sufficiently motivated: e.g., decisions to include only the latest version of a package or not to distinguish between compile time and run time dependencies. While these decisions might satisfy the needs of a particular analysis the authors describe in the accompanying paper, the intention of the data showcase paper should be to provide for a broad spectre of possible applications. The decision to store only one ebuild version is particularly strange since the pre-processed ebuild files are stored in the directories as follows convention year-month/category-subcategory/package/package-version.ebuild, i.e., multiple ebuild files could have been stored in the same package directory. Furthermore, the authors decision to retroactively change all the package names in the historical snapshots to the current names of the packages makes it impossible to reconstruct the earlier system state. 
+
+Paper:
+* The authors do not seem to be aware of the large body of research on dependencies between components. For instance, it is not clear why does one need to design a new text-based formal for inter-package dependencies while Common Upgradeability Description Format, CUDF [http://www.mancoosi.org/reports/tr3.pdf], has been proposed by Treinen and Zacchiroli more than five years ago. Numerous papers have analysed data in the CUDF format, and yearly MICS (Mancoosi International Solver Competition) have been organized in 2010, 2011 and 2012. Additional papers published as part of the Mancoosi project are available on the project site: http://www.mancoosi.org/ For more recent work on upgrade dependencies the authors might consult a paper by Schoenmakers et al. [WCRE 2013].
+* On p.2 the authors discuss the "innovation perspective" without explaining it.
+* p.3 "We then attempted to visualise the entire graph of the latest snapshot after generating the dataset. <...> We tried software packages such as Graphviz, Tulip, Gephi, Jetty and Cytoscope, but after several days of trying and many hours of calculation, none where able to produce any insightful layout for the sixteen thousand nodes and hundred thousand relations." Information visualization research has resulted in numerous approaches for visualization of large graphs corresponding, e.g., to state spaces with tens of thousands of nodes. I wonder whether those techniques might have provided the necessary insights in the Gentoo package structure.
+* p.3 Fat tail of the distribution is not surprising as it is both common in software metrics and in social networks (preferential attachment). The authors could have conjectured a simular model for the packages.
+* p.3 "The histogram was approximately linear in the double logarithmic scale, suggesting a power-law like distribution of the number of adopters for a given technology." A better way to analyse a "power-law-like" distribution would be based on the following paper: A. Clauset, C.R. Shalizi, and M.E.J. Newman, "Power-law distributions in empirical data" SIAM Review 51(4), 661-703 (2009).
+* p.4 "Tulip was able to determine using only objective, deterministic mathematical methods from graph theory that kdelibs plays a central role in the KDE technology." This is hardly surprising.
+* Reference [1] does not indicate how the paper has been published.
+
+
+----------------------- REVIEW 2 ---------------------
+PAPER: 177
+TITLE: Gentoo Package Dependencies over Time
+AUTHORS: Remco Bloemen and Chintan Amrit
+
+
+----------- REVIEW -----------
+Gentoo is a source based linux distro, often distributed solely by
+source because many gentoo users love applying GCC flags.
+
+Gentoo is not Ubuntu and has a different view of the linux world than
+ubuntu does. That said, this document needs to reference the prior MSR
+challenges that used the ultimate debian database as well as the work
+of Daniel German et al. that leveraged the dependency graphs of Debian
+distributions.
+
+
+
+
+      The Ultimate Debian Database: Consolidating bazaar metadata for Quality Assurance and data mining
+      Full Text Sign-In or Purchase
+      2 Author(s)
+      Nussbaum, L. ; LORIA, Nancy-Univ., Nancy, France ; Zacchiroli, S.
+      
+      German et al. The Evolution of the R Software Ecosystem
+      
+      Mining Challenge 2010: FreeBSD, GNOME Desktop and Debian/Ubuntu
+
+
+      Life and death of software packages: an evolutionary study of Debian
+        Raymond Nguyen  University of Waterloo, Waterloo, Canada
+        Ric Holt        University of Waterloo, Waterloo, Canada
+
+
+
+This paper is different though, while the UDD was accessible and not
+necessarily historical the Gentoo people actually used version control
+and keep a history of their dependency information. That's really
+neat.
+
+These authors went out and did a valuable job of preprocessing the
+data and gave us a gentoo dependency graph over time. To do this with
+UDD, requires snapshotting.
+
+The authors put in a lot of effort and made a new tool.
+
+The paper suffers from:
+
+- lack of schema -- please explain better the layout of the data
+
+- lack of tool example - it's not clear how to use the tool
+
+- Please footnote projects and other tools you use. Not everyone knows
+  what squashfs is
+
+I can't view any of your graphs, I segfault everytime!
+
+src/depgraph/./graphanalysis ./graphanalysis  gentoo-depgraph-2005-07.gml
+Reading file
+Parsing file
+
+Program received signal SIGSEGV, Segmentation fault.
+__memcpy_ssse3_back () at ../sysdeps/x86_64/multiarch/memcpy-ssse3-back.S:1515
+1515    ../sysdeps/x86_64/multiarch/memcpy-ssse3-back.S: No such file or directory.
+(gdb) bt
+#0  __memcpy_ssse3_back ()
+    at ../sysdeps/x86_64/multiarch/memcpy-ssse3-back.S:1515
+#1  0x00007ffff7b9168e in char* std::string::_S_construct<char const*>(char const*, char const*, std::allocator<char> const&, std::forward_iterator_tag) ()
+   from /usr/lib/x86_64-linux-gnu/libstdc++.so.6
+#2  0x00007ffff7b916fd in std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, unsigned long, std::allocator<char> const&) () from /usr/lib/x86_64-linux-gnu/libstdc++.so.6
+#3  0x0000000000406d97 in read_string (
+    cursor=@0x7fffffffd648: 0x800786e4abc9 <Address 0x800786e4abc9 out of bounds>) at varint.cpp:158
+#4  0x00000000004034da in Cluster::from_bip (this=this@entry=0x62fa40, 
+    cursor=@0x7fffffffd648: 0x800786e4abc9 <Address 0x800786e4abc9 out of bounds>) at cluster.cpp:19
+#5  0x000000000040492b in Dataset::from_bip (this=0x60a7c0 <dataset>, 
+    cursor=@0x7fffffffd648: 0x800786e4abc9 <Address 0x800786e4abc9 out of bounds>) at dataset.cpp:179
+#6  0x0000000000402482 in main (argc=<optimized out>, argv=<optimized out>)
+    at graphanalysis.cpp:600
+
+I don't have mathmatica?
+
+THe squashfs file has all the ebuild files
+
+Good use of squashfs, it knows repeated files when it seems them.
+
+It'd be nice to know how to read bip without using your C++ code.
+
+Thus I could only partially evaluate the data.
+
+This partialness makes it hard for me to argue either way. I like the
+idea, but I cannot really access the graph which is what I wanted to
+do.
+
+Maybe convert to an existing graph database?
+
+
+----------------------- REVIEW 3 ---------------------
+PAPER: 177
+TITLE: Gentoo Package Dependencies over Time
+AUTHORS: Remco Bloemen and Chintan Amrit
+
+
+----------- REVIEW -----------
+This paper presents a data set that contains the evolution of the dependencies in the portage repository of packages.  The authors have done a lot of dirty work to clean up the data and present a small exploratory study using the data.
+
+Pros:
+ - There's clearly a lot of work that went into collecting the data set.  This is not something that others could do trivially.  For example, the hybrid approach of collecting dependencies.
+ - It's a novel data set.
+ - The case study is interesting and shows a starting point for potentially more research.
+
+Cons:
+ - The data set (as far as I can tell), only includes dependencies and not other package meta-data.
+ - I'm not sure I see a ton of potential uses for this data.
+
+It's not really a surprise that trying to visualize a graph with thousands of nodes yielded nothing meaningful.  The last paragraph in section 3 describes a distribution.  Why not just present a figure of it?
+
+Why squashfs and not a tarball?  Mac and Win users are out of luck?
+
+nit: figure 5 has text that is much too small and the edges are not all visible when printed in black and white.
+
+
+
+
+
+
+----------------------- REVIEW 1 ---------------------
+PAPER: 106
+TITLE: Innovation diffusion in Open Source Software
+AUTHORS: Remco Bloemen, Chintan Amrit, Stefan Kuhlmann and Gonzalo Ordóñez–matamoros
+
+
+----------- REVIEW -----------
+This paper is billed as a research paper, by which I assume this means a full 10 page paper. However, I'm going to review it is a short paper since the papers four pages long and clearly the authors intended it to be submitted as a short paper.
+
+
+As a short paper, I think that this paper has great deal to offer in the limited space available.
+
+
+The paper makes an interesting connection between diffusion, the process of uptake of innovations by markets, and a model of uptake of open source through dependency. The idea is that the growth in dependencies represents the growth in uptake and this allows the authors to compare dependency growth through software repository mining in Gentoo with similar concepts in market uptake of innovation.
+
+In particular, the authors draw a parallel with the work of Bass, a market researcher has published from the late 1960s in management science.
+
+I very much like this kind of work, which draws parallels between software engineering models and models used by other engineers and other sciences, including management and social sciences. While some of these works can tend to be rather "wacky" and forced, I did not sense that this was the case with this paper. The authors present some thought-provoking and interesting results which allow them to draw the conclusion that there really is a genuine connection with previous work management science.
+
+I would also like to see this work extended to see if the Bass model fitted to the data in these papers can be used as a predictive model for future growth and dependence.
+
+
+----------------------- REVIEW 2 ---------------------
+PAPER: 106
+TITLE: Innovation diffusion in Open Source Software
+AUTHORS: Remco Bloemen, Chintan Amrit, Stefan Kuhlmann and Gonzalo Ordóñez–matamoros
+
+
+----------- REVIEW -----------
+This paper uses the package dependency information available in the Gentoo 
+Portage package database to investigate whether the changes in package
+dependencies over time are indicative of the Bass innovation diffusion model.
+Using dependency information over time for a number of libraries, the paper
+investigates which show evidence of an innovator diffusion model versus
+an imitator diffusion model. The paper also points out the lack
+of "discarding" in the Bass model and the need for such extensions.
+
+I thoroughly enjoyed reading this paper. It was very interesting to see the
+innovator versus imitator diffusions of particular libraries/systems.
+In future work, I would encourage you to investigate some in each of the
+categories in more qualitative depth to understand what might have led
+to one diffusion model versus another. 
+
+You should try to add more detail in Section 3 regarding the "special tools"
+that were developed to support the analysis. I have a guess at what you did
+but I shouldn't need to guess. The description of the underlying data should
+be in the paper for others to be able to replicate the work. [In Section 3,
+there is also a mispelling: "falil"]
+
+I didn't totally understand the imitator adoption of git. I think it
+would be worth clarifying (if true) that these are uses of the git
+libraries as opposed to users of git. I think it is particularly
+confusing when you are discussing why the adoption might be of the
+imitator style as it can be read either in terms of a user of the
+git library (i.e., another repository that programmatically includes
+git) or a user of a git repository.
+
+You should also weaken your claim in the conclusion that most projects follow the Bass model based
+on the projects analyzed. An analysis of 8 projects is not enough to make this claim.
+
+
+----------------------- REVIEW 3 ---------------------
+PAPER: 106
+TITLE: Innovation diffusion in Open Source Software
+AUTHORS: Remco Bloemen, Chintan Amrit, Stefan Kuhlmann and Gonzalo Ordóñez–matamoros
+
+
+----------- REVIEW -----------
+This short paper proposes to use the Bass innovation diffusion model for Gentoo packages. Innovators are distinguished from imitators according to the Bass model. The results are basically three figures that show an imitation driven adoption of git, an innovation driven adoption of libmad, and a rise and decline model of xulrunner. 
+
+I found this paper interesting as it adopts the bass model (dating back to 1969) to open source software, leading to a good presentation of adoption phases. 
+
+However, I was not sure whether the assumptions for the Bass model actually hold, as software also declines in usage after some saturation (see Fig 3). The authors also state that the Bass model does not account for this decline. So what is the consequence of this?
+
+Although being a short paper, I would have expected to see many more diffusion models reported, for example, in a table that would cover many packages. As such the paper is interesting, but not delivering much as little can be learned from the 3 examples given.

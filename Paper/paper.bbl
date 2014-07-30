@@ -1,0 +1,92 @@
+\begin{thebibliography}{13}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[rem({\natexlab{a}})]{rem14}
+\emph{{The Gentoo Portage package dependency graph}}, {\natexlab{a}}.
+
+\bibitem[rem({\natexlab{b}})]{rem142}
+\emph{{Innovation Diffusion in Open Source Software}}, {\natexlab{b}}.
+
+\bibitem[{Bass}(1969)]{bass69}
+Frank~M. {Bass}.
+\newblock {A New Product Growth for Model Consumer Durables}.
+\newblock \emph{Management Science}, 15\penalty0 (5):\penalty0 215--227,
+  January 1969.
+
+\bibitem[({BBRI})(2010)]{bass10}
+Bass's Basement Research~Institute ({BBRI}).
+\newblock {The Bass Model Homepage}, 2010.
+\newblock Available at \url{http://www.frankmbass.org/BassModel/}.
+
+\bibitem[Chen(2006)]{chen06}
+Si~Chen.
+\newblock {An Economic Model of Open Source Software Adoption}.
+\newblock \emph{The Journal of Portfolio Management}, 2006.
+
+\bibitem[Crowston et~al.(2008)Crowston, Wei, Howison, and Wiggins]{crowston08}
+Kevin Crowston, Kangning Wei, James Howison, and Andrea Wiggins.
+\newblock {Free/Libre Open-source Software Development: What We Know and What
+  We Do Not Know}.
+\newblock \emph{ACM Comput. Surv.}, 44\penalty0 (2):\penalty0 7:1--7:35, March
+  2008.
+\newblock ISSN 0360-0300.
+\newblock \doi{10.1145/2089125.2089127}.
+\newblock URL \url{http://doi.acm.org/10.1145/2089125.2089127}.
+
+\bibitem[Escanciano(2006)]{carlos06}
+J.~Carlos Escanciano.
+\newblock {Goodness-of-Fit Tests for Linear and Nonlinear Time Series Models}.
+\newblock \emph{Journal of the American Statistical Association}, 101\penalty0
+  (474):\penalty0 531--541, 2006.
+\newblock \doi{10.1198/016214505000001050}.
+\newblock URL
+  \url{http://www.tandfonline.com/doi/abs/10.1198/016214505000001050}.
+
+\bibitem[Haefliger et~al.(2008)Haefliger, von Krogh, and Spaeth]{haefliger08}
+Stefan Haefliger, Georg von Krogh, and Sebastian Spaeth.
+\newblock {Code Reuse in Open Source Software}.
+\newblock \emph{Management Science}, 54\penalty0 (1):\penalty0 180--193, 2008.
+\newblock \doi{10.1287/mnsc.1070.0748}.
+\newblock URL
+  \url{http://pubsonline.informs.org/doi/abs/10.1287/mnsc.1070.0748}.
+
+\bibitem[Haw(2004)]{dedrick04}
+\emph{{An Exploratory Study into Open Source Platform Adoption}}, 2004. Hawaii
+  International Conference on System Sciences.
+\newblock URL \url{http://scholarworks.sjsu.edu/org_mgmt_pub/1}.
+
+\bibitem[{Narayanan}(2001)]{narayanan01}
+Vadake~K. {Narayanan}.
+\newblock \emph{{Managing Technology and Innovation for Competitive
+  Advantage}}.
+\newblock Prentice Hall, Englewood Cliffs, New Jersey, 2001.
+\newblock ISBN 9780130305060.
+
+\bibitem[{Vijay {Mahajan}}(1995)]{mahajan95}
+Eitan {Muller} Frank M.~{Bass} {Vijay {Mahajan}}.
+\newblock {Diffusion of New Products: Emperical Generalizations and Manegerial
+  Uses}.
+\newblock \emph{Marketing Science}, 14:\penalty0 G79--G88, 1995.
+
+\bibitem[{Vijay {Mahajan}}(1990)]{mahajan90}
+Eitan {Muller} Rajendra K.~{Srivastava} {Vijay {Mahajan}}.
+\newblock {Determination of Adopter Categories by Using Innovation Diffusion
+  Models}.
+\newblock \emph{Journal of Marketing Research}, 27:\penalty0 37--50, February
+  1990.
+
+\bibitem[Zheng et~al.(2008)Zheng, Zeng, Li, and Wang]{zheng08}
+Xiaolong Zheng, Daniel Zeng, Huiqian Li, and Feiyue Wang.
+\newblock {Analyzing open-source software systems as complex networks}.
+\newblock \emph{Physica A: Statistical Mechanics and its Applications},
+  387\penalty0 (24):\penalty0 6190--6200, 2008.
+\newblock ISSN 0378-4371.
+\newblock \doi{10.1016/j.physa.2008.06.050}.
+\newblock URL
+  \url{http://www.sciencedirect.com/science/article/pii/S0378437108005852}.
+
+\end{thebibliography}
