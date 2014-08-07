@@ -57,6 +57,15 @@ Now that a data source is selected, it is time to extract the required informati
 
 \section{Related work}
 
+In \citet{crowston08} published a comprehensive overview of academical research on open source software development. Of the 184 articles they cite, the vast majority of articles are case studies or surveys, with 4\% of the articles describing the development of empirical instruments and/or measurements. Also, most articles look at the level of a particular group or project, with 4\% looking at the societal level of interacting projects. Crowston et al. find no articles that develop instruments or measurements on the level of OSS packages, which this paper aims to do.
+
+In their 2008 article \citet{zheng08} analyse the dependency graph of the Gentoo Portage package database as it was in February 2007. The global structure of the graph is analysed in graph theoretic terms of sparsity, clustering coefficient, degree distribution and degree growth rate. The authors conclude that the graph can not be explained well by existing models of network growth and they propose two new models instead. Our study differs in two ways: First, we analyse the changes to the dependency graph over time, whereas Zheng et al. look at a particular instance in 2007. Second, we analyse and model the development of a given software package in the dependency network, instead of the overall development of the network. It can be interesting to study how the Bass diffusion model for the development of individual nodes corresponds to Zheng et al. model for the development of the whole graph.
+
+\citet{haefliger08} study code re-use on six open source projects, they conclude that there is extensive code re-use in open source software. The article proceeds by identifying the process of code re-use, such as the drivers for re-using and the tools used to find relevant code. The study by Haefliger et al. looks at a given project and how it  re-uses existing components, whereas this paper looks at a given project and how it is being re-used by other projects. Additionally, we performed our analysis using a large set of automatically collected and processed empirical data.
+
+\citet{dedrick04} and \citet{chen06} study the adoption process of open source software by (commercial) end users. Their focus is on the competitive economic strengths of open source software versus commercial software. The conclusion is that cost is the most important driver for open source adoption and freedom and extensibility plays a lesser role. The articles do not provide empirical data on the adoption process itself, which makes it hard to compare it to our present finding of a Bass diffusion adoption process.
+
+
 Why this order?
 
 \subsection{Innovation theory}
@@ -322,17 +331,13 @@ Size & 2 MB \\
 
 \section{Exploring the Dataset}
 
-\begin{wrapfigure}{r}{0.5\textwidth}
-\centering
-\includegraphics[width=0.95\linewidth]{packageCountUnfiltered2.pdf}
-\caption{Growth of the total number of packages in the Gentoo package database over time.}\label{fig:pkgsgrowth}
-\end{wrapfigure}
 
-\begin{wrapfigure}{r}{0.5\textwidth}
+\begin{figure}
 \centering
-\includegraphics[width=0.95\linewidth]{packageCountDeltaUnfiltered2.pdf}
-\caption{The number of package additions and removals over time.}\label{fig:pkgsgrowthdelta}
-\end{wrapfigure}
+\subfigure[Total number of packages]{\includegraphics[width=0.45\textwidth]{packageCountUnfiltered2.pdf}\label{fig:pkgsgrowth}}
+\subfigure[Additions and removals]{\includegraphics[width=0.45\textwidth]{packageCountDeltaUnfiltered2.pdf}\label{fig:pkgsgrowthdelta}}
+\caption{Growth of the Gentoo package database over time.}\label{fig:pkgsgrowth}
+\end{figure}
 
 In figure~\ref{fig:pkgsgrowth} the number of packages in the database is plotted over time. One can see how the database started in 2001, underwent a period of rapid growth between 2002---2006 and settled into calm a linear growth from 2006 onwards. In figure~\ref{fig:pkgsgrowthdelta} the rate of introducing and removing packages is plotted over time. This show two spikes, one at the start of 2002 and one in 2005. The cause of these spikes was not thoroughly investigated, but a likely cause is a massive cleanup and refactoring of the database. This is a warning sign that the data exactly at these points might contain a lot of noise. In general, the data before 2006 should be considered with more caution than the data afterwards.
 
@@ -340,23 +345,18 @@ The effect of the growth of the entire dataset on the number of dependencies for
 
 One of the first thing attempted after generating the dataset was to visualize the entire graph of the latest snapshot. The problem is, to make any sense of a graph it has to be laid out visually on a plane, nodes that are connected should be placed close to each other so that connecting lines are short and have little overlap. Software packages such as Graphviz, Tulip, Gephi, Jetty and Cytoscope have been tried, but after days of trying and many hours of calculation, none where able to produce any insightful layout for the sixteen thousand nodes and hundred thousand relations.
 
-\begin{wrapfigure}{r}{0.5\textwidth}
+\begin{figure}
 \centering
-\includegraphics[width=\linewidth]{histo-out.pdf}
-\caption{Double logarithmic histograms of the number of dependencies per package. }\label{fig:dephisto-out}
-\end{wrapfigure}
-
-\begin{wrapfigure}{r}{0.5\textwidth}
-\centering
-\includegraphics[width=\linewidth]{histo-in.pdf}
-\caption{Double logarithmic histograms of the number of dependers per package.}\label{fig:dephisto-in}
-\end{wrapfigure}
+\subfigure[Dependencies per package]{\includegraphics[width=0.45\textwidth]{histo-out.pdf}\label{fig:dephisto-out}}
+\subfigure[Dependers per package]{\includegraphics[width=0.45\textwidth]{histo-in.pdf}\label{fig:dephisto-in}}
+\caption{Double logarithmic histograms of the number of incoming and outgoing dependencies per package.}
+\end{figure}
 
 Since it was impossible to get a visual overview of the entire dependency graph, its structure was plotted using histograms. Figure~\ref{fig:dephisto-out} is a histogram of the number of dependencies per package. A log-log scale was required to make the plot insightful, this reflects the fact that there are many packages with only zero, one or a few dependencies and a few packages with a lot of dependencies. Statistically this means the distribution of the number of dependencies has a fat tail. Likewise, the number of dependers for each package is plotted in figure~\ref{fig:dephisto-in}. This can be interpreted as the distribution of the number of adopters of a given technology. Again, there is a fat tail, even fatter than the one from the number of dependencies. The approximate linearity of the histogram suggest a power-law like distribution of the number of adopters for a given technology. \citet{zheng08} suggest that the structure of package dependency networks is not comparable to known models of social networks and have developed their own model to explain the graph structure.
 
 Since it was impossible to get a visual overview of the entire dependency graph, its structure was plotted using double logarithmic histograms. It was found that there there are many packages with only zero, one or a few dependencies and a few packages with a lot of dependencies. Statistically this means the distribution of the number of dependencies has a fat tail. Likewise, the number of dependers for each package was plotted, this can be interpreted as the distribution of the number of adopters of a given technology. Again, there was a fat tail, even fatter than the one from the number of dependencies. The histogram was approximately linear in the double logarithmic scale, suggesting a power-law like distribution of the number of adopters for a given technology. \citet{zheng08} suggest that the structure of package dependency networks is not comparable to known models of social networks and have developed their own model to explain the graph structure.
 
-\section{the KDE Subgraph}
+\subsection{The KDE Subgraph}
 
 The entire graph might be difficult to visualize, but a small part should be easier. The problem with choosing a small part is that the part must have a meaningful boundary, a random selection will likely have few relations and miss some key packages. It was therefore decided to only pick the packages that belong to the KDE desktop environment. The primary reason is that the author is familiar with this set of packages and knows its structure in some detail. A secondary reason is that the packages are developed by a tightly connected community where component reuse among the projects is stimulated by creating libraries. The selection was implemented by considering only packages in the category \verb|kde-base| from the Gentoo Portage database.
 
@@ -376,7 +376,86 @@ Scattered throughout the figure are yellow dots containing packages that are onl
 
 It is remarkable how only a few dependency relations provide sufficient clues for the clustering algorithm to automatically find related areas of technology. Similar but faster clustering techniques where used on the whole snapshot with similar results. Related packages for certain programming languages (Perl, Php, Java, Python, Ruby) would cluster and packages related to either KDE or GNOME would cluster, among many more. Unfortunately the analysis software was struggling with the size of the dataset and the full set was not investigated further.
 
-\section{TESTING}
+\section{Results}
+
+From the entire list of packages, a few well-known (at least according to the author) packages where selected. The selection criteria was that the package must not have existed before (around) 2004, because the Gentoo Portage database was still too immature then, and the package must have gained a considerable number of dependers since its introduction. In \ref{tbl:results}, we list some selected packages along with their parameters. In all cases the adjusted coefficient of determination $\bar{R}^2$ was more than $99\%$.
+
+\begin{table}
+\centering
+\caption{Results of fitting the Bass model.}\label{tbl:results}
+\begin{tabular}{lr@{ $\pm$}rr@{ $\pm$}rr@{ $\pm$}r}
+\toprule
+Package & \multicolumn{2}{c}{$p$} & \multicolumn{2}{c}{$q$} & \multicolumn{2}{c}{$M$} \\
+\midrule
+\texttt{git}         & 0.00 & 0.01    & 0.73 & 0.13   & 746 & 394 \\
+\texttt{libnotify}   & 0.05 & 0.08    & 0.72 & 0.30   & 103 &   9 \\
+\texttt{udev}        & 0.01 & 0.01    & 0.50 & 0.12   & 200 &  65 \\
+\texttt{cairo}       & 0.01 & 0.01    & 0.43 & 0.09   & 249 &  44 \\
+\texttt{libmad}      & 0.18 & 0.14    & 1.13 & 0.3    &  55 &   1 \\
+\texttt{libtheora}   & 0.11 & 0.09    & 0.63 & 0.21   &  32 &   1 \\
+\texttt{taglib}      & 0.22 & 0.03    & 0.04 & 0.06   &  62 &  12 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{BassFit-git2.pdf}
+\vspace{-2em}
+\caption{The imitation driven adoption of \texttt{git}.}\label{fig:git}
+\vspace{-1.5em}
+\end{figure}
+
+\subsection{Imitator Driven Growth}
+
+The first package we consider is \verb|git|, a modern revision control system that shows an imitator driven adoption. It's growth can be seen in \ref{fig:git}, the corresponding statistics are in \ref{tbl:results}. The package first appeared just before 2005, it had around ten packages depending on it in 2006, twenty in 2008 and is currently used by almost three hundred packages. According to the Bass model, it will continue to grow to approximately 750 users. The innovator inflow is only $0.2\%$ of the potential market per year, so one would expect $0.002\cdot (750 - 300) = 1$ user to adopt \verb|git| out of sheer innovation. Taking the analogy with persons, if someone from the $450$ current non-users where to meet a random person from the entire $750$ market, there is a $\frac{300}{750}= 40\%$ chance of meeting a user which can convince him/her to start using \verb|git|. The chance of this happening is the imitator inflow $q = 0.73$. Therefore, the total number of users \verb|git| can expect to gain from imitation this year is $450\cdot 40\%\cdot 0.73 = 131$. Very much imitator driven!
+
+The relative slowness of \verb|git|'s growth and its dependence on imitator can be explained. Open source projects, and software project in general, consist of numerous large textual files containing source code. Changes made in one place can hugely and unpredictably affect other places. To complicate matters further, usually more than one developer works on the source code at the same time. There are competing systems such as \verb|cvs|, \verb|subversion|, \verb|mercurial|, etcetera., but the basic functionality of maintaining version is provided by all of them. Thus two explanations can be derived for \verb|git|'s growth: First, the revision control system is not a part that affects the products delivered by the open source project and second, there is little incentive to switch unless the new revision control system is proved to be superior.
+
+\verb|libnotify| is a library for notifications. In modern desktop environments applications may want to notify the user of certain events, for example a battery that is about to go empty, a new email or an incoming phone call. The adoption is relatively slow, despite its usefulness. A possible explanation is that the target applications all have their own custom solutions, which the developers are keen to keep.
+
+\verb|udev| is a device manager. Its task is to communicate closely with the hardware drivers in Linux kernel to monitor any changes in the hardware configuration. It represents an architectural change in a very low level component, this might explain its slow imitator driven growth.
+
+\verb|cairo| is a graphics library. It provides facilities for drawing lines, circles, text and other graphics primitives and is used by user graphics-heavy projects such as user interface libraries. Much like \verb|udev| it is an architectural change at a low level, this might explain its similar growth pattern.
+
+\subsection{Innovator Driven Growth}
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{BassFit-libmad2.pdf}
+\vspace{-2em}
+\caption{The innovation driven adoption of \texttt{libmad}.}\label{fig:libmad}
+\vspace{-1em}
+\end{figure}
+
+A typical example of innovator driven growth is given by \verb|libmad|. The model is fitted resulting in \ref{fig:libmad}. Again, the data is neatly explained by a Bass diffusion process, in particular the rapid steep growth and the stable user base afterwards. The name is an acronym for ``library for MPEG Audio Decoding'' and the package provides a high quality mp3 decoder for use in multimedia applications. This might also explain the rapid growth of its adoption: multimedia applications can benefit a lot from good quality mp3 support.
+
+\verb|libtheora| is a library for the Schroedinger video codec. It implements a multimedia standard for use by video players. Just as with \verb|libmad| there is a strong innovator driven growth.
+
+\verb|taglib| is a library that processes metadata from multimedia files. The package allows media players to read and store information such as artist and title from multimedia files. Again, like the other multimedia packages we observe rapid innovator driven growth.
+
+\subsection{Growth and Demise}
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{BassFit-xulrunner-22.pdf}
+\vspace{-2em}
+\caption{The rise and decline of \texttt{xulrunner}.}\label{fig:xulrunner}
+\vspace{-1em}
+\end{figure}
+
+The previous examples are all about projects that start and undergo a growth phase that can be explained by a Bass diffusion process. So far, the Bass diffusion model has appeared to give a very accurate explanation of the adoption of an open source software library.
+
+A Bass diffusion increases monotonically, and never declines. However, not all packages follow this behaviour. Project \verb|libmad| (see \ref{fig:libmad}) is a good example of this contra-behaviour. The package has an innovator driver growth that brings it close to its maximum in about two years. After that, the package's usage remains almost flat for years, and will do so indefinitely if it is a perfect Bass diffusion process. This is called the ``maturity stage'' in product life-cycle parlance.
+
+A real product life-cycle will also include a ``decline stage'' where the product begins to become obsolete. The Bass innovation diffusion model does not account for this. In a deep sense it would not have to, once ideas spread they become part of our collective knowledge and will continue to be used by the new products being developed. But the Bass model was not developed for the spreading of ideas, it was developed in the context of marketing to model the adoption of products. Extending the Bass model to include obsolescence would be an interesting extension for future research.
+
+The package \verb|xulrunner| in the dataset is a nice example of a short but complete life cycle, see \ref{fig:xulrunner}. When the Bass model is applied naively and a least mean squares best-fit is made, the result is a poor fit. If one looks at the dependency growth of the package, the cause is clear: the package becomes obsolete, which the Bass model as presented in section \ref{eq:bass} does not represent. The decline of the package from approximately 2011 onwards can be seen as blue dots in the figure.
+
+Excluding the blue dots from the data results in the Bass model fit from figure \ref{fig:xulrunner}. The fitness increases to $\bar{R}^2=99.54\%$ and the parameters have tighter and reasonable confidence intervals. This is strong evidence that the initial adoption of the package is a Bass diffusion process. To explain the last part, the model should be extended with an obsolescence term. 
+
+
+\subsection{Hypothesis testing}
 
 · Filter on >2004  >30
 · Select 10 randomly where
@@ -388,8 +467,6 @@ Hypotheses: “Package dependency growth fits a Bass diffusion process”
 To test this hypotheses we do the following: 
 
 → Explain why discontinuities are unnatural and filter on them
-
-
 
 \begin{itemize}
 	\item Start with all the packages in the Gentoo portage database. (21\,380)
@@ -525,94 +602,6 @@ The growth curves with large discontinuities are rejected. The hypotheses concer
 The package \texttt{dev-libs/libunique} does not have a good fit, but looking at the graph, \raisebox{-.15em}{\includegraphics[height=.8em,trim=7em 0 0 0,clip=true]{sparkline-218-dev-libs-libunique.pdf}}, it goes down at the end. This is demonstraded even more clearly in \texttt{net-libs/xulrunner}, \raisebox{-.15em}{\includegraphics[height=.8em,trim=3em 0 0 0,clip=true]{sparkline-140-net-libs-xulrunner.pdf}}, which declines almost completely.
 
 
-\section{Results}
-
-From the entire list of packages, a few well-known (at least according to the author) packages where selected. The selection criteria was that the package must not have existed before (around) 2004, because the Gentoo Portage database was still too immature then, and the package must have gained a considerable number of dependers since its introduction. In \ref{tbl:results}, we list some selected packages along with their parameters. In all cases the adjusted coefficient of determination $\bar{R}^2$ was more than $99\%$.
-
-\begin{table}
-\centering
-\caption{Results of fitting the Bass model.}\label{tbl:results}
-\begin{tabular}{lr@{ $\pm$}rr@{ $\pm$}rr@{ $\pm$}r}
-\toprule
-Package & \multicolumn{2}{c}{$p$} & \multicolumn{2}{c}{$q$} & \multicolumn{2}{c}{$M$} \\
-\midrule
-\texttt{git}         & 0.00 & 0.01    & 0.73 & 0.13   & 746 & 394 \\
-\texttt{libnotify}   & 0.05 & 0.08    & 0.72 & 0.30   & 103 &   9 \\
-\texttt{udev}        & 0.01 & 0.01    & 0.50 & 0.12   & 200 &  65 \\
-\texttt{cairo}       & 0.01 & 0.01    & 0.43 & 0.09   & 249 &  44 \\
-\texttt{libmad}      & 0.18 & 0.14    & 1.13 & 0.3    &  55 &   1 \\
-\texttt{libtheora}   & 0.11 & 0.09    & 0.63 & 0.21   &  32 &   1 \\
-\texttt{taglib}      & 0.22 & 0.03    & 0.04 & 0.06   &  62 &  12 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\begin{figure}
-\centering
-\includegraphics[width=\linewidth]{BassFit-git2.pdf}
-\vspace{-2em}
-\caption{The imitation driven adoption of \texttt{git}.}\label{fig:git}
-\vspace{-1.5em}
-\end{figure}
-
-\subsection{Imitator Driven Growth}
-
-The first package we consider is \verb|git|, a modern revision control system that shows an imitator driven adoption. It's growth can be seen in \ref{fig:git}, the corresponding statistics are in \ref{tbl:results}. The package first appeared just before 2005, it had around ten packages depending on it in 2006, twenty in 2008 and is currently used by almost three hundred packages. According to the Bass model, it will continue to grow to approximately 750 users. The innovator inflow is only $0.2\%$ of the potential market per year, so one would expect $0.002\cdot (750 - 300) = 1$ user to adopt \verb|git| out of sheer innovation. Taking the analogy with persons, if someone from the $450$ current non-users where to meet a random person from the entire $750$ market, there is a $\frac{300}{750}= 40\%$ chance of meeting a user which can convince him/her to start using \verb|git|. The chance of this happening is the imitator inflow $q = 0.73$. Therefore, the total number of users \verb|git| can expect to gain from imitation this year is $450\cdot 40\%\cdot 0.73 = 131$. Very much imitator driven!
-
-The relative slowness of \verb|git|'s growth and its dependence on imitator can be explained. Open source projects, and software project in general, consist of numerous large textual files containing source code. Changes made in one place can hugely and unpredictably affect other places. To complicate matters further, usually more than one developer works on the source code at the same time. There are competing systems such as \verb|cvs|, \verb|subversion|, \verb|mercurial|, etcetera., but the basic functionality of maintaining version is provided by all of them. Thus two explanations can be derived for \verb|git|'s growth: First, the revision control system is not a part that affects the products delivered by the open source project and second, there is little incentive to switch unless the new revision control system is proved to be superior.
-
-\verb|libnotify| is a library for notifications. In modern desktop environments applications may want to notify the user of certain events, for example a battery that is about to go empty, a new email or an incoming phone call. The adoption is relatively slow, despite its usefulness. A possible explanation is that the target applications all have their own custom solutions, which the developers are keen to keep.
-
-\verb|udev| is a device manager. Its task is to communicate closely with the hardware drivers in Linux kernel to monitor any changes in the hardware configuration. It represents an architectural change in a very low level component, this might explain its slow imitator driven growth.
-
-\verb|cairo| is a graphics library. It provides facilities for drawing lines, circles, text and other graphics primitives and is used by user graphics-heavy projects such as user interface libraries. Much like \verb|udev| it is an architectural change at a low level, this might explain its similar growth pattern.
-
-\subsection{Innovator Driven Growth}
-
-\begin{figure}
-\centering
-\includegraphics[width=\linewidth]{BassFit-libmad2.pdf}
-\vspace{-2em}
-\caption{The innovation driven adoption of \texttt{libmad}.}\label{fig:libmad}
-\vspace{-1em}
-\end{figure}
-
-A typical example of innovator driven growth is given by \verb|libmad|. The model is fitted resulting in \ref{fig:libmad}. Again, the data is neatly explained by a Bass diffusion process, in particular the rapid steep growth and the stable user base afterwards. The name is an acronym for ``library for MPEG Audio Decoding'' and the package provides a high quality mp3 decoder for use in multimedia applications. This might also explain the rapid growth of its adoption: multimedia applications can benefit a lot from good quality mp3 support.
-
-\verb|libtheora| is a library for the Schroedinger video codec. It implements a multimedia standard for use by video players. Just as with \verb|libmad| there is a strong innovator driven growth.
-
-\verb|taglib| is a library that processes metadata from multimedia files. The package allows media players to read and store information such as artist and title from multimedia files. Again, like the other multimedia packages we observe rapid innovator driven growth.
-
-\subsection{Growth and Demise}
-
-\begin{figure}
-\centering
-\includegraphics[width=\linewidth]{BassFit-xulrunner-22.pdf}
-\vspace{-2em}
-\caption{The rise and decline of \texttt{xulrunner}.}\label{fig:xulrunner}
-\vspace{-1em}
-\end{figure}
-
-The previous examples are all about projects that start and undergo a growth phase that can be explained by a Bass diffusion process. So far, the Bass diffusion model has appeared to give a very accurate explanation of the adoption of an open source software library.
-
-A Bass diffusion increases monotonically, and never declines. However, not all packages follow this behaviour. Project \verb|libmad| (see \ref{fig:libmad}) is a good example of this contra-behaviour. The package has an innovator driver growth that brings it close to its maximum in about two years. After that, the package's usage remains almost flat for years, and will do so indefinitely if it is a perfect Bass diffusion process. This is called the ``maturity stage'' in product life-cycle parlance.
-
-A real product life-cycle will also include a ``decline stage'' where the product begins to become obsolete. The Bass innovation diffusion model does not account for this. In a deep sense it would not have to, once ideas spread they become part of our collective knowledge and will continue to be used by the new products being developed. But the Bass model was not developed for the spreading of ideas, it was developed in the context of marketing to model the adoption of products. Extending the Bass model to include obsolescence would be an interesting extension for future research.
-
-The package \verb|xulrunner| in the dataset is a nice example of a short but complete life cycle, see \ref{fig:xulrunner}. When the Bass model is applied naively and a least mean squares best-fit is made, the result is a poor fit. If one looks at the dependency growth of the package, the cause is clear: the package becomes obsolete, which the Bass model as presented in section \ref{eq:bass} does not represent. The decline of the package from approximately 2011 onwards can be seen as blue dots in the figure.
-
-Excluding the blue dots from the data results in the Bass model fit from figure \ref{fig:xulrunner}. The fitness increases to $\bar{R}^2=99.54\%$ and the parameters have tighter and reasonable confidence intervals. This is strong evidence that the initial adoption of the package is a Bass diffusion process. To explain the last part, the model should be extended with an obsolescence term. 
-
-\section{Related Work}
-
-In \citet{crowston08} published a comprehensive overview of academical research on open source software development. Of the 184 articles they cite, the vast majority of articles are case studies or surveys, with 4\% of the articles describing the development of empirical instruments and/or measurements. Also, most articles look at the level of a particular group or project, with 4\% looking at the societal level of interacting projects. Crowston et al. find no articles that develop instruments or measurements on the level of OSS packages, which this paper aims to do.
-
-In their 2008 article \citet{zheng08} analyse the dependency graph of the Gentoo Portage package database as it was in February 2007. The global structure of the graph is analysed in graph theoretic terms of sparsity, clustering coefficient, degree distribution and degree growth rate. The authors conclude that the graph can not be explained well by existing models of network growth and they propose two new models instead. Our study differs in two ways: First, we analyse the changes to the dependency graph over time, whereas Zheng et al. look at a particular instance in 2007. Second, we analyse and model the development of a given software package in the dependency network, instead of the overall development of the network. It can be interesting to study how the Bass diffusion model for the development of individual nodes corresponds to Zheng et al. model for the development of the whole graph.
-
-\citet{haefliger08} study code re-use on six open source projects, they conclude that there is extensive code re-use in open source software. The article proceeds by identifying the process of code re-use, such as the drivers for re-using and the tools used to find relevant code. The study by Haefliger et al. looks at a given project and how it  re-uses existing components, whereas this paper looks at a given project and how it is being re-used by other projects. Additionally, we performed our analysis using a large set of automatically collected and processed empirical data.
-
-\citet{dedrick04} and \citet{chen06} study the adoption process of open source software by (commercial) end users. Their focus is on the competitive economic strengths of open source software versus commercial software. The conclusion is that cost is the most important driver for open source adoption and freedom and extensibility plays a lesser role. The articles do not provide empirical data on the adoption process itself, which makes it hard to compare it to our present finding of a Bass diffusion adoption process.
-
 \section{Conclusions and Future Work}
 
 The growth of the number of packages depending on a packages can be modelled as a a Bass diffusion process. Overall the Bass diffusion model gave very a good fit for most OSS projects. Using only four parameters, it was able to describe the growth curves from the empirical data. Full statistical rigour would require a more involved analysis using the methods from, for example, \citet{carlos06}, but given the amount of and quality of evidence found we can conclude that most OSS project do follow the Bass diffusion model.
@@ -625,7 +614,7 @@ The package dependency graph contains empirical data to test extensions of the B
 
 The scale and complexity of the dependency graphs and open source innovation requires some care. Three notable issues became apparent in this study: First, In the open source community there is a lot of forking. It is not always clear whether a forked project constitutes the continuation of the original project or a separate new project. A more thorough study on the nature of forking could provide the insights to resolve this. Second, due to the public nature of open source development many immature or abandoned projects are visible in the larger datasets. This is good from a scientific perspective: it allows one to research projects from their early beginning and look at projects that failed to grow or became obsolete. But it clouds the `big picture' with many projects that do not significantly contribute to the overall innovation. In large datasets one would have to devise a relevance metric to select the relevant metrics. Such metrics could be the number of developers, the number users or the number of dependees. Third, the sheer scale of the available OSS databases provide challenges for analysis. Specialist tooling is required to transform the raw data into more manageable formats.
 
-\section{Relevance}
+\section{Relevance — Implications to practice and research}
 
 Type four theory: Explains and predicts.
 
