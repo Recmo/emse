@@ -23,12 +23,14 @@
 \begin{document}
 
 \title{Gentoo Package Dependencies over Time}
-\subtitle{FGH}
-\dedication{JKL}
+\subtitle{Subtitle}
+\dedication{}
 \author{Remco Bloemen \and Chintan Amrit}
 \institute{University of Twente}
 
 \maketitle
+
+\tableofcontents
 
 \begin{abstract}
 Open source distributions such as Gentoo need to accurately track dependency relations between software packages in order to install working systems. To do this, Gentoo has a carefully authored database containing those relations. In this paper, we extract the Gentoo package dependency graph and its changes over time. The final dependency graph spans 15 thousand open source projects and 80 thousand dependency relations. Furthermore, the development of this graph is tracked over time from the beginning of the Gentoo project in 2000 to the first quarter of 2012, with monthly resolution. The resulting dataset provides many opportunities for research. In this paper we explore cluster analysis to reveals meaningful relations between packages and in a separate paper we analyze changes in the dependencies over time to get insights in the innovation dynamics of open source software.
@@ -38,6 +40,132 @@ Open source distributions such as Gentoo need to accurately track dependency rel
 \section{Introduction}
 
 We study software innovation from the adoption perspective. Adoption reflects innovation 'better' than changes within packages. Because reasons.
+
+
+
+\section{Introduction}
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{depgraph.pdf}
+\caption{Example dependency graph.}\label{fig:depgraph-chat}
+\vspace{-1em}
+\end{figure}
+
+No software project stands entirely on its own. Software is usually developed by taking one or more existing libraries of components and combining those components in ways to create new products. Take for example a simple chat application. The chat application uses a different library for user interface development that provides components such as a window a text entry field and a button (that is labeled "send message" by the chat application). This user interface library in its turn uses a graphics library to draw the lines, rectangles and text necessary for the fields and buttons. The graphics library uses a library to read font files and uses the fonts to turn text into pictures that can be displayed on the screen. The graphics library then sends the contents of the window to the window manager, which in turns uses a graphics card driver to instruct the hardware. The chat application uses a networking library to provide it with the basic components for internet communication and uses a file library to store the users settings. The same file library is also used by the font library to read font files. The dependency graph so described is drawn in figure~\ref{fig:depgraph-chat}. Compared to a real chat application the graph is hugely simplified, tracing a real chat application back to all the components involved will likely result in hundreds of libraries used.
+
+In the remainder of this article, the terms `project', `package' and `library' will be used as synonyms for a node in the dependency graph.
+
+Now that a data source is selected, it is time to extract the required information and process the data into a form that allows easy calculations. The major steps are collecting the raw data, parsing this into a simpler format and producing the final dependency graph from this simpler form. Some post-processing can then be done on the dependency graph. In the process, the dataset will shrink from thirteen gigabytes taking more than a week to collect, to thirty megabytes that can be processed in four seconds.
+
+\section{Introduction}
+
+\emph{Diffusion} is the process of market uptake of an innovation, the users of a particular innovation are called \emph{adopters} \citep{narayanan01}. Taking the open source projects as a 'market', these concepts can be applied to libraries and dependencies. For example, consider the projects with a graphical user interface (GUI). These have a demand for a GUI toolkit, and there are several competing implementations available (\verb|Qt|, \verb|GTK|, \verb|Wx|, etc..). The introduction and uptake of a new GUI toolkit is a process of innovation diffusion and the projects that use a particular toolkit can be considered adopters of that toolkit. When talking about software projects such a relation is often called a \emph{dependency}.
+In the next section we describe the Bass \citep{bass69}  diffusion model, we then describe the results of our analysis of fitting the Bass diffusion model on the Gentoo portage package dependency graph. This is followed by a discussion of the results of our analysis and finally we end the paper with the conclusions from our analysis and some discussion of possible future work.
+
+\section{The Bass Diffusion Model}
+
+
+
+\subsection{The Bass diffusion model}\label{sect:Bass}
+
+Once an innovation is released to the public a process starts where an increasing portion of the market decides to use the innovation. In the theory of innovation dynamics this process is called diffusion and the users are called adopters. \citep[see][chapter 4]{narayanan01}
+
+To model the process of innovation diffusion \cite{bass69} introduces two processes that propagate an innovation. The first processes is involves individuals that decide to use an innovation based on their perception of its merits, without looking at the experiences of others. The second process involves the word-of-mouth effect or the bandwagon effect, individuals adopt the innovation solely because they hear of the experiences of previous adopters. Of course in reality, everyone will be somewhere in between these two extreme types, but for the sake of modelling it suffices to consider the relative abundance of both types.
+
+It should be noted that \cite{bass69} and all later authors, use confusing terms to describe the two types of adopters. The first type are called "innovators", not to be confused with those actually inventing the innovation and the second type are called "imitators", not to be confused with those developing imitating offerings. If one remembers that the model concerns the demand side of the market and not the supply side than it will all be clear.
+
+To model the diffusion process, let $M$ be the total market size for the innovation and $A$ the current number of adopters, such that $0 \ge A \ge M$. The two adoption processes can then be described as follows: \citep[see also][]{bass10,mahajan90}
+
+\emph{Innovators}: Some individuals in the market that don't use the innovation might decide to adopt the innovation. The rate at which this happens is $p$, the coefficient of innovation. The number of user that do not use the innovation is $M-A$, so the inflow of adopters is $p(M-A)$.
+
+\emph{Imitators}: The people who use the innovation can express their fondness to people who do not yet use the innovation, which can influence them to adopt the innovation. The rate at which this happens is $q$, the rate of imitation. The number of user that do not use the innovation is again $M-A$, the chance of meeting someone that does use the innovation is proportional to $\frac{A}{M}$ so the inflow of imitators can be modelled as $q\frac{A}{M}(M-A)$.
+
+When these two effects are combined, the net inflow of users, represented by the time derivative of $A$, can be modelled as:
+\begin{align*}
+\nd{A}{t} &= p(M - A) + q\frac{A}{M}(M - A) \\
+&= \left(p + q\frac{A}{M} \right)(M - A)
+\end{align*}
+
+Often one is not concerned with the market size $M$ and only interested in the fraction of the market---denoted with $F$---that uses the innovation. Of course, $F=\frac{A}{M}$. By dividing the above equation with $M$ one obtains the Bass model:
+
+\begin{align}\label{eq:bass-ode}
+\nd{F}{t} &= \left(p + q F\right)(1 - F)
+\end{align}
+
+\cite{bass69} solves this ordinary differential equation, which results in the following function for $F$:
+
+\begin{align}\label{eq:bass-direct}
+F(t) &= \frac{1 - \e^{-(p+q)t}}{1+\frac{q}{p}\e^{-(p+q)t}}
+\end{align}
+
+\begin{figure}\small\centering
+\caption[Bass model of innovation diffusion]{The Bass model of innovation diffusion. The blue trace represents a Bass diffusion with $p=0.01$ and $q=0.90$. The purple trace bass diffusion with $p=0.90$ and $q=0.01$.}
+\label{fig:bass}
+\includegraphics{Bass.pdf}
+\end{figure}
+
+In figure~\ref{fig:bass} two Bass diffusions are plotted using equation \eqref{eq:bass-direct}, one representing an innovation diffusion with many innovators and few imitators and one representing a diffusion with many imitators and few innovators. When there are more imitators it takes a while for the innovation to take of since the majority of the potential users are waiting for someone else to try it first.
+
+To fit the model of equation~\eqref{eq:bass-direct} to empirical data two additions are necessary. First the market size has to be re-introduced, this is done by taking $A(t) = M F(t)$. The market size, $M$, in this equation represents the total number of potential adopters for this specific product, not the total number of adopters for a category of products. Since it is not possible to know in advance who will eventually be using an innovation it is difficult to determine $M$ in advance. Furthermore, the Bass model assumes the market size to be constant and competition free, which is unlikely in practise. Therefore the quantity has to be fitted to the data, statistical goodness-of-fit measures can then be used to determine the validity of the assumptions. The second addition is the time at which the innovation is introduced. Until now the assumption was that the introduction was at $t=0$, in arbitrary units. For empirical data fitting it is necessary to be able to specify an arbitrary introduction time. This can be achieved by introducing the introduction time $t_0$ in the equation as $A(t) = M F(t - t_0)$. Again, this variable can be fitted if it can not be determined in advance.
+
+\begin{align} \label{eq:bass-model}
+	A(t) &= M \frac{1 - \e^{-(p+q)(t-t_0)}}{1 + \frac{q}{p}\e^{-(p+q)(t-t_0)}}
+\end{align}
+
+Equation~\eqref{eq:bass-model} incorporates the two additions and can be readily applied to empirical data. In \cite{mahajan95} and many other empirical studies this happens in the differential form, since only absolute sales figures are available and not absolute user figures. The dependency graph method presented later allows one to obtain absolute usage number, so the differential form is not further used. 
+
+
+The interpretation of the variables and parameters and their dimensions is presented in table~\ref{tbl:bass-model}. When applying the formula one should note that it is non-linear, so ordinary linear regression can not be used. Instead one can use non-linear least squares regression, but note the correct number of the degrees of freedom. This can be done using existing mathematical/statistical packages. For this thesis the  \verb|NonlinearModelFit| procedure in Mathematica was used. 
+
+\begin{table}\centering\small
+\caption[Bass model variables and parameters]{Overview of the variables and parameters of the Bass model as presented in equation~\eqref{eq:bass-model}.}
+\label{tbl:bass-model}
+\begin{tabular}{cll}
+\toprule
+& Dimension & description \\
+\midrule
+$A$   & adopters    & adopters at a the model time \\
+$t$   & time        & model time \\
+\midrule
+$t_0$ & time        & time of innovation introduction \\
+$M$   & adopters    & number of potential adopters \\
+$p$   & time$^{-1}$ & rate of adopter innovation \\
+$q$   & time$^{-1}$ & rate of adopter imitation \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+
+To model the process of innovation diffusion, Bass \citep{bass69} introduces two processes that propagate an innovation. The first processes involves individuals that decide to use an innovation based on their perception of its merits. The second process involves the word-of-mouth effect or the bandwagon effect: individuals adopt the innovation because they hear of the experiences of previous adopters. In reality however, everyone will be somewhere in between these two extreme types, but for the sake of modelling it suffices to consider the relative contribution of both types. It should be noted that for historical reasons \citet{bass69} and all later authors use the following terms; the first type are called "innovators", not to be confused with those actually inventing the innovation and the second type are called "imitators", not to be confused with those developing imitating offerings. Taking $M$ to stand for the total market size and $A$ to stand for the total number of adopters the Bass diffusion can be modelled with two simultaneous processes:
+
+\emph{Innovators}: Market participants not using use the innovation yet might decide to adopt the innovation. The rate at which this happens is $p$, the coefficient of innovation. The number of user that do not use the innovation is $M-A$, so the inflow of adopters is $p(M-A)$.
+
+\emph{Imitators}: Users of the innovation can express their fondness to market participants who do not yet use the innovation. This can influence them to adopt the innovation at a rate $q$, the rate of imitation. The number of user that do not use the innovation is again $M-A$, the chance of meeting someone that does use the innovation is proportional to $\frac{A}{M}$ so the inflow of imitators can be modelled as $q\frac{A}{M}(M-A)$.
+
+When these two effects are combined the net inflow of adopters represented by the time derivative of $A$ can be modelled as
+
+\begin{align}
+	\nd{A}{t} &= p (M-A) + q\frac{A}{M}(M-A) \text{.}
+\end{align}
+
+This first order homogeneous ordinary differential equation can be solved for $A(t)$ to give
+
+\begin{align} \label{eq:bass}
+	A(t) &= M \frac{1 - \e^{-(p+q)t}}{1 + \frac{q}{p} \e^{-(p+q)t}} \text{.}
+\end{align}
+
+The solution assumes the innovation is introduced at time zero, to account for this the substitution $t \rightarrow t - t_0$ is made. This results in four parameters, $t_0$, $M$, $p$ and $q$ that can be fit to the empirical data.
+
+\section{The Gentoo Portage Dependency Graph}
+
+The empirical data used is the time evolution of the Gentoo Portage package dependency graph \citep{rem14}. This dataset contains the full dependency graph for every month since the project was initiated in $2000$, the resulting graphs have a combined total of 1.3 million packages and 6.9 million dependency relations, with the largest graph having 15 thousand packages and 80 thousand dependency relations.
+
+Special tools where developed to extract the time series of the number of adopters $A_t$ for a given package. This time series was then fit to \eqref{eq:bass} using Mathematica's \texttt{NonLinearModelFit}. The goodness-of-fit was analysed using an ANOVA table and calculated using the adjust coefficient of determination $\bar{R}^2$. The parameters were extracted from the fit, and confidence intervals were calculated under assumptions of normality. In \ref{tbl:results} the relevant parameters are presented with their mean value and a $95\%$ confidence interval. Since normality was assumed, the confidence intervals ignore the $p \ge 0$ and $q \ge 0$ constraints. 
+
+The plots were drawn using a thick red line for the model and shades of red for the prediction bands. The thick red line was drawn according to \eqref{eq:bass}, with the mean values used as parameters. Then single value predictions bands were calculated for $90\%$, $95\%$, $99\%$ and $99.9\%$ confidence and were drawn in progressively darker shades of pink. They represent a prediction for where a single additional value would likely fall. According to the model and the uncertainty introduced by the fit, there is a $90\%$ chance that it will fall in the innermost band, $95\%$ chance that it would falil in the second band, etc. If the data fits the model properly, one would expect to see $90\%$ of the points in the inner band. Finally, the empirical data points were plotted as black dots, connected with a thin vertical line - the residual error of the model.
+
 
 
 \section{Related work}
@@ -93,22 +221,6 @@ Power law distributions:
 
 A. Clauset, C.R. Shalizi, and M.E.J. Newman, "Power-law distributions in empirical data" SIAM Review 51(4), 661-703 (2009).
 
-
-
-\section{Introduction}
-
-\begin{figure}
-\centering
-\includegraphics[width=\linewidth]{graphs/depgraph.pdf}
-\caption{Example dependency graph.}\label{fig:depgraph-chat}
-\vspace{-1em}
-\end{figure}
-
-No software project stands entirely on its own. Software is usually developed by taking one or more existing libraries of components and combining those components in ways to create new products. Take for example a simple chat application. The chat application uses a different library for user interface development that provides components such as a window a text entry field and a button (that is labeled "send message" by the chat application). This user interface library in its turn uses a graphics library to draw the lines, rectangles and text necessary for the fields and buttons. The graphics library uses a library to read font files and uses the fonts to turn text into pictures that can be displayed on the screen. The graphics library then sends the contents of the window to the window manager, which in turns uses a graphics card driver to instruct the hardware. The chat application uses a networking library to provide it with the basic components for internet communication and uses a file library to store the users settings. The same file library is also used by the font library to read font files. The dependency graph so described is drawn in figure~\ref{fig:depgraph-chat}. Compared to a real chat application the graph is hugely simplified, tracing a real chat application back to all the components involved will likely result in hundreds of libraries used.
-
-In the remainder of this article, the terms `project', `package' and `library' will be used as synonyms for a node in the dependency graph.
-
-Now that a data source is selected, it is time to extract the required information and process the data into a form that allows easy calculations. The major steps are collecting the raw data, parsing this into a simpler format and producing the final dependency graph from this simpler form. Some post-processing can then be done on the dependency graph. In the process, the dataset will shrink from thirteen gigabytes taking more than a week to collect, to thirty megabytes that can be processed in four seconds.
 
 \section{Collecting}
 
@@ -178,13 +290,13 @@ Using all the observations and choices made above, a tool was developed to extra
 
 \begin{figure}
 \centering
-\includegraphics[width=\linewidth]{graphs/packageCountUnfiltered2.pdf}
+\includegraphics[width=\linewidth]{packageCountUnfiltered2.pdf}
 \caption{Growth of the total number of packages in the Gentoo package database over time.}\label{fig:pkgsgrowth}
 \end{figure}
 
 \begin{figure}
 \centering
-\includegraphics[width=\linewidth]{graphs/packageCountDeltaUnfiltered2.pdf}
+\includegraphics[width=\linewidth]{packageCountDeltaUnfiltered2.pdf}
 \caption{The number of package additions and removals over time.}\label{fig:pkgsgrowthdelta}
 \end{figure}
 
@@ -196,13 +308,13 @@ One of the first thing attempted after generating the dataset was to visualize t
 
 \begin{figure}
 \centering
-\includegraphics[width=\linewidth]{graphs/histo-out.pdf}
+\includegraphics[width=\linewidth]{histo-out.pdf}
 \caption{Double logarithmic histograms of the number of dependencies per package. }\label{fig:dephisto-out}
 \end{figure}
 
 \begin{figure}
 \centering
-\includegraphics[width=\linewidth]{graphs/histo-in.pdf}
+\includegraphics[width=\linewidth]{histo-in.pdf}
 \caption{Double logarithmic histograms of the number of dependers per package.}\label{fig:dephisto-in}
 \end{figure}
 
@@ -249,63 +361,61 @@ To test this hypotheses we do the following:
 \end{itemize}
 
 \begin{table}
-\centering
 \caption{Rejected packages}\label{tbl:rejected}
-\begin{tabular}{lll}
+\begin{tabular}{llll}
 \toprule
-Package & \multicolumn{2}{l}{Reason for excluding} \\
+Growth & Package & \multicolumn{2}{l}{Reason for excluding}\\
 \midrule
-app-arch/lzma-utils & C & (forked of LZMA SDK) \\
-app-text/asciidoc & D & (first release in 2002) \\
-app-text/sword-modules & A & (sudden huge peak) \\
-dev-dotnet/gnome-sharp & A & (sudden large rise) \\
-dev-haskell/hscolour & D & (original release was in 2003) \\
-dev-haskell/mtl & C & (factored out of GHC) \\
-dev-java/sun-jaf & B & (not open source) \\
-dev-libs/liboil & A & (sudden large drop) \\
-dev-php/pear & D & (first released in 2002) \\
-dev-ruby/hoe & A & (sudden large drop and jump) \\
-dev-ruby/rake & A & (sudden large jump) \\
-dev-util/cmake & A & (sudden large jump) \\
-dev-util/xfce4-dev-tools & C &(factored out of xfce) \\
-games-fps/quake3-bin & B &(not open source) \\
-kde-base/libkdepim & C &(factored out of kdelibs) \\
-kde-base/oxygen-icons & C &(factored out of kdelibs) \\
-mail-client/claws-mail & C &(spun out of Sylpheed in 2001) \\
-media-fonts/font-cursor-misc & B & (not a software project) \\
-media-libs/glew & D & (first released in 2002) \\
-media-libs/phonon & C &(factored out of kdelibs) \\
-sys-apps/openrc & A & (sudden jump) \\
-sys-apps/sandbox & A &(huge unexplained spike) \\
-sys-devel/automake-wrapper & B &(Gentoo logistical package) \\
-x11-libs/libpciaccess & A & (sudden jump) \\
-x11-libs/libSM & C &(factored out of Xorg) \\
-x11-libs/libXaw & D &(originally from 1998) \\
-x11-libs/libXdmcp & C &(factored out of Xorg) \\
-x11-libs/qt-demo & C &(factored out of Qt) \\
-x11-libs/qt-opengl & C &(factored out of Qt lib) \\
-x11-libs/qt-script & C &(factored out of Qt lib) \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-173-app-arch-lzma-utils.pdf}} & \texttt{app-arch/lzma-utils} & C & (forked of LZMA SDK) \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-74-app-text-asciidoc.pdf}} & \texttt{app-text/asciidoc} & D & (first release in 2002) \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-23-app-text-sword-modules.pdf}} & \texttt{app-text/sword-modules} & A & (discontinuous  peak) \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-35-dev-dotnet-gnome-sharp.pdf}} & \texttt{dev-dotnet/gnome-sharp} & A & (discontinuous jump) \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-166-dev-haskell-hscolour.pdf}} & \texttt{dev-haskell/hscolour} & D & (original release was in 2003) \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-159-dev-haskell-mtl.pdf}} & \texttt{dev-haskell/mtl} & C & (factored out of GHC) \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-146-dev-java-sun-jaf.pdf}} & \texttt{dev-java/sun-jaf} & B & (not open source) \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-39-dev-libs-liboil.pdf}} & \texttt{dev-libs/liboil} & A & (discontinuous  drop) \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-222-dev-php-pear.pdf}} & \texttt{dev-php/pear} & D & (first released in 2002) \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-150-dev-ruby-hoe.pdf}} & \texttt{dev-ruby/hoe} & A & (discontinuous  drop and jump) \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-51-dev-ruby-rake.pdf}} & \texttt{dev-ruby/rake} & A & (discontinuous  jump) \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-6-dev-util-cmake.pdf}} & \texttt{dev-util/cmake} & A & (discontinuous jump) \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-198-dev-util-xfce4-dev-tools.pdf}} & \texttt{dev-util/xfce4-dev-tools} & C &(factored out of xfce) \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-122-games-fps-quake3-bin.pdf}} & \texttt{games-fps/quake3-bin} & B &(not open source) \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-60-kde-base-libkdepim.pdf}} & \texttt{kde-base/libkdepim} & C &(factored out of kdelibs) \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-221-kde-base-oxygen-icons.pdf}} & \texttt{kde-base/oxygen-icons} & C &(factored out of kdelibs) \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-152-mail-client-claws-mail.pdf}} & \texttt{mail-client/claws-mail} & C &(spun out of Sylpheed in 2001) \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-119-media-fonts-font-cursor-misc.pdf}} & \texttt{media-fonts/font-cursor-misc} & B & (not a software project) \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-79-media-libs-glew.pdf}} & \texttt{media-libs/glew} & D & (first released in 2002) \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-187-x11-libs-qt-phonon.pdf}} & \texttt{media-libs/phonon} & C &(factored out of kdelibs) \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-193-sys-apps-openrc.pdf}} & \texttt{sys-apps/openrc} & A & (discontinuous jump) \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-72-sys-apps-sandbox.pdf}} & \texttt{sys-apps/sandbox} & A &(discontinuous spike) \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-48-sys-devel-automake-wrapper.pdf}} & \texttt{sys-devel/automake-wrapper} & B &(Gentoo logistical package) \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-199-x11-libs-libpciaccess.pdf}} & \texttt{x11-libs/libpciaccess} & A & (discontinuous jump) \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-109-x11-libs-libSM.pdf}} & \texttt{x11-libs/libSM} & C &(factored out of Xorg) \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-86-x11-libs-libXaw.pdf}} & \texttt{x11-libs/libXaw} & D &(originally from 1998) \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-104-x11-libs-libXdmcp.pdf}} & \texttt{x11-libs/libXdmcp} & C &(factored out of Xorg) \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-196-x11-libs-qt-demo.pdf}} & \texttt{x11-libs/qt-demo} & C &(factored out of Qt) \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-180-x11-libs-qt-opengl.pdf}} & \texttt{x11-libs/qt-opengl} & C &(factored out of Qt lib) \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-185-x11-libs-qt-script.pdf}} & \texttt{x11-libs/qt-script} & C &(factored out of Qt lib) \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \begin{table}
-\centering
 \caption{The ten selected packages}\label{tbl:selected}
 \begin{tabular}{rlp{20em}}
 \toprule
-& Package & Description \\
-\midrule \\
-1  & dev-dotnet/gconf-sharp & GtkSharp's gconf module of the gnome-sharp tarball \\
-2  & dev-haskell/cabal & A framework for packaging Haskell software \\
-3  & dev-libs/libunique & A library for writing single instance application \\
-4  & dev-python/lxml & A Pythonic binding for the libxml2 and libxslt libraries \\
-5  & dev-python/simplejson & Simple, fast, extensible JSON encoder/decoder for Python \\
-6  & dev-vcs/git & The stupid content tracker, the revision control system heavily used by the Linux kernel team \\
-7  & dev-vcs/mercurial & Scalable distributed SCM. Initial release in 2005. \\
-8  & gnome-base/gnome-keyring & Password and keyring managing daemon \\
-9  & media-libs/libcanberra & Portable sound event library \\
-10 & x11-misc/xdg-utils & Portland utils for cross-platform/cross-toolkit/cross-desktop interoperability \\
+Growth & Package & Description \\
+\midrule
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-34-dev-dotnet-gconf-sharp.pdf}} & \texttt{dev-dotnet/gconf-sharp} & GtkSharp's gconf module \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-65-dev-haskell-cabal.pdf}}  & \texttt{dev-haskell/cabal} & Framework for packaging Haskell software \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-218-dev-libs-libunique.pdf}}  & \texttt{dev-libs/libunique} & Library for writing single instance application \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-77-dev-python-lxml.pdf}}  & \texttt{dev-python/lxml} & Python bindings for libxml2 and libxslt \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-157-dev-python-simplejson.pdf}}  & \texttt{dev-python/simplejson} & JSON encoder/decoder for Python \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-240-dev-vcs-git.pdf}}  & \texttt{dev-vcs/git} & The stupid content tracker \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-242-dev-vcs-mercurial.pdf}}  & \texttt{dev-vcs/mercurial} & Scalable distributed SCM \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-17-gnome-base-gnome-keyring.pdf}}  & \texttt{gnome-base/gnome-keyring} & Password and keyring managing daemon \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-206-media-libs-libcanberra.pdf}} & \texttt{media-libs/libcanberra} & Portable sound event library \\
+\raisebox{-.15em}{\includegraphics[height=.8em]{sparkline-143-x11-misc-xdg-utils.pdf}} & \texttt{x11-misc/xdg-utils} & Portland utils for interoperability \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -347,19 +457,19 @@ The growth curves with large discontinuities are rejected. The hypotheses concer
 \subfigure[\texttt{dev-dotnet/gconf-sharp}]{\includegraphics[width=0.45\textwidth]{BassFit-34-dev-dotnet-gconf-sharp.pdf}\label{fig:fit34}}
 \subfigure[\texttt{dev-haskell/cabal}]{\includegraphics[width=0.45\textwidth]{BassFit-65-dev-haskell-cabal.pdf}\label{fig:fit65}}
 \subfigure[\texttt{dev-libs/libunique}]{\includegraphics[width=0.45\textwidth]{BassFit-218-dev-libs-libunique.pdf}\label{fig:fit218}}
-\subfigure[\texttt{dev-dotnet/gconf-sharp}]{\includegraphics[width=0.45\textwidth]{BassFit-218-dev-libs-libunique.pdf}\label{fig:fit34}}
-\subfigure[Caption of subfigure 2]{
-	\includegraphics[width=0.45\textwidth]{BassFit-65-dev-haskell-cabal.pdf}
-	\label{fig:fit34}
-}
-\subfigure[Caption of subfigure 3]{\includegraphics[width=0.48\textwidth]{BassFit-218-dev-libs-libunique.pdf}\label{fig:fit34}}
-\caption{Bass curve fits}
+\subfigure[\texttt{dev-python/lxml}]{\includegraphics[width=0.45\textwidth]{BassFit-77-dev-python-lxml.pdf}\label{fig:fit77}}
+\subfigure[\texttt{dev-python/simplejson}]{\includegraphics[width=0.45\textwidth]{BassFit-157-dev-python-simplejson.pdf}\label{fig:fit157}}
+\subfigure[\texttt{dev-vcs/git}]{\includegraphics[width=0.45\textwidth]{BassFit-240-dev-vcs-git.pdf}\label{fig:fit240}}
+\subfigure[\texttt{dev-vcs/mercurial}]{\includegraphics[width=0.45\textwidth]{BassFit-242-dev-vcs-mercurial.pdf}\label{fig:fit242}}
+\subfigure[\texttt{gnome-base/gnome-keyring}]{\includegraphics[width=0.45\textwidth]{BassFit-17-gnome-base-gnome-keyring.pdf}\label{fig:fit17}}
+\subfigure[\texttt{media-libs/libcanberra}]{\includegraphics[width=0.45\textwidth]{BassFit-206-media-libs-libcanberra.pdf}\label{fig:fit206}}
+\subfigure[\texttt{x11-misc/xdg-utils}]{\includegraphics[width=0.45\textwidth]{BassFit-143-x11-misc-xdg-utils.pdf}\label{fig:fit143}}
+\caption{Bass curve fits on ten randomly selected packages that met the criteria.}
 \end{figure}
 
 
 
-The package libunique does not have a good fit, but looking at the graph, \raisebox{-.3em}{\includegraphics[height=1em]{spark-218-dev-libs-libunique.pdf}}, one can see that it goes down at the end. This is demonstraded even more clearly in XulRunner. 
-
+The package \texttt{dev-libs/libunique} does not have a good fit, but looking at the graph, \raisebox{-.15em}{\includegraphics[height=.8em,trim=7em 0 0 0,clip=true]{sparkline-218-dev-libs-libunique.pdf}}, it goes down at the end. This is demonstraded even more clearly in \texttt{net-libs/xulrunner}, \raisebox{-.15em}{\includegraphics[height=.8em,trim=3em 0 0 0,clip=true]{sparkline-140-net-libs-xulrunner.pdf}}, which declines almost completely.
 
 \section{the KDE Subgraph}
 
@@ -369,7 +479,7 @@ The program Tulip was used to visualize the graph, the result is in figure~\ref{
 
 \begin{figure}
 \centering
-\includegraphics[clip,trim=0 0 1cm 10cm,width=\linewidth]{graphs/kde.pdf}
+\includegraphics[clip,trim=0 0 1cm 10cm,width=\linewidth]{kde.pdf}
 \caption{Internal dependencies of modules in the KDE project. Color represents the $k$-core measure. The graph edges have been bundled to improve readability.}\label{fig:kde2}
 \end{figure}
 
@@ -423,114 +533,6 @@ Size & 2 MB \\
 \end{table}
 
 
-\section{Introduction}
-
-\emph{Diffusion} is the process of market uptake of an innovation, the users of a particular innovation are called \emph{adopters} \citep{narayanan01}. Taking the open source projects as a 'market', these concepts can be applied to libraries and dependencies. For example, consider the projects with a graphical user interface (GUI). These have a demand for a GUI toolkit, and there are several competing implementations available (\verb|Qt|, \verb|GTK|, \verb|Wx|, etc..). The introduction and uptake of a new GUI toolkit is a process of innovation diffusion and the projects that use a particular toolkit can be considered adopters of that toolkit. When talking about software projects such a relation is often called a \emph{dependency}.
-In the next section we describe the Bass \citep{bass69}  diffusion model, we then describe the results of our analysis of fitting the Bass diffusion model on the Gentoo portage package dependency graph. This is followed by a discussion of the results of our analysis and finally we end the paper with the conclusions from our analysis and some discussion of possible future work.
-
-\section{The Bass Diffusion Model}
-
-
-
-\subsection{The Bass diffusion model}\label{sect:Bass}
-
-Once an innovation is released to the public a process starts where an increasing portion of the market decides to use the innovation. In the theory of innovation dynamics this process is called diffusion and the users are called adopters. \citep[see][chapter 4]{narayanan01}
-
-To model the process of innovation diffusion \cite{bass69} introduces two processes that propagate an innovation. The first processes is involves individuals that decide to use an innovation based on their perception of its merits, without looking at the experiences of others. The second process involves the word-of-mouth effect or the bandwagon effect, individuals adopt the innovation solely because they hear of the experiences of previous adopters. Of course in reality, everyone will be somewhere in between these two extreme types, but for the sake of modelling it suffices to consider the relative abundance of both types.
-
-It should be noted that \cite{bass69} and all later authors, use confusing terms to describe the two types of adopters. The first type are called "innovators", not to be confused with those actually inventing the innovation and the second type are called "imitators", not to be confused with those developing imitating offerings. If one remembers that the model concerns the demand side of the market and not the supply side than it will all be clear.
-
-To model the diffusion process, let $M$ be the total market size for the innovation and $A$ the current number of adopters, such that $0 \ge A \ge M$. The two adoption processes can then be described as follows: \citep[see also][]{bass10,mahajan90}
-
-\emph{Innovators}: Some individuals in the market that don't use the innovation might decide to adopt the innovation. The rate at which this happens is $p$, the coefficient of innovation. The number of user that do not use the innovation is $M-A$, so the inflow of adopters is $p(M-A)$.
-
-\emph{Imitators}: The people who use the innovation can express their fondness to people who do not yet use the innovation, which can influence them to adopt the innovation. The rate at which this happens is $q$, the rate of imitation. The number of user that do not use the innovation is again $M-A$, the chance of meeting someone that does use the innovation is proportional to $\frac{A}{M}$ so the inflow of imitators can be modelled as $q\frac{A}{M}(M-A)$.
-
-When these two effects are combined, the net inflow of users, represented by the time derivative of $A$, can be modelled as:
-\begin{align*}
-\nd{A}{t} &= p(M - A) + q\frac{A}{M}(M - A) \\
-&= \left(p + q\frac{A}{M} \right)(M - A)
-\end{align*}
-
-Often one is not concerned with the market size $M$ and only interested in the fraction of the market---denoted with $F$---that uses the innovation. Of course, $F=\frac{A}{M}$. By dividing the above equation with $M$ one obtains the Bass model:
-
-\begin{align}\label{eq:bass-ode}
-\nd{F}{t} &= \left(p + q F\right)(1 - F)
-\end{align}
-
-\cite{bass69} solves this ordinary differential equation, which results in the following function for $F$:
-
-\begin{align}\label{eq:bass-direct}
-F(t) &= \frac{1 - \e^{-(p+q)t}}{1+\frac{q}{p}\e^{-(p+q)t}}
-\end{align}
-
-\begin{figure}\small\centering
-\caption[Bass model of innovation diffusion]{The Bass model of innovation diffusion. The blue trace represents a Bass diffusion with $p=0.01$ and $q=0.90$. The purple trace bass diffusion with $p=0.90$ and $q=0.01$.}
-\label{fig:bass}
-\includegraphics{graphs/Bass.pdf}
-\end{figure}
-
-In figure~\ref{fig:bass} two Bass diffusions are plotted using equation \eqref{eq:bass-direct}, one representing an innovation diffusion with many innovators and few imitators and one representing a diffusion with many imitators and few innovators. When there are more imitators it takes a while for the innovation to take of since the majority of the potential users are waiting for someone else to try it first.
-
-To fit the model of equation~\eqref{eq:bass-direct} to empirical data two additions are necessary. First the market size has to be re-introduced, this is done by taking $A(t) = M F(t)$. The market size, $M$, in this equation represents the total number of potential adopters for this specific product, not the total number of adopters for a category of products. Since it is not possible to know in advance who will eventually be using an innovation it is difficult to determine $M$ in advance. Furthermore, the Bass model assumes the market size to be constant and competition free, which is unlikely in practise. Therefore the quantity has to be fitted to the data, statistical goodness-of-fit measures can then be used to determine the validity of the assumptions. The second addition is the time at which the innovation is introduced. Until now the assumption was that the introduction was at $t=0$, in arbitrary units. For empirical data fitting it is necessary to be able to specify an arbitrary introduction time. This can be achieved by introducing the introduction time $t_0$ in the equation as $A(t) = M F(t - t_0)$. Again, this variable can be fitted if it can not be determined in advance.
-
-\begin{align} \label{eq:bass-model}
-	A(t) &= M \frac{1 - \e^{-(p+q)(t-t_0)}}{1 + \frac{q}{p}\e^{-(p+q)(t-t_0)}}
-\end{align}
-
-Equation~\eqref{eq:bass-model} incorporates the two additions and can be readily applied to empirical data. In \cite{mahajan95} and many other empirical studies this happens in the differential form, since only absolute sales figures are available and not absolute user figures. The dependency graph method presented later allows one to obtain absolute usage number, so the differential form is not further used. 
-
-
-The interpretation of the variables and parameters and their dimensions is presented in table~\ref{tbl:bass-model}. When applying the formula one should note that it is non-linear, so ordinary linear regression can not be used. Instead one can use non-linear least squares regression, but note the correct number of the degrees of freedom. This can be done using existing mathematical/statistical packages. For this thesis the  \verb|NonlinearModelFit| procedure in Mathematica was used. 
-
-\begin{table}\centering\small
-\caption[Bass model variables and parameters]{Overview of the variables and parameters of the Bass model as presented in equation~\eqref{eq:bass-model}.}
-\label{tbl:bass-model}
-\begin{tabular}{cll}
-\toprule
-& Dimension & description \\
-\midrule
-$A$   & adopters    & adopters at a the model time \\
-$t$   & time        & model time \\
-\midrule
-$t_0$ & time        & time of innovation introduction \\
-$M$   & adopters    & number of potential adopters \\
-$p$   & time$^{-1}$ & rate of adopter innovation \\
-$q$   & time$^{-1}$ & rate of adopter imitation \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-
-
-To model the process of innovation diffusion, Bass \citep{bass69} introduces two processes that propagate an innovation. The first processes involves individuals that decide to use an innovation based on their perception of its merits. The second process involves the word-of-mouth effect or the bandwagon effect: individuals adopt the innovation because they hear of the experiences of previous adopters. In reality however, everyone will be somewhere in between these two extreme types, but for the sake of modelling it suffices to consider the relative contribution of both types. It should be noted that for historical reasons \citet{bass69} and all later authors use the following terms; the first type are called "innovators", not to be confused with those actually inventing the innovation and the second type are called "imitators", not to be confused with those developing imitating offerings. Taking $M$ to stand for the total market size and $A$ to stand for the total number of adopters the Bass diffusion can be modelled with two simultaneous processes:
-
-\emph{Innovators}: Market participants not using use the innovation yet might decide to adopt the innovation. The rate at which this happens is $p$, the coefficient of innovation. The number of user that do not use the innovation is $M-A$, so the inflow of adopters is $p(M-A)$.
-
-\emph{Imitators}: Users of the innovation can express their fondness to market participants who do not yet use the innovation. This can influence them to adopt the innovation at a rate $q$, the rate of imitation. The number of user that do not use the innovation is again $M-A$, the chance of meeting someone that does use the innovation is proportional to $\frac{A}{M}$ so the inflow of imitators can be modelled as $q\frac{A}{M}(M-A)$.
-
-When these two effects are combined the net inflow of adopters represented by the time derivative of $A$ can be modelled as
-
-\begin{align}
-	\nd{A}{t} &= p (M-A) + q\frac{A}{M}(M-A) \text{.}
-\end{align}
-
-This first order homogeneous ordinary differential equation can be solved for $A(t)$ to give
-
-\begin{align} \label{eq:bass}
-	A(t) &= M \frac{1 - \e^{-(p+q)t}}{1 + \frac{q}{p} \e^{-(p+q)t}} \text{.}
-\end{align}
-
-The solution assumes the innovation is introduced at time zero, to account for this the substitution $t \rightarrow t - t_0$ is made. This results in four parameters, $t_0$, $M$, $p$ and $q$ that can be fit to the empirical data.
-
-\section{The Gentoo Portage Dependency Graph}
-
-The empirical data used is the time evolution of the Gentoo Portage package dependency graph \citep{rem14}. This dataset contains the full dependency graph for every month since the project was initiated in $2000$, the resulting graphs have a combined total of 1.3 million packages and 6.9 million dependency relations, with the largest graph having 15 thousand packages and 80 thousand dependency relations.
-
-Special tools where developed to extract the time series of the number of adopters $A_t$ for a given package. This time series was then fit to \eqref{eq:bass} using Mathematica's \texttt{NonLinearModelFit}. The goodness-of-fit was analysed using an ANOVA table and calculated using the adjust coefficient of determination $\bar{R}^2$. The parameters were extracted from the fit, and confidence intervals were calculated under assumptions of normality. In \ref{tbl:results} the relevant parameters are presented with their mean value and a $95\%$ confidence interval. Since normality was assumed, the confidence intervals ignore the $p \ge 0$ and $q \ge 0$ constraints. 
-
-The plots were drawn using a thick red line for the model and shades of red for the prediction bands. The thick red line was drawn according to \eqref{eq:bass}, with the mean values used as parameters. Then single value predictions bands were calculated for $90\%$, $95\%$, $99\%$ and $99.9\%$ confidence and were drawn in progressively darker shades of pink. They represent a prediction for where a single additional value would likely fall. According to the model and the uncertainty introduced by the fit, there is a $90\%$ chance that it will fall in the innermost band, $95\%$ chance that it would falil in the second band, etc. If the data fits the model properly, one would expect to see $90\%$ of the points in the inner band. Finally, the empirical data points were plotted as black dots, connected with a thin vertical line - the residual error of the model.
-
 \section{Results}
 
 From the entire list of packages, a few well-known (at least according to the author) packages where selected. The selection criteria was that the package must not have existed before (around) 2004, because the Gentoo Portage database was still too immature then, and the package must have gained a considerable number of dependers since its introduction. In \ref{tbl:results}, we list some selected packages along with their parameters. In all cases the adjusted coefficient of determination $\bar{R}^2$ was more than $99\%$.
@@ -555,7 +557,7 @@ Package & \multicolumn{2}{c}{$p$} & \multicolumn{2}{c}{$q$} & \multicolumn{2}{c}
 
 \begin{figure}
 \centering
-\includegraphics[width=\linewidth]{graphs/BassFit-git2.pdf}
+\includegraphics[width=\linewidth]{BassFit-git2.pdf}
 \vspace{-2em}
 \caption{The imitation driven adoption of \texttt{git}.}\label{fig:git}
 \vspace{-1.5em}
@@ -577,7 +579,7 @@ The relative slowness of \verb|git|'s growth and its dependence on imitator can 
 
 \begin{figure}
 \centering
-\includegraphics[width=\linewidth]{graphs/BassFit-libmad2.pdf}
+\includegraphics[width=\linewidth]{BassFit-libmad2.pdf}
 \vspace{-2em}
 \caption{The innovation driven adoption of \texttt{libmad}.}\label{fig:libmad}
 \vspace{-1em}
@@ -593,7 +595,7 @@ A typical example of innovator driven growth is given by \verb|libmad|. The mode
 
 \begin{figure}
 \centering
-\includegraphics[width=\linewidth]{graphs/BassFit-xulrunner-22.pdf}
+\includegraphics[width=\linewidth]{BassFit-xulrunner-22.pdf}
 \vspace{-2em}
 \caption{The rise and decline of \texttt{xulrunner}.}\label{fig:xulrunner}
 \vspace{-1em}

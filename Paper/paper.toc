@@ -1,0 +1,26 @@
+\begingroup \small 
+\contentsline {section}{\numberline {1}Introduction}{1}{section.1}
+\contentsline {section}{\numberline {2}Related work}{2}{section.2}
+\contentsline {subsection}{\numberline {2.1}Innovation theory}{3}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Software innovation}{3}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Innovation theoretic models of adoption}{3}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Innovative adoption in software}{3}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}Software package dependencies}{3}{subsection.2.5}
+\contentsline {subsection}{\numberline {2.6}Innovation diffusion}{3}{subsection.2.6}
+\contentsline {subsection}{\numberline {2.7}The Bass diffusion model}{4}{subsection.2.7}
+\contentsline {section}{\numberline {3}The Gentoo Portage Dataset}{7}{section.3}
+\contentsline {subsection}{\numberline {3.1}Collecting}{8}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Parsing}{9}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Producing the Dependency Graphs}{9}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Final Remarks}{11}{subsection.3.4}
+\contentsline {section}{\numberline {4}Exploring the Dataset}{12}{section.4}
+\contentsline {section}{\numberline {5}the KDE Subgraph}{14}{section.5}
+\contentsline {section}{\numberline {6}TESTING}{16}{section.6}
+\contentsline {section}{\numberline {7}Results}{18}{section.7}
+\contentsline {subsection}{\numberline {7.1}Imitator Driven Growth}{20}{subsection.7.1}
+\contentsline {subsection}{\numberline {7.2}Innovator Driven Growth}{21}{subsection.7.2}
+\contentsline {subsection}{\numberline {7.3}Growth and Demise}{22}{subsection.7.3}
+\contentsline {section}{\numberline {8}Related Work}{23}{section.8}
+\contentsline {section}{\numberline {9}Conclusions and Future Work}{24}{section.9}
+\contentsline {section}{\numberline {10}Relevance}{25}{section.10}
+\endgroup 

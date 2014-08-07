@@ -1,0 +1,1543 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     60306,       1533]
+NotebookOptionsPosition[     58356,       1463]
+NotebookOutlinePosition[     58769,       1479]
+CellTagsIndexPosition[     58726,       1476]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"SetDirectory", "[", 
+  "\"\</home/remco/John Galt Holding/Universiteit Twente/Thesis/graphanalysis\
+\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.490942889172167*^9, 3.4909429053462887`*^9}, {
+  3.490942956879958*^9, 3.4909429591633472`*^9}, {3.613300726491002*^9, 
+  3.613300727628522*^9}, {3.615734300131792*^9, 3.615734301127987*^9}}],
+
+Cell[BoxData["\<\"/home/remco/John Galt Holding/Universiteit \
+Twente/Thesis/graphanalysis\"\>"], "Output",
+ CellChangeTimes->CompressedData["
+1:eJxTTMoPSmVkYGAwAOK6We7fC5leOT479esviM7JeKxeAqSN2DJ9QXRep3MZ
+iJ6VZdBTCaRv/3z6ogpIr6j9JHOY+ZVjGM/t7vNA+ogzU9glIM1+8euOy0D6
+3f3YzdeB9PQra3aD6MUsMwNvAGnOmdpdINrAy+qGVuErx47SpGnaQFq9QizN
+Hkhv8epidADSu26+SmoB0kdXi5z6Vf3K8Wer4v9Lr185+h3XW3UZSMftK+S5
+AqR7Js5UAtFKxbUaIHpHRpchiJ5y/VC92LtXjkuMPliJA2nFydWOIDr69fpg
+EG3lUR8JolW+ZCeC6B1hK8tBNJvCve8SQPr6fs1ySSAd4DajAUQfC9zTC6L3
+u2+aDKJ/tC9aCKIf3lNdBaK3hfzaBKIfzDWdLAWkVW/2v0358MpRr95leiqQ
+tlH/WZ4BpF/d5GoC0cURmV25QBoAmgHNoQ==
+  "]]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"<<", "\"\<candidates.mm\>\""}]], "Input",
+ CellChangeTimes->{{3.613300731459405*^9, 3.613300737316741*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Length", "[", "pkgs", "]"}]], "Input",
+ CellChangeTimes->{{3.613300897242412*^9, 3.613300917084353*^9}, {
+  3.613302101564725*^9, 3.6133021061638308`*^9}}],
+
+Cell[BoxData["259"], "Output",
+ CellChangeTimes->{{3.613300907623618*^9, 3.613300917393527*^9}, {
+   3.61330209944658*^9, 3.6133021065902433`*^9}, 3.61330213771588*^9, 
+   3.613302232540689*^9, 3.613302885538783*^9, {3.6133029182119617`*^9, 
+   3.613302935100266*^9}, 3.613303062751569*^9, {3.613303109919839*^9, 
+   3.613303132719698*^9}, 3.6133031885100937`*^9, 3.613303414007346*^9, {
+   3.613303510581676*^9, 3.613303558155999*^9}, 3.6133036155156183`*^9, 
+   3.613303797834464*^9, 3.6144875532538*^9, 3.61448823466332*^9, 
+   3.61448905002442*^9, 3.614489101971548*^9, 3.614489247528222*^9, 
+   3.61448929652221*^9, {3.61448934317706*^9, 3.614489360231091*^9}, {
+   3.614489470120776*^9, 3.614489474684812*^9}, {3.6144895303509502`*^9, 
+   3.614489560949171*^9}, 3.614492610286673*^9, 3.6144936275070543`*^9, 
+   3.6144937024952173`*^9, 3.614493807178958*^9, 3.614493855843218*^9, 
+   3.614493967653863*^9, 3.614494041215004*^9, 3.6144941068296947`*^9, 
+   3.6144958999758797`*^9, 3.6156967504397097`*^9, 3.6156981072911587`*^9, 
+   3.615704001027967*^9, 3.615704082087781*^9, 3.6157143887676907`*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"IdFor", "[", "str_", "]"}], ":=", 
+  RowBox[{
+   RowBox[{"Position", "[", 
+    RowBox[{"pkgs", ",", 
+     RowBox[{
+      RowBox[{"Select", "[", 
+       RowBox[{"pkgs", ",", 
+        RowBox[{
+         RowBox[{"StringMatchQ", "[", 
+          RowBox[{"#", ",", 
+           RowBox[{"RegularExpression", "[", 
+            RowBox[{"\"\<.*\>\"", "<>", "str", "<>", "\"\<.*\>\""}], "]"}]}], 
+          "]"}], "&"}]}], "]"}], "\[LeftDoubleBracket]", "1", 
+      "\[RightDoubleBracket]"}]}], "]"}], "\[LeftDoubleBracket]", 
+   RowBox[{"1", ",", "1"}], "\[RightDoubleBracket]"}]}]], "Input",
+ CellChangeTimes->{{3.615733496564225*^9, 3.615733503428741*^9}, {
+  3.6157335351441107`*^9, 3.615733602020319*^9}, {3.615733657714422*^9, 
+  3.6157336639030247`*^9}, {3.615733701338505*^9, 3.6157337650631437`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"id", "=", 
+  RowBox[{"IdFor", "[", "\"\<lzma\>\"", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"data", "=", 
+   RowBox[{"deps", "[", 
+    RowBox[{"pkgs", "\[LeftDoubleBracket]", "id", "\[RightDoubleBracket]"}], 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"max", " ", "=", " ", 
+   RowBox[{"Max", "[", "data", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"curvepoints", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"2000", "+", 
+         RowBox[{"#", "/", "12"}]}], ",", 
+        RowBox[{
+        "data", "\[LeftDoubleBracket]", "#", "\[RightDoubleBracket]"}]}], 
+       "}"}], "&"}], "/@", 
+     RowBox[{"Range", "[", 
+      RowBox[{"Length", "[", "data", "]"}], "]"}]}], "//", 
+    RowBox[{
+     RowBox[{"Select", "[", 
+      RowBox[{"#", ",", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"#", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}],
+           ">", "0"}], "&"}], ")"}]}], "]"}], "&"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{"curvepoints", ",", " ", 
+   RowBox[{"PlotRange", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "max"}], "}"}]}], ",", 
+   RowBox[{"Frame", "\[Rule]", "None"}], ",", 
+   RowBox[{"Axes", "\[Rule]", "False"}], ",", 
+   RowBox[{"ImageSize", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"100", ",", "25"}], "}"}]}], ",", 
+   RowBox[{"AspectRatio", "\[Rule]", "Full"}]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Export", "[", 
+  RowBox[{
+   RowBox[{"\"\<sparkline-\>\"", "<>", 
+    RowBox[{"ToString", "[", "id", "]"}], "<>", "\"\<-\>\"", "<>", 
+    RowBox[{"StringReplace", "[", 
+     RowBox[{
+      RowBox[{"pkgs", "\[LeftDoubleBracket]", "id", "\[RightDoubleBracket]"}],
+       ",", 
+      RowBox[{"\"\</\>\"", "\[Rule]", "\"\<-\>\""}]}], "]"}], "<>", 
+    "\"\<.pdf\>\""}], ",", "%"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.615733837847725*^9, 3.615733843696794*^9}, {
+  3.615734081705696*^9, 3.615734178862831*^9}}],
+
+Cell[BoxData["173"], "Output",
+ CellChangeTimes->{
+  3.615734099875972*^9, {3.615734169138267*^9, 3.615734179646523*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {{}, {}, 
+    {RGBColor[0.24720000000000014`, 0.24, 0.6], LineBox[CompressedData["
+1:eJxd0jsOglAQhWFiZWlhYanGwsJYqImlrMHEBDrFBwgK4grYib1uwiW5BOEM
+d2YyNyHHL/lzYwKjqNieO57nreunWZz9y6cfv82uOcqfd32UMQfnro+e3fPR
+s/u0kfOEevaMevac9ihGr4yeHdCexOidq4B652/bn10fUu/sh9QrYy9i9M5V
+2ytjYzH62PSxuT8x9yfy/9ArY67OK+rZS+qVMakYfWr6VO7DZOZ+9oL6zLyv
+m7xP9Owp9cqYuxg9e0y9MiYXo89Nn5u+MH1hevaQ9iFGzx5Qr4wpxehL07Pb
+7/8p/gOUAsHE
+      "]]}}, {}},
+  AspectRatio->Full,
+  AxesLabel->{None, None},
+  AxesOrigin->{2008., 0},
+  Frame->None,
+  ImageSize->{100, 25},
+  Method->{},
+  PlotRange->{{2008., 2012.5}, {0, 102}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{0.09, 0.09}, {0., 0.}}]], "Output",
+ CellChangeTimes->{
+  3.615734099875972*^9, {3.615734169138267*^9, 3.615734179650413*^9}}]
+}, Open  ]],
+
+Cell[BoxData["\"\<\>"], "Input",
+ CellChangeTimes->{{3.615734186216783*^9, 3.615734186256771*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"IdFor", "[", "\"\<lzma-utils\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.6157335888102217`*^9, 3.61573359530962*^9}, {
+  3.61573377450811*^9, 3.6157337822252703`*^9}}],
+
+Cell[BoxData["173"], "Output",
+ CellChangeTimes->{{3.615733595943488*^9, 3.615733603251049*^9}, 
+   3.615733664998748*^9, {3.615733708824703*^9, 3.615733782630685*^9}, 
+   3.6157338451203337`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.615733851247286*^9, 3.61573385865626*^9}, {
+   3.615733930240892*^9, 3.615733933657033*^9}, {3.615733973513734*^9, 
+   3.615734064640912*^9}, 3.615734095564885*^9}],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {{}, {}, 
+    {RGBColor[0.24720000000000014`, 0.24, 0.6], LineBox[CompressedData["
+1:eJxd0jsOglAQhWFiZWlhYanGwsJYqImlrMHEBDrFBwgK4grYib1uwiW5BOEM
+d2YyNyHHL/lzYwKjqNieO57nreunWZz9y6cfv82uOcqfd32UMQfnro+e3fPR
+s/u0kfOEevaMevac9ihGr4yeHdCexOidq4B652/bn10fUu/sh9QrYy9i9M5V
+2ytjYzH62PSxuT8x9yfy/9ArY67OK+rZS+qVMakYfWr6VO7DZOZ+9oL6zLyv
+m7xP9Owp9cqYuxg9e0y9MiYXo89Nn5u+MH1hevaQ9iFGzx5Qr4wpxehL07Pb
+7/8p/gOUAsHE
+      "]]}}, {}},
+  AspectRatio->Full,
+  AxesLabel->{None, None},
+  AxesOrigin->{2008., 0},
+  Frame->None,
+  ImageSize->{100, 25},
+  Method->{},
+  PlotRange->{{2008., 2012.5}, {0, 102}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{0.09, 0.09}, {0., 0.}}]], "Output",
+ CellChangeTimes->{{3.615733987328682*^9, 3.61573406503132*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"%685", ",", 
+   RowBox[{"ImageSize", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"100", ",", "55"}], "}"}]}], ",", 
+   RowBox[{"AspectRatio", "\[Rule]", "Full"}]}], "]"}]], "Input",
+ NumberMarks->False],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {{}, {}, 
+    {RGBColor[0.24720000000000014`, 0.24, 0.6], LineBox[CompressedData["
+1:eJxd0jsOglAQhWFiZWlhYanGwsJYqImlrMHEBDrFBwgK4grYib1uwiW5BOEM
+d2YyNyHHL/lzYwKjqNieO57nreunWZz9y6cfv82uOcqfd32UMQfnro+e3fPR
+s/u0kfOEevaMevac9ihGr4yeHdCexOidq4B652/bn10fUu/sh9QrYy9i9M5V
+2ytjYzH62PSxuT8x9yfy/9ArY67OK+rZS+qVMakYfWr6VO7DZOZ+9oL6zLyv
+m7xP9Owp9cqYuxg9e0y9MiYXo89Nn5u+MH1hevaQ9iFGzx5Qr4wpxehL07Pb
+7/8p/gOUAsHE
+      "]]}}, {}},
+  AspectRatio->Full,
+  AxesLabel->{None, None},
+  AxesOrigin->{2008., 0},
+  Frame->None,
+  ImageSize->{100, 55},
+  Method->{},
+  PlotRange->{{2008., 2012.5}, {0, 102}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{0.09, 0.09}, {0., 0.}}]], "Output",
+ CellChangeTimes->{3.6157339997796*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"%683", ",", 
+   RowBox[{"ImageSize", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"55", ",", "55"}], "}"}]}], ",", 
+   RowBox[{"AspectRatio", "\[Rule]", "Full"}]}], "]"}]], "Input",
+ NumberMarks->False],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {{}, {}, 
+    {RGBColor[0.24720000000000014`, 0.24, 0.6], LineBox[CompressedData["
+1:eJxd0jsOglAQhWFiZWlhYanGwsJYqImlrMHEBDrFBwgK4grYib1uwiW5BOEM
+d2YyNyHHL/lzYwKjqNieO57nreunWZz9y6cfv82uOcqfd32UMQfnro+e3fPR
+s/u0kfOEevaMevac9ihGr4yeHdCexOidq4B652/bn10fUu/sh9QrYy9i9M5V
+2ytjYzH62PSxuT8x9yfy/9ArY67OK+rZS+qVMakYfWr6VO7DZOZ+9oL6zLyv
+m7xP9Owp9cqYuxg9e0y9MiYXo89Nn5u+MH1hevaQ9iFGzx5Qr4wpxehL07Pb
+7/8p/gOUAsHE
+      "]]}}, {}},
+  AspectRatio->Full,
+  AxesLabel->{None, None},
+  AxesOrigin->{2008., 0},
+  Frame->None,
+  ImageSize->{55, 55},
+  Method->{},
+  PlotRange->{{2008., 2012.5}, {0, 102}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{0.09, 0.09}, {0., 0.}}]], "Output",
+ CellChangeTimes->{3.6157339659258823`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"i", ",", 
+      RowBox[{"pkgs", "[", 
+       RowBox[{"[", "i", "]"}], "]"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", "259"}], "}"}]}], "]"}], "//", 
+  "TableForm"}]], "Input",
+ CellChangeTimes->{{3.615710764460388*^9, 3.615710806159482*^9}}],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"1", "\<\"app-arch/bzip2\"\>"},
+    {"2", "\<\"app-arch/gzip\"\>"},
+    {"3", "\<\"app-arch/tar\"\>"},
+    {"4", "\<\"app-arch/sharutils\"\>"},
+    {"5", "\<\"media-sound/beep-media-player\"\>"},
+    {"6", "\<\"dev-util/cmake\"\>"},
+    {"7", "\<\"dev-libs/libgpg-error\"\>"},
+    {"8", "\<\"dev-libs/libedit\"\>"},
+    {"9", "\<\"dev-perl/extutils-pkgconfig\"\>"},
+    {"10", "\<\"media-libs/taglib\"\>"},
+    {"11", "\<\"media-libs/jasper\"\>"},
+    {"12", "\<\"dev-lang/yasm\"\>"},
+    {"13", "\<\"media-libs/libtheora\"\>"},
+    {"14", "\<\"dev-perl/Test-Pod\"\>"},
+    {"15", "\<\"dev-perl/DateTime\"\>"},
+    {"16", "\<\"x11-libs/cairo\"\>"},
+    {"17", "\<\"gnome-base/gnome-keyring\"\>"},
+    {"18", "\<\"net-dns/libidn\"\>"},
+    {"19", "\<\"x11-themes/hicolor-icon-theme\"\>"},
+    {"20", "\<\"dev-perl/DBD-SQLite\"\>"},
+    {"21", "\<\"dev-perl/Test-Exception\"\>"},
+    {"22", "\<\"dev-perl/Class-Accessor\"\>"},
+    {"23", "\<\"app-text/sword-modules\"\>"},
+    {"24", "\<\"dev-java/javahelp\"\>"},
+    {"25", "\<\"games-fps/ut2004\"\>"},
+    {"26", "\<\"dev-cpp/glibmm\"\>"},
+    {"27", "\<\"media-gfx/graphicsmagick\"\>"},
+    {"28", "\<\"app-emulation/emul-linux-x86-sdl\"\>"},
+    {"29", "\<\"games-server/ut2004-ded\"\>"},
+    {"30", "\<\"media-sound/gmpc\"\>"},
+    {"31", "\<\"app-emulation/emul-linux-x86-compat\"\>"},
+    {"32", "\<\"app-emulation/emul-linux-x86-soundlibs\"\>"},
+    {"33", "\<\"dev-java/ant-core\"\>"},
+    {"34", "\<\"dev-dotnet/gconf-sharp\"\>"},
+    {"35", "\<\"dev-dotnet/gnome-sharp\"\>"},
+    {"36", "\<\"dev-dotnet/glade-sharp\"\>"},
+    {"37", "\<\"sys-apps/hal\"\>"},
+    {"38", "\<\"gnome-extra/evolution-data-server\"\>"},
+    {"39", "\<\"dev-libs/liboil\"\>"},
+    {"40", "\<\"dev-java/ant-tasks\"\>"},
+    {"41", "\<\"dev-java/jruby\"\>"},
+    {"42", "\<\"dev-java/javatoolkit\"\>"},
+    {"43", "\<\"dev-perl/Test-Pod-Coverage\"\>"},
+    {"44", "\<\"dev-perl/File-Slurp\"\>"},
+    {"45", "\<\"app-shells/bash-completion-config\"\>"},
+    {"46", "\<\"app-crypt/qca\"\>"},
+    {"47", "\<\"sys-devel/autoconf-wrapper\"\>"},
+    {"48", "\<\"sys-devel/automake-wrapper\"\>"},
+    {"49", "\<\"rox-base/rox-lib\"\>"},
+    {"50", "\<\"dev-ruby/rubygems\"\>"},
+    {"51", "\<\"dev-ruby/rake\"\>"},
+    {"52", "\<\"media-sound/wavpack\"\>"},
+    {"53", "\<\"media-libs/libmodplug\"\>"},
+    {"54", "\<\"media-libs/freeglut\"\>"},
+    {"55", "\<\"media-fonts/dejavu\"\>"},
+    {"56", "\<\"dev-python/matplotlib\"\>"},
+    {"57", "\<\"sys-fs/fuse\"\>"},
+    {"58", "\<\"kde-base/libkdegames\"\>"},
+    {"59", "\<\"kde-base/konqueror\"\>"},
+    {"60", "\<\"kde-base/libkdepim\"\>"},
+    {"61", "\<\"kde-base/kode\"\>"},
+    {"62", "\<\"kde-base/libkcal\"\>"},
+    {"63", "\<\"kde-base/kwin\"\>"},
+    {"64", "\<\"dev-php/PEAR-PEAR\"\>"},
+    {"65", "\<\"dev-haskell/cabal\"\>"},
+    {"66", "\<\"dev-ruby/activesupport\"\>"},
+    {"67", "\<\"dev-python/pycairo\"\>"},
+    {"68", "\<\"app-text/gnome-doc-utils\"\>"},
+    {"69", "\<\"app-text/poppler\"\>"},
+    {"70", "\<\"dev-python/gst-python\"\>"},
+    {"71", "\<\"kde-base/kdebase-data\"\>"},
+    {"72", "\<\"sys-apps/sandbox\"\>"},
+    {"73", "\<\"dev-python/twisted-web\"\>"},
+    {"74", "\<\"app-text/asciidoc\"\>"},
+    {"75", "\<\"dev-db/libpq\"\>"},
+    {"76", "\<\"app-admin/eselect\"\>"},
+    {"77", "\<\"dev-python/lxml\"\>"},
+    {"78", "\<\"dev-python/gnome-python-extras\"\>"},
+    {"79", "\<\"media-libs/glew\"\>"},
+    {"80", "\<\"x11-apps/mkfontdir\"\>"},
+    {"81", "\<\"x11-apps/mkfontscale\"\>"},
+    {"82", "\<\"x11-misc/util-macros\"\>"},
+    {"83", "\<\"x11-libs/libX11\"\>"},
+    {"84", "\<\"x11-libs/libXp\"\>"},
+    {"85", "\<\"x11-libs/libXi\"\>"},
+    {"86", "\<\"x11-libs/libXaw\"\>"},
+    {"87", "\<\"x11-libs/libXmu\"\>"},
+    {"88", "\<\"x11-libs/libXt\"\>"},
+    {"89", "\<\"x11-libs/libICE\"\>"},
+    {"90", "\<\"x11-libs/libXext\"\>"},
+    {"91", "\<\"x11-libs/libxkbfile\"\>"},
+    {"92", "\<\"x11-libs/libXxf86dga\"\>"},
+    {"93", "\<\"x11-libs/libXrandr\"\>"},
+    {"94", "\<\"x11-apps/bdftopcf\"\>"},
+    {"95", "\<\"x11-libs/libXau\"\>"},
+    {"96", "\<\"media-fonts/encodings\"\>"},
+    {"97", "\<\"media-fonts/font-alias\"\>"},
+    {"98", "\<\"x11-libs/libXv\"\>"},
+    {"99", "\<\"x11-libs/libXxf86vm\"\>"},
+    {"100", "\<\"x11-libs/libXft\"\>"},
+    {"101", "\<\"x11-libs/libXScrnSaver\"\>"},
+    {"102", "\<\"x11-libs/libXrender\"\>"},
+    {"103", "\<\"x11-apps/xhost\"\>"},
+    {"104", "\<\"x11-libs/libXdmcp\"\>"},
+    {"105", "\<\"x11-libs/libXinerama\"\>"},
+    {"106", "\<\"x11-libs/libXtst\"\>"},
+    {"107", "\<\"x11-libs/libXcursor\"\>"},
+    {"108", "\<\"x11-libs/libXpm\"\>"},
+    {"109", "\<\"x11-libs/libSM\"\>"},
+    {"110", "\<\"x11-libs/libXfixes\"\>"},
+    {"111", "\<\"x11-libs/libdrm\"\>"},
+    {"112", "\<\"x11-libs/libXcomposite\"\>"},
+    {"113", "\<\"x11-libs/libXdamage\"\>"},
+    {"114", "\<\"x11-base/xorg-server\"\>"},
+    {"115", "\<\"net-dns/avahi\"\>"},
+    {"116", "\<\"media-tv/gentoo-vdr-scripts\"\>"},
+    {"117", "\<\"media-tv/vdrplugin-rebuild\"\>"},
+    {"118", "\<\"media-fonts/font-util\"\>"},
+    {"119", "\<\"media-fonts/font-cursor-misc\"\>"},
+    {"120", "\<\"media-fonts/font-misc-misc\"\>"},
+    {"121", "\<\"dev-libs/libnl\"\>"},
+    {"122", "\<\"games-fps/quake3-bin\"\>"},
+    {"123", "\<\"x11-misc/imake\"\>"},
+    {"124", "\<\"dev-python/setuptools\"\>"},
+    {"125", "\<\"app-admin/webapp-config\"\>"},
+    {"126", "\<\"x11-misc/gccmakedep\"\>"},
+    {"127", "\<\"media-libs/gst-plugins-base\"\>"},
+    {"128", "\<\"media-libs/gst-plugins-good\"\>"},
+    {"129", "\<\"app-text/hunspell\"\>"},
+    {"130", "\<\"x11-libs/libnotify\"\>"},
+    {"131", "\<\"sys-apps/man-db\"\>"},
+    {"132", "\<\"www-client/seamonkey\"\>"},
+    {"133", "\<\"dev-python/numpy\"\>"},
+    {"134", "\<\"dev-python/gnome-python-desktop\"\>"},
+    {"135", "\<\"media-gfx/exiv2\"\>"},
+    {"136", "\<\"dev-perl/List-MoreUtils\"\>"},
+    {"137", "\<\"sys-freebsd/freebsd-mk-defs\"\>"},
+    {"138", "\<\"media-libs/freealut\"\>"},
+    {"139", "\<\"dev-python/PyQt4\"\>"},
+    {"140", "\<\"net-libs/xulrunner\"\>"},
+    {"141", "\<\"app-text/ghostscript-gpl\"\>"},
+    {"142", "\<\"media-sound/pulseaudio\"\>"},
+    {"143", "\<\"x11-misc/xdg-utils\"\>"},
+    {"144", "\<\"dev-libs/dbus-glib\"\>"},
+    {"145", "\<\"dev-python/dbus-python\"\>"},
+    {"146", "\<\"dev-java/sun-jaf\"\>"},
+    {"147", "\<\"dev-python/pygobject\"\>"},
+    {"148", "\<\"x11-libs/libxcb\"\>"},
+    {"149", "\<\"net-misc/networkmanager\"\>"},
+    {"150", "\<\"dev-ruby/hoe\"\>"},
+    {"151", "\<\"dev-ruby/rspec\"\>"},
+    {"152", "\<\"mail-client/claws-mail\"\>"},
+    {"153", "\<\"dev-python/notify-python\"\>"},
+    {"154", "\<\"dev-java/ant-junit\"\>"},
+    {"155", "\<\"dev-java/ant-nodeps\"\>"},
+    {"156", "\<\"dev-java/ant-trax\"\>"},
+    {"157", "\<\"dev-python/simplejson\"\>"},
+    {"158", "\<\"dev-python/nose\"\>"},
+    {"159", "\<\"dev-haskell/mtl\"\>"},
+    {"160", "\<\"net-libs/telepathy-glib\"\>"},
+    {"161", "\<\"dev-python/pygments\"\>"},
+    {"162", "\<\"net-im/pidgin\"\>"},
+    {"163", "\<\"dev-cpp/eigen\"\>"},
+    {"164", "\<\"app-admin/eselect-vdr\"\>"},
+    {"165", "\<\"sec-policy/selinux-games\"\>"},
+    {"166", "\<\"dev-haskell/hscolour\"\>"},
+    {"167", "\<\"dev-ruby/mocha\"\>"},
+    {"168", "\<\"app-text/texlive-core\"\>"},
+    {"169", "\<\"dev-texlive/texlive-basic\"\>"},
+    {"170", "\<\"dev-texlive/texlive-documentation-base\"\>"},
+    {"171", "\<\"dev-texlive/texlive-latex\"\>"},
+    {"172", "\<\"dev-texlive/texlive-latexextra\"\>"},
+    {"173", "\<\"app-arch/lzma-utils\"\>"},
+    {"174", "\<\"dev-haskell/parsec\"\>"},
+    {"175", "\<\"x11-libs/qt-dbus\"\>"},
+    {"176", "\<\"x11-libs/qt-core\"\>"},
+    {"177", "\<\"x11-libs/qt-test\"\>"},
+    {"178", "\<\"x11-libs/qt-assistant\"\>"},
+    {"179", "\<\"x11-libs/qt-gui\"\>"},
+    {"180", "\<\"x11-libs/qt-opengl\"\>"},
+    {"181", "\<\"x11-libs/qt-qt3support\"\>"},
+    {"182", "\<\"x11-libs/qt-sql\"\>"},
+    {"183", "\<\"x11-libs/qt-svg\"\>"},
+    {"184", "\<\"x11-libs/qt-xmlpatterns\"\>"},
+    {"185", "\<\"x11-libs/qt-script\"\>"},
+    {"186", "\<\"x11-libs/qt-webkit\"\>"},
+    {"187", "\<\"x11-libs/qt-phonon\"\>"},
+    {"188", "\<\"app-admin/eselect-python\"\>"},
+    {"189", "\<\"kde-base/kdepimlibs\"\>"},
+    {"190", "\<\"kde-base/libkworkspace\"\>"},
+    {"191", "\<\"kde-base/kde-l10n\"\>"},
+    {"192", "\<\"dev-util/gtk-doc-am\"\>"},
+    {"193", "\<\"sys-apps/openrc\"\>"},
+    {"194", "\<\"dev-db/postgresql-base\"\>"},
+    {"195", "\<\"dev-db/postgresql-server\"\>"},
+    {"196", "\<\"x11-libs/qt-demo\"\>"},
+    {"197", "\<\"net-libs/webkit-gtk\"\>"},
+    {"198", "\<\"dev-util/xfce4-dev-tools\"\>"},
+    {"199", "\<\"x11-libs/libpciaccess\"\>"},
+    {"200", "\<\"dev-python/sphinx\"\>"},
+    {"201", "\<\"sys-libs/e2fsprogs-libs\"\>"},
+    {"202", "\<\"dev-python/libgnome-python\"\>"},
+    {"203", "\<\"dev-python/gnome-vfs-python\"\>"},
+    {"204", "\<\"dev-python/gconf-python\"\>"},
+    {"205", "\<\"dev-lang/vala\"\>"},
+    {"206", "\<\"media-libs/libcanberra\"\>"},
+    {"207", "\<\"app-office/akonadi-server\"\>"},
+    {"208", "\<\"media-libs/libv4l\"\>"},
+    {"209", "\<\"kde-base/plasma-workspace\"\>"},
+    {"210", "\<\"net-wireless/bluez\"\>"},
+    {"211", "\<\"dev-dotnet/glib-sharp\"\>"},
+    {"212", "\<\"dev-perl/Moose\"\>"},
+    {"213", "\<\"dev-dotnet/gtk-sharp-gapi\"\>"},
+    {"214", "\<\"dev-ruby/test-unit\"\>"},
+    {"215", "\<\"app-arch/xz-utils\"\>"},
+    {"216", "\<\"xfce-base/xfconf\"\>"},
+    {"217", "\<\"gpe-base/libgpewidget\"\>"},
+    {"218", "\<\"dev-libs/libunique\"\>"},
+    {"219", "\<\"xfce-base/exo\"\>"},
+    {"220", "\<\"kde-base/libknotificationitem\"\>"},
+    {"221", "\<\"kde-base/oxygen-icons\"\>"},
+    {"222", "\<\"dev-php/pear\"\>"},
+    {"223", "\<\"net-zope/zope-interface\"\>"},
+    {"224", "\<\"net-zope/zope-event\"\>"},
+    {"225", "\<\"net-zope/zope-schema\"\>"},
+    {"226", "\<\"net-zope/zope-i18nmessageid\"\>"},
+    {"227", "\<\"net-zope/zope-security\"\>"},
+    {"228", "\<\"net-zope/zope-component\"\>"},
+    {"229", "\<\"net-zope/zope-location\"\>"},
+    {"230", "\<\"x11-libs/qt-multimedia\"\>"},
+    {"231", "\<\"sys-auth/polkit\"\>"},
+    {"232", "\<\"xfce-base/libxfce4ui\"\>"},
+    {"233", "\<\"net-zope/zope-publisher\"\>"},
+    {"234", "\<\"net-zope/zope-traversing\"\>"},
+    {"235", "\<\"sys-infiniband/libibverbs\"\>"},
+    {"236", "\<\"x11-libs/qt-declarative\"\>"},
+    {"237", "\<\"dev-ruby/minitest\"\>"},
+    {"238", "\<\"dev-libs/gobject-introspection\"\>"},
+    {"239", "\<\"media-libs/clutter\"\>"},
+    {"240", "\<\"dev-vcs/git\"\>"},
+    {"241", "\<\"dev-vcs/bzr\"\>"},
+    {"242", "\<\"dev-vcs/mercurial\"\>"},
+    {"243", "\<\"sys-fs/udisks\"\>"},
+    {"244", "\<\"dev-lang/ruby-enterprise\"\>"},
+    {"245", "\<\"sys-power/upower\"\>"},
+    {"246", "\<\"dev-util/automoc\"\>"},
+    {"247", "\<\"media-libs/qimageblitz\"\>"},
+    {"248", "\<\"gnome-base/libgnome-keyring\"\>"},
+    {"249", "\<\"x11-libs/gdk-pixbuf\"\>"},
+    {"250", "\<\"dev-perl/Test-Fatal\"\>"},
+    {"251", "\<\"gnome-base/gsettings-desktop-schemas\"\>"},
+    {"252", "\<\"media-libs/phonon\"\>"},
+    {"253", "\<\"sys-apps/systemd\"\>"},
+    {"254", "\<\"dev-php/Horde_Exception\"\>"},
+    {"255", "\<\"dev-php/Horde_Translation\"\>"},
+    {"256", "\<\"dev-php/Horde_Util\"\>"},
+    {"257", "\<\"net-misc/leechcraft-core\"\>"},
+    {"258", "\<\"dev-php/ezc-Base\"\>"},
+    {"259", "\<\"x11-libs/qt-openvg\"\>"}
+   },
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}, "RowsIndexed" -> {}}],
+  Function[BoxForm`e$, 
+   TableForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{{3.615710765259581*^9, 3.615710806706746*^9}, 
+   3.6157143897629013`*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Pkg", "[", "id_", "]"}], ":=", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"id", ",", 
+       RowBox[{
+       "pkgs", "\[LeftDoubleBracket]", "id", "\[RightDoubleBracket]"}]}], 
+      "}"}], ",", 
+     RowBox[{"ListLinePlot", "[", 
+      RowBox[{
+       RowBox[{"deps", "[", 
+        RowBox[{
+        "pkgs", "\[LeftDoubleBracket]", "id", "\[RightDoubleBracket]"}], 
+        "]"}], ",", 
+       RowBox[{"ImageSize", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"600", ",", "350"}], "}"}]}], ",", 
+       RowBox[{"PlotRange", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", 
+          RowBox[{"Max", "[", 
+           RowBox[{"deps", "[", 
+            RowBox[{
+            "pkgs", "\[LeftDoubleBracket]", "id", "\[RightDoubleBracket]"}], 
+            "]"}], "]"}]}], "}"}]}]}], "]"}]}], "}"}], "//", 
+   "Column"}]}]], "Input",
+ CellChangeTimes->{{3.614503398292363*^9, 3.61450341786613*^9}, 
+   3.6145035634857407`*^9, {3.615698415987194*^9, 3.61569843003085*^9}, {
+   3.615703956614847*^9, 3.615703959292542*^9}, {3.6157041787939367`*^9, 
+   3.615704190044421*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Pkg", "[", "23", "]"}]], "Input",
+ CellChangeTimes->{{3.615709212515586*^9, 3.6157092170985537`*^9}, 
+   3.61571071136078*^9, {3.615710833162341*^9, 3.61571083341842*^9}, 
+   3.615710914581761*^9, {3.61571104796253*^9, 3.615711048015942*^9}}],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     RowBox[{"{", 
+      RowBox[{"23", ",", "\<\"app-text/sword-modules\"\>"}], "}"}]},
+    {
+     GraphicsBox[{{}, {{}, {}, 
+        {RGBColor[0.24720000000000014`, 0.24, 0.6], LineBox[CompressedData["
+1:eJxd1EmKFUEUBdCHI4cOHDhw8BUREZGy763QsteyKfs+/erYLbyFOPhLeUv5
+S3AJKhWpxHmQBCcvN4NMiDy0/LHzfU9E/Pxz/V1359dmjNNG7sX78H58AB/E
+C3wYH8FH8TF8HJ/AJ/EGPoVP4zP4LD6Hz+ML+CK+hC/jK/gqvoav403cRieO
+G+Q4bpLj2CLHcYscx21yHHfIcdwlx3GPHMd9chwPyHE87O7nKnE8IsexPT9v
+d81t8sfkOJ6Q43g6uuHEheMZfZy4cOzQx4kLx3P6OGf371U4XtDHiWv23H85
+uuHEheMVfZy4cLymjxMXjjf0ceLC8ba7/4fb7H5OElf3etnvvxvdcOLC8Z4+
+Tlzd+a33P4xuOHF1/3v/j6MbTlw4PtHHiQvHZ/o4ceGYRi9wwxNOvMKF1zi+
+sD9ueMKJV7jwGseS/XHDE068wjW7zxrH19EL3PCE879/A+fU4k8=
+          "]]}}, {}},
+      AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+      Axes->True,
+      AxesLabel->{None, None},
+      AxesOrigin->{0, 0},
+      ImageSize->{600, 350},
+      Method->{},
+      PlotRange->{{0, 156.}, {0, 164}},
+      PlotRangeClipping->True,
+      PlotRangePadding->{{3.12, 3.12}, {0., 0.}}]}
+   },
+   DefaultBaseStyle->"Column",
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Column"]], "Output",
+ CellChangeTimes->{3.6157092175767097`*^9, 3.615710711929125*^9, 
+  3.615710834256422*^9, 3.615710914942458*^9, 3.615711048651346*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Pkg", "[", "x", "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "1", ",", 
+     RowBox[{"Length", "[", "pkgs", "]"}], ",", "1"}], "}"}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.6133008874437733`*^9, 3.613300926297821*^9}, {
+   3.6133009675377417`*^9, 3.613301053233059*^9}, {3.6133011311285954`*^9, 
+   3.61330113710925*^9}, {3.613301169542007*^9, 3.61330119786935*^9}, {
+   3.6133012342113*^9, 3.613301238436851*^9}, {3.613301300047801*^9, 
+   3.6133013135855703`*^9}, {3.6133014950229073`*^9, 3.613301535739954*^9}, {
+   3.613301593944199*^9, 3.613301631425733*^9}, 3.613302258550871*^9, 
+   3.613302947752494*^9, 3.613303208229372*^9, 3.6133039375386868`*^9, {
+   3.6144943565584373`*^9, 3.614494360424233*^9}, {3.615703984775028*^9, 
+   3.6157040127136927`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`x$$ = 118, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`x$$], 1, 259, 1}}, Typeset`size$$ = {
+    600., {180.5, 187.5}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`x$4059842$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`x$$ = 1}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`x$$, $CellContext`x$4059842$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> $CellContext`Pkg[$CellContext`x$$], 
+      "Specifications" :> {{$CellContext`x$$, 1, 259, 1}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{647., {226., 233.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.614495901786395*^9, 3.615698111970826*^9, 3.615698431637692*^9, {
+   3.6157039642295437`*^9, 3.615704013449213*^9}, 3.615704191726137*^9, 
+   3.615710731280834*^9, 3.6157144031582947`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"IDs", "=", 
+  RowBox[{"{", 
+   RowBox[{
+   "34", ",", "65", ",", "218", ",", "157", ",", "240", ",", "242", ",", "17",
+     ",", "206", ",", "193", ",", "143"}], "}"}]}]], "Input",
+ CellChangeTimes->{{3.614503357775858*^9, 3.614503387346319*^9}, {
+   3.615704038528673*^9, 3.6157040508159246`*^9}, 3.615705443864959*^9, {
+   3.615705520394156*^9, 3.61570552071437*^9}, {3.615710167413557*^9, 
+   3.615710168488028*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "34", ",", "65", ",", "218", ",", "157", ",", "240", ",", "242", ",", "17", 
+   ",", "206", ",", "193", ",", "143"}], "}"}]], "Output",
+ CellChangeTimes->{3.614503388023942*^9, 3.615703886509458*^9, 
+  3.615704051491159*^9, 3.615704094570014*^9, 3.615705445020299*^9, 
+  3.615705521938005*^9, 3.6157100370911093`*^9, 3.61571016928583*^9, 
+  3.615714407026874*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"Pkg", "[", 
+     RowBox[{"IDs", "[", 
+      RowBox[{"[", "x", "]"}], "]"}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", "1", ",", 
+      RowBox[{"Length", "[", "IDs", "]"}]}], "}"}]}], "]"}], " ", "//", 
+  "Column"}]], "Input",
+ CellChangeTimes->{{3.6145034253621407`*^9, 3.614503469702289*^9}, {
+  3.6157041053754873`*^9, 3.615704110790566*^9}, {3.61570545798129*^9, 
+  3.6157054616411457`*^9}}],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     TagBox[GridBox[{
+        {
+         RowBox[{"{", 
+          RowBox[{"34", ",", "\<\"dev-dotnet/gconf-sharp\"\>"}], "}"}]},
+        {
+         GraphicsBox[{{}, {{}, {}, 
+            {RGBColor[0.24720000000000014`, 0.24, 0.6], 
+             LineBox[CompressedData["
+1:eJxd1UlKA2EQhuHClUsXLly4iEFERMR51pTzGIc4z23EtVeog7jIUeooOYJH
+ULEK+d8fmuLhS3VI01UZan+03ntE5PPn+q1/56sh5dGSvXAf3A8PwINwDa7D
+w/AIPAqPwePwBDwJT8HT8Aw8C8/B8/ACvAgvwcvwCrwKr8HrcAPW0gbLBnJY
+NpHDsoUclm3ksOwgh2UXOSx7yGHZRw7LAXJYDpHDcoQclmPksDTDMUfWRH6C
+/nTO8Sn6YTmLGnOpsMEOyzn6YYMdllbUevSnY84NdlguosbcK2ywp3MvXJbW
+dOwFgz2de+SqzBU22NPZf43+dOwhgx2Wm9Kajr1lsMNyW1phgx2WO/SnY08a
+7Pi83Je5wgY7LA/ohw32dO7px9Kajr1u6djjDstTaYUNdlie0Q8b7LC8RI3/
+FYUN9nT2V6Vr6Xwe6XgeFWxwB3a4i/vLa+karHAFG9yBHe7C0sb3wwpXsMGd
+dP7+dLx/3XSet9I1WOEKtn9/A4fArT8=
+              "]]}}, {}},
+          AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+          Axes->True,
+          AxesLabel->{None, None},
+          AxesOrigin->{0, 0},
+          ImageSize->{600, 350},
+          Method->{},
+          PlotRange->{{0, 156.}, {0, 23}},
+          PlotRangeClipping->True,
+          PlotRangePadding->{{3.12, 3.12}, {0., 0.}}]}
+       },
+       DefaultBaseStyle->"Column",
+       GridBoxAlignment->{"Columns" -> {{Left}}},
+       GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+      "Column"]},
+    {
+     TagBox[GridBox[{
+        {
+         RowBox[{"{", 
+          RowBox[{"65", ",", "\<\"dev-haskell/cabal\"\>"}], "}"}]},
+        {
+         GraphicsBox[{{}, {{}, {}, 
+            {RGBColor[0.24720000000000014`, 0.24, 0.6], 
+             LineBox[CompressedData["
+1:eJxd1EluFFEQhOEQK5ZeeMGCRdmyEEIIgc1gRj8MGMzsCY9A0Yg1V8iDsOij
+5FH6CBzBRo40en9JradPUfkWpchemPze/nVJ0p+z37/z/Pm7pv5pPS/Dc/A8
+fAW+Cg/wIrwEX4Ovwzfgm/At+DZ8B16GV+C78D34PvwAXoUfwo/gx/AT+Cn8
+DF6DW++A9Rw5rHXksF4gh/USOaxXyGFtIIf1GjmsN8hhbSKH9RY5rHfIYb1H
+DusDclgfkcP6hBzWZ9t73+CAE9YW5uGAE9a27f+NBkd58fxMWDs+vYcNjrL3
+NpFrF/Nl72nACWvPp/e4wbHXv5/I9QXzdu1ZVL7u+cpt7fdudvU+KnevE9ZB
+7wZH2b1KWIe9Gxxl9zbti94eYR4OOGEdYx4OOGGdYB4Ou/YoK689+tq72bUn
+AWe9X3v0rc+bXXsUldsJ63vvVnZPA05YY+8BbvBYdo/Drp5PkSc8g/Wj92DX
+XrTK3bvRvuhZ2b2Y2tWbhGd1v3ugSe8BbmV/99Gu7xDwdNLfk5P+vVndV8/P
+3gPc4BGO/z4FWlvWnw==
+              "]]}}, {}},
+          AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+          Axes->True,
+          AxesLabel->{None, None},
+          AxesOrigin->{0, 0},
+          ImageSize->{600, 350},
+          Method->{},
+          PlotRange->{{0, 156.}, {0, 148}},
+          PlotRangeClipping->True,
+          PlotRangePadding->{{3.12, 3.12}, {0., 0.}}]}
+       },
+       DefaultBaseStyle->"Column",
+       GridBoxAlignment->{"Columns" -> {{Left}}},
+       GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+      "Column"]},
+    {
+     TagBox[GridBox[{
+        {
+         RowBox[{"{", 
+          RowBox[{"218", ",", "\<\"dev-libs/libunique\"\>"}], "}"}]},
+        {
+         GraphicsBox[{{}, {{}, {}, 
+            {RGBColor[0.24720000000000014`, 0.24, 0.6], 
+             LineBox[CompressedData["
+1:eJxd1TlOHFEUheEjIkICAgKCwkIWQhYCg8FmcD8m22AzuJnnAuSYLdyFOOil
+3KX0ElgCIO4Fvf9JpadPp47U1ckZu3vo/huQ9P/5eblfz2NH9Sk1B+EheBge
+gUfhBv4Aj8Mf4Ql4Ev4ET8HT8Az8GZ6F5+Av8Dy8AH+Fv8GL8BK8DK/A3+EO
+XGobrFXksNaQw1pHDmsDOaxN5LB+IIf1EzmsX8hhbSGHtY0c1m/ksP4gh7WD
+HNYuclh7yGHt1y6wwQ7rL/qwwQ6riz5ssMM6QB822GEdog8b7LCO0IcNdljH
+6MMGO6wT9GGDHdYp+rDBDusMfdhgh3WOPmyww7pAHzbYYV2iDxvsb477Ku7Y
+xZKOnTPY07lr13HHjpV07JilY8cc1k3tko5ds3TskKdzh9q4Y0cauKRjR9p0
+7IylY1d66dgRD+du9DPPHbmt8yacu1EyD7eZx04Y3IM9Hb+/n84dvKu/p0nn
+9yNvYcP7vXTstKfj/+6n89zXbuACt7C9+wmPn5bc
+              "]]}}, {}},
+          AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+          Axes->True,
+          AxesLabel->{None, None},
+          AxesOrigin->{0, 0},
+          ImageSize->{600, 350},
+          Method->{},
+          PlotRange->{{0, 156.}, {0, 40}},
+          PlotRangeClipping->True,
+          PlotRangePadding->{{3.12, 3.12}, {0., 0.}}]}
+       },
+       DefaultBaseStyle->"Column",
+       GridBoxAlignment->{"Columns" -> {{Left}}},
+       GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+      "Column"]},
+    {
+     TagBox[GridBox[{
+        {
+         RowBox[{"{", 
+          RowBox[{"157", ",", "\<\"dev-python/simplejson\"\>"}], "}"}]},
+        {
+         GraphicsBox[{{}, {{}, {}, 
+            {RGBColor[0.24720000000000014`, 0.24, 0.6], 
+             LineBox[CompressedData["
+1:eJxd1UlKBEEQheGHK5cuXLhwUYqIiIjzPKTtPGs7z2WLa68QB3HRR8mj9BE8
+gooRSP4JTfDxKrJ6VW+g9dF875L0+fP7nX/na13lSSW74R64F+6D++EKHoSH
+4GF4BB6Fx+BxeAKehKfgaXgGnoXn4Hl4AV6El+BleAVehdfgdTiVNlgbyGE1
+kMPaRA5rCzmsbeSwdpDD2kUOaw85rH3ksA6QwzpEDusIOaxj5LBOkMM6RQ7r
+rHSCDc6wzrEPG5xhNbEPG5xhXWAfNjjDusQ+bHCGdYV92OAM69rt380EG5xh
+3WAfNjjDusV+2L/bBmdYd6VT2L/zBmdY96UTbHCG9eDTeyTBFh70fViPPr1H
+Emxh75UM68mn90YKe29Y2Hsjh6M3nn16TyTY4ByOnnkpncLeMxaOfVh1+XwF
+p7D3VB2O/4fn22HvrRz2XurAevXpPVW5o4dS2Hunhg1ux30Nfz/cgdUqXbmj
+x1Lk3ls1bHAb9+W4z/NO5HHeSldwgmvY/v0NyRaiuQ==
+              "]]}}, {}},
+          AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+          Axes->True,
+          AxesLabel->{None, None},
+          AxesOrigin->{0, 0},
+          ImageSize->{600, 350},
+          Method->{},
+          PlotRange->{{0, 156.}, {0, 39}},
+          PlotRangeClipping->True,
+          PlotRangePadding->{{3.12, 3.12}, {0., 0.}}]}
+       },
+       DefaultBaseStyle->"Column",
+       GridBoxAlignment->{"Columns" -> {{Left}}},
+       GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+      "Column"]},
+    {
+     TagBox[GridBox[{
+        {
+         RowBox[{"{", 
+          RowBox[{"240", ",", "\<\"dev-vcs/git\"\>"}], "}"}]},
+        {
+         GraphicsBox[{{}, {{}, {}, 
+            {RGBColor[0.24720000000000014`, 0.24, 0.6], 
+             LineBox[CompressedData["
+1:eJxd1EtOFUEYxfEvjhwycODAQUOMMYYQUFDxASWgyFtevpXmNTIKuoJvIQ56
+KbUUluAS1HCOpv6d3FR+dbq6bu7tOqNHZzunVyLi55/P3/Hy+jUf7VVaXoVH
+4GvwdfgG3MFj8E34FnwbvgOPwxPwJDwF34XvwdPwDHwffgA/hGfhR/Bj+An8
+FJ6D5+HSOuF4hhyOBeRwLCKHYwk5HM+Rw/ECORzLyOF4iRyOFeRwrCKHYw05
+HOvI4dhADscmcji2kMPxqnWB09a5r/9yjduty3Z7f8IVjh2N6okCJ1zh2MV6
+OOEKxx7WwwlXOPaxHk64wvEa6231ZNpjWm+79960LnDa6sEKx1uN6sViq/fS
+Vu9V2732TqN6q9jqrbTVW9V2z77XuKD1tnomkVfbPfKhdbHVIym7V6pz98hH
+5eqNAqfsHqnO3QOfZJ3bIvtcpnOdu2r7HH1uXWSfq3QuVzgONK9zUWS/1yn7
+va7O/R72uk//ayf7fyrO9bv3tn9X36/nDn27rvbt/IV9qP01Fo2d54/a+V7u
+5eFY+8sXJ+1zh1Ptb3/Rfd7na7vPIHdyftP+9ln7PeJc814vD86/a3955If2
+d+7ruHUHF7iH879/A987vvk=
+              "]]}}, {}},
+          AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+          Axes->True,
+          AxesLabel->{None, None},
+          AxesOrigin->{0, 0},
+          ImageSize->{600, 350},
+          Method->{},
+          PlotRange->{{0, 156.}, {0, 289}},
+          PlotRangeClipping->True,
+          PlotRangePadding->{{3.12, 3.12}, {0., 0.}}]}
+       },
+       DefaultBaseStyle->"Column",
+       GridBoxAlignment->{"Columns" -> {{Left}}},
+       GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+      "Column"]},
+    {
+     TagBox[GridBox[{
+        {
+         RowBox[{"{", 
+          RowBox[{"242", ",", "\<\"dev-vcs/mercurial\"\>"}], "}"}]},
+        {
+         GraphicsBox[{{}, {{}, {}, 
+            {RGBColor[0.24720000000000014`, 0.24, 0.6], 
+             LineBox[CompressedData["
+1:eJxd1UtKXEEUxvGDI4cZOHDg4KYJEoKIRo0ajV0+4/v9SDTRa4tjt3AW4qCX
+cpbSS8gSjHg+pP4FTfHju+cWl4b6PvaeTh+HzOz5/+91f1v/ulavUnMY/gCP
+wKPwGNzAHfgTPA5/hr/AE/AkPAVPw1/hGXgWnoO/wfPwArwIf4eX4GX4B7wC
+d+FS22FbRQ7bGnLY1pHDtoEctk3ksG0hh+0ncti2kcO2gxy2XeSw7SGHbR85
+bAfIYTtEDtsRctiOaxfY4YDtJJ33RoEdDthOMQ87HLCdYR52OGTda+e1C+xy
+3nMB20Xuec8V2OGA7RLzsMMB2xXmYYcDtl+Yhx0OWd//u3aBHQ5Z/981zocd
+Dlm9cVO73NTPOxyw/cH5cr7P5U7Ow/YX58MOB2y3uWfPFTl7zuXsuZDVc3e5
+Z68V2OGQ1Xtt7QYucvZgC7ucvdlHHvBAVg/e127k7NEiZy+2cvagy9mDfTjk
+7MWBrJ7r5Z691sjZk6VXP9/CnlZv9pEH3jeQtR5qN3CBW9jf/QJcJq9i
+              
+              "]]}}, {}},
+          AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+          Axes->True,
+          AxesLabel->{None, None},
+          AxesOrigin->{0, 0},
+          ImageSize->{600, 350},
+          Method->{},
+          PlotRange->{{0, 156.}, {0, 34}},
+          PlotRangeClipping->True,
+          PlotRangePadding->{{3.12, 3.12}, {0., 0.}}]}
+       },
+       DefaultBaseStyle->"Column",
+       GridBoxAlignment->{"Columns" -> {{Left}}},
+       GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+      "Column"]},
+    {
+     TagBox[GridBox[{
+        {
+         RowBox[{"{", 
+          RowBox[{"17", ",", "\<\"gnome-base/gnome-keyring\"\>"}], "}"}]},
+        {
+         GraphicsBox[{{}, {{}, {}, 
+            {RGBColor[0.24720000000000014`, 0.24, 0.6], 
+             LineBox[CompressedData["
+1:eJxd1TluVFEQheGSI0ICBw4IGgshhCzEPGMXzWCD8YAZbEa3jYjZQi2EoJdS
+S/ESvARAnAO6/5OeSp9O963onnf++Mfe94WI+Pn7/TP/PqdrMT458gx8Fl6E
+l+Bz8ARehi/AF+FL8GV4Bb4CX4WvwdfhG/BN+BZ8G74D34XvwffhB/BD+BG8
+Cq/BObrgeIwcjilyOJ4gh+MpcjieIYfjOXI41pHDsYEcjhfI4XiJ/J81NzV1
+r2oT+avRBccWcji2kcOxgxyOXU3d67R1rwtu2/f89eiEy1YPtO0e2BudcMFt
+L2u+GZ22eqLghuPt6IQLbts9805TPZK2eqTghuP96LTVMwU3HPua6qGEy1bv
+NBwHmuqhhAtu2z31YXTa6qmy1UsNx0dN9VTCZau3Go5PoxMuW+c18visqd5L
+Wz1XcNtTzS+jEy7ZvdjI4yv+b3s/3HAcjk7b+w+xH46Zpnp1Aqfs3p3BBc9t
+9Xj7PPkEeRyN+QRO2/vhOhrPmyNvW9+FE/w+jrEfTtnfrZlzuZDPkbc91X7b
+z7fREzjhGVz//QvR1rbs
+              "]]}}, {}},
+          AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+          Axes->True,
+          AxesLabel->{None, None},
+          AxesOrigin->{0, 0},
+          ImageSize->{600, 350},
+          Method->{},
+          PlotRange->{{0, 156.}, {0, 44}},
+          PlotRangeClipping->True,
+          PlotRangePadding->{{3.12, 3.12}, {0., 0.}}]}
+       },
+       DefaultBaseStyle->"Column",
+       GridBoxAlignment->{"Columns" -> {{Left}}},
+       GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+      "Column"]},
+    {
+     TagBox[GridBox[{
+        {
+         RowBox[{"{", 
+          RowBox[{"206", ",", "\<\"media-libs/libcanberra\"\>"}], "}"}]},
+        {
+         GraphicsBox[{{}, {{}, {}, 
+            {RGBColor[0.24720000000000014`, 0.24, 0.6], 
+             LineBox[CompressedData["
+1:eJxd1TlOJFEQhOEQFiYGBgZG0UIIITRi3wce+74zAwwDXQPC5gp5EIw+Sh6l
+j8ARYEQmqP4ntVKfQlFtxtDjy8Vzj6TXj9//+/ne1tR8pcleuA/uhwfgQbiC
+W/AwPAKPwmPwOPwDnoAn4Sl4Gp6BZ+E5eB5egBfhJXgZXoF/wqvwGlyaNljr
+yGFtIIe1iRzWFnJY28hh7SCHtYsc1h5yWPvIYR0gh3WIHNYRcljHyGGdIId1
+ihzWWdMFNthhnaMPG+ywLtCHDXZYl+jDBjusK/Rhgx3WL/Rhgx3Wb/Rhgx3W
+NfqwwQ7rBn3YYId1iz5ssMP6gz5ssMO6C8cOFdhgh/UX/XTsmMGezh27jxs7
+V9Kxa5ZuRR/WQ9zYsQIb7OnctXbc2LXSbuaG3GHVcWOnKrikY7dq2NKxY510
+7JTD3XTu1L+4sVNVOnaqpGOXatjgDuz4Xjf8tXOPTVfh3L2CvE5HbnAn+xvx
+//heN53vqekKLnAN27ffAZlzmhE=
+              "]]}}, {}},
+          AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+          Axes->True,
+          AxesLabel->{None, None},
+          AxesOrigin->{0, 0},
+          ImageSize->{600, 350},
+          Method->{},
+          PlotRange->{{0, 156.}, {0, 36}},
+          PlotRangeClipping->True,
+          PlotRangePadding->{{3.12, 3.12}, {0., 0.}}]}
+       },
+       DefaultBaseStyle->"Column",
+       GridBoxAlignment->{"Columns" -> {{Left}}},
+       GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+      "Column"]},
+    {
+     TagBox[GridBox[{
+        {
+         RowBox[{"{", 
+          RowBox[{"193", ",", "\<\"sys-apps/openrc\"\>"}], "}"}]},
+        {
+         GraphicsBox[{{}, {{}, {}, 
+            {RGBColor[0.24720000000000014`, 0.24, 0.6], 
+             LineBox[CompressedData["
+1:eJxd1klKBEEQheGHK5cuXLhwUYqIiIjzrJ3O89TOc6m49gpxEBd9lDhKH8Ej
+qJih5J9QJB+vHlW7iL6X9+Zbh6SP7+fn/j2fDZUnleyEu+BuuAfuhSu4Hx6A
+B+EheBgegUfhMXgcnoAn4Sl4Gp6BZ+E5eB5egBfhJXgZXoEbcCptsFaRw1pD
+DmsdOawN5LA2kcPaQg5rGzmsHeSwdpHD2kMOax85rAPksA6RwzpCDusYOayT
+0gk22GGdog8b7LCa6MMGO6wz9GGDHdY5+rDBDusCfdhgh3WJPmyww7pCHzbY
+YV2jDxvssG7Q//PvbbDDui2dYAvnueOw7kqncJ5LBjus+9IJNthhPaAfzv9j
+sON9PaIPG+ywntCHDXZYdekKTnANG9yCHW6HYy94Ll2F856QwnlPqMP9+fvh
+vCe0wnlP8HDeC9rh2ANe8p3neAWncJ77NXJD3grnOe7hPPfb4TivpSs4wTVs
+//4CDQaVqg==
+              "]]}}, {}},
+          AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+          Axes->True,
+          AxesLabel->{None, None},
+          AxesOrigin->{0, 0},
+          ImageSize->{600, 350},
+          Method->{},
+          PlotRange->{{0, 156.}, {0, 25}},
+          PlotRangeClipping->True,
+          PlotRangePadding->{{3.12, 3.12}, {0., 0.}}]}
+       },
+       DefaultBaseStyle->"Column",
+       GridBoxAlignment->{"Columns" -> {{Left}}},
+       GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+      "Column"]},
+    {
+     TagBox[GridBox[{
+        {
+         RowBox[{"{", 
+          RowBox[{"143", ",", "\<\"x11-misc/xdg-utils\"\>"}], "}"}]},
+        {
+         GraphicsBox[{{}, {{}, {}, 
+            {RGBColor[0.24720000000000014`, 0.24, 0.6], 
+             LineBox[CompressedData["
+1:eJxd1UlOVVEUheEdWzZt2LBh40KIMYQQCsWCalOogIIKUipwwdhmCnsgNN5Q
+9lDeEBwCEPaCnP8mLydf1jmvudbI5dXuvydmdn37uzvvv//L1n7e8in8DH4O
+v4Bfwh08Co/Br+DX8Dg8AU/CU/A0PAPPwm/gt/Ac/A5+D3+AP8Lz8AK8CC/B
+y7C3DthWkMO2ihy2NeSwrSOH7RNy2D4jh+0Lctg2kMO2iRy2LeSwfUUO2zfk
+sG0jh20HOWzfkcP2o7XDASdsP/EeDjhh28V7OOCEbQ/v4YATtl94D8eD78+E
+bb+1wwEnbAd4D4dcvZuwHbZ2uXo44ITtqLXDAaesXj+us3rd4ZCr51MerfOk
+zup5l6vnQ66eT1m9/ru1wyHXLqSsHfjT2uXq/ZCr91NWz5+2ucu1C3Ha3k9Z
+u3BWZ+2Cy7ULIdcupKwdOG/tcu1CwClrB/q6V73fldX7jryHAx7I9T7hof5/
+tc6L1l1ZO+Fwr/u1E4F8oLx2IpWXh7Bdtvc72OFerp0JeABnWbs0VK7vb+sO
+driH49E3SumoCQ==
+              "]]}}, {}},
+          AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+          Axes->True,
+          AxesLabel->{None, None},
+          AxesOrigin->{0, 0},
+          ImageSize->{600, 350},
+          Method->{},
+          PlotRange->{{0, 156.}, {0, 45}},
+          PlotRangeClipping->True,
+          PlotRangePadding->{{3.12, 3.12}, {0., 0.}}]}
+       },
+       DefaultBaseStyle->"Column",
+       GridBoxAlignment->{"Columns" -> {{Left}}},
+       GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+      "Column"]}
+   },
+   DefaultBaseStyle->"Column",
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Column"]], "Output",
+ CellChangeTimes->{{3.614503428301893*^9, 3.6145034705072603`*^9}, 
+   3.614503567661416*^9, 3.615703887323574*^9, 3.615704053194517*^9, {
+   3.6157040965449953`*^9, 3.615704111491046*^9}, 3.615704199685239*^9, {
+   3.6157054460324993`*^9, 3.615705462209263*^9}, 3.615705522860449*^9, 
+   3.615710038160828*^9, 3.615710170191045*^9, 3.6157144081921797`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Table", "[", 
+  RowBox[{
+   RowBox[{"Pkg", "[", 
+    RowBox[{"RandomInteger", "[", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "259"}], "}"}], "]"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "1", ",", "10"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.615698058178657*^9, 3.615698082224236*^9}, {
+  3.615698324933477*^9, 3.615698346276767*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   TagBox[GridBox[{
+      {
+       RowBox[{"{", 
+        RowBox[{"199", ",", "\<\"x11-libs/libpciaccess\"\>"}], "}"}]},
+      {
+       GraphicsBox[{{}, {{}, {}, 
+          {RGBColor[0.24720000000000014`, 0.24, 0.6], LineBox[CompressedData["
+
+1:eJxd1UlKBEEUhOHAlUsXLly4KEVERMR51k7bedZ2ntsW117hHcRFH+UdpY/g
+EVQ6H5J/QpF8RAW1qxhqfTY+eiR9/T5/d/d811SeVLIX7oP74QF4EK7gYXgE
+HoXH4HF4Ap6Ep+BpeAaehefgeXgBXoSX4GV4BV6F1+B1eAOuwam0wdpEDquO
+HNYWcljbyGHtIIe1ixzWHnJY+8hhHSCHdYgc1hFyWMfIYZ0gh3WKHNYZcljn
+pRNssMO6QB822GE10IcNdliX6MMGO6wr9GGDHdY1+rDBDusGfdhgh3WLPmyw
+w7pDHzbYYd2jDxvssB7C3TvBBns4duixdIItnHfKYT2VTuG8YwZ7OHbtuXSC
+DfZw7OQL+rCF8046rNfSKZx31mCH1SxdwQluwhbO32/DDndgveU7/7er7NiZ
+FHk9fx82uA073IHVKl3BCW5mx85Z5HnX2uG8Ux7v513rRB7nvXQFJ7gJ279/
+AKyvmL8=
+            "]]}}, {}},
+        AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+        Axes->True,
+        AxesLabel->{None, None},
+        AxesOrigin->{0, 0},
+        ImageSize->{600, 350},
+        Method->{},
+        PlotRange->{{0, 156.}, {0, 44}},
+        PlotRangeClipping->True,
+        PlotRangePadding->{{3.12, 3.12}, {0., 0.}}]}
+     },
+     DefaultBaseStyle->"Column",
+     GridBoxAlignment->{"Columns" -> {{Left}}},
+     GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+    "Column"], ",", 
+   TagBox[GridBox[{
+      {
+       RowBox[{"{", 
+        RowBox[{"77", ",", "\<\"dev-python/lxml\"\>"}], "}"}]},
+      {
+       GraphicsBox[{{}, {{}, {}, 
+          {RGBColor[0.24720000000000014`, 0.24, 0.6], LineBox[CompressedData["
+
+1:eJxd1jlKREEUheGDkaGBgYHBsxEREXGetct5ntp5firGbuEuxKCXcpfSS3AJ
+KtZF6i94FB+Hk9Z5A68frfcuSZ8/3+/9d76aKk8q2Q33wL1wH9wPV3ADHoSH
+4GF4BB6Fx+BxeAKehKfgaXgGnoXn4Hl4AV6El+BleAVehZtwKm2w1pDDWkcO
+awM5rE3ksLaQw9pGDmsHOaxd5LD2kMPaRw7rADmsQ+SwjpDDOkYO6wQ5rNPS
+CTbYYZ1l53cjwQY7rBb6sMEO6xx92GCHdYE+bLDDukQfNthhXaEPG+ywrtGH
+DfZwvOs3pRNssMO6RT+cd8FgD8dO3JVOsIWjj1z36Ifz7hjssB7ynXcowRZu
+5D6sx9IJNthhPaEPG+ywntGHDfZw7GpduoJTOO9uDVs473A7nHfYw3mHO+HY
+4ZfSVTj3E/IaNrgNezjveiccu/5auoJTOO9+DVs4/we0YQ/nne+E47yVruAE
+17D9+xucpLns
+            "]]}}, {}},
+        AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+        Axes->True,
+        AxesLabel->{None, None},
+        AxesOrigin->{0, 0},
+        ImageSize->{600, 350},
+        Method->{},
+        PlotRange->{{0, 156.}, {0, 24}},
+        PlotRangeClipping->True,
+        PlotRangePadding->{{3.12, 3.12}, {0., 0.}}]}
+     },
+     DefaultBaseStyle->"Column",
+     GridBoxAlignment->{"Columns" -> {{Left}}},
+     GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+    "Column"], ",", 
+   TagBox[GridBox[{
+      {
+       RowBox[{"{", 
+        RowBox[{"98", ",", "\<\"x11-libs/libXv\"\>"}], "}"}]},
+      {
+       GraphicsBox[{{}, {{}, {}, 
+          {RGBColor[0.24720000000000014`, 0.24, 0.6], LineBox[CompressedData["
+
+1:eJxd1DlOQzEQxvERFSUFBQXFAyGEEELsO8SEfYdAEsL6CKLmCj4IRY4yR8kR
+OAKgzATN31Jk/fR5nh3L9lj7s/YxICJfv7+/vte+KxJbihyEh+BheAQehQt4
+HJ6AJ+EpeBqegWfhOXgeXoAX4SV4GV6BV+E1eB3egDfhLXgb3oErcIrOsOwi
+h6WKHJY95LDsI4flADksh8hhOUIOyzFyWE6Qw3KKHJYz5LCcI4flAjksl8hh
+uUIOy3V0gjOssNygHs5993p1+ztRi05uezey2+6huv3e3Fpv9yK5q1Zv9nOp
+nvs5vLPcnOAMKyx16+3cpjrqkavb6xtxfQnOsDZQ38T6mzHPyBWWe9TDGVa3
+rUdacb7ktv+bYW1h/oeYJzjDCssj6uHstndDzf135Ck6ub0eVlieMf8z6mHF
+eHlBvbm//577/sPyGp3cPj+ssJTRBZzKuP4SzhjfgRXuwvKG+eEEl3A2+351
+YIW77qp9px3zwu3zwyWcUd9px/Upxnc99/YeXcAJLuH87x/mW8AI
+            "]]}}, {}},
+        AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+        Axes->True,
+        AxesLabel->{None, None},
+        AxesOrigin->{0, 0},
+        ImageSize->{600, 350},
+        Method->{},
+        PlotRange->{{0, 156.}, {0, 43}},
+        PlotRangeClipping->True,
+        PlotRangePadding->{{3.12, 3.12}, {0., 0.}}]}
+     },
+     DefaultBaseStyle->"Column",
+     GridBoxAlignment->{"Columns" -> {{Left}}},
+     GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+    "Column"], ",", 
+   TagBox[GridBox[{
+      {
+       RowBox[{"{", 
+        RowBox[{"218", ",", "\<\"dev-libs/libunique\"\>"}], "}"}]},
+      {
+       GraphicsBox[{{}, {{}, {}, 
+          {RGBColor[0.24720000000000014`, 0.24, 0.6], LineBox[CompressedData["
+
+1:eJxd1TlOHFEUheEjIkICAgKCwkIWQhYCg8FmcD8m22AzuJnnAuSYLdyFOOil
+3KX0ElgCIO4Fvf9JpadPp47U1ckZu3vo/huQ9P/5eblfz2NH9Sk1B+EheBge
+gUfhBv4Aj8Mf4Ql4Ev4ET8HT8Az8GZ6F5+Av8Dy8AH+Fv8GL8BK8DK/A3+EO
+XGobrFXksNaQw1pHDmsDOaxN5LB+IIf1EzmsX8hhbSGHtY0c1m/ksP4gh7WD
+HNYuclh7yGHt1y6wwQ7rL/qwwQ6riz5ssMM6QB822GEdog8b7LCO0IcNdljH
+6MMGO6wT9GGDHdYp+rDBDusMfdhgh3WOPmyww7pAHzbYYV2iDxvsb477Ku7Y
+xZKOnTPY07lr13HHjpV07JilY8cc1k3tko5ds3TskKdzh9q4Y0cauKRjR9p0
+7IylY1d66dgRD+du9DPPHbmt8yacu1EyD7eZx04Y3IM9Hb+/n84dvKu/p0nn
+9yNvYcP7vXTstKfj/+6n89zXbuACt7C9+wmPn5bc
+            "]]}}, {}},
+        AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+        Axes->True,
+        AxesLabel->{None, None},
+        AxesOrigin->{0, 0},
+        ImageSize->{600, 350},
+        Method->{},
+        PlotRange->{{0, 156.}, {0, 40}},
+        PlotRangeClipping->True,
+        PlotRangePadding->{{3.12, 3.12}, {0., 0.}}]}
+     },
+     DefaultBaseStyle->"Column",
+     GridBoxAlignment->{"Columns" -> {{Left}}},
+     GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+    "Column"], ",", 
+   TagBox[GridBox[{
+      {
+       RowBox[{"{", 
+        RowBox[{"69", ",", "\<\"app-text/poppler\"\>"}], "}"}]},
+      {
+       GraphicsBox[{{}, {{}, {}, 
+          {RGBColor[0.24720000000000014`, 0.24, 0.6], LineBox[CompressedData["
+
+1:eJxd1TluVFEQheESESEBAQHBs4UQshACM4ONCzPPYObB8GxEzBZqIQS9lFpK
+L4ElAPI5Rve/Uqv06dx6Uevclf2fOz+ORMSvv79/8+D83orx5Mij8DH4OHwC
+PglP8Cp8Cj4Nn4HX4LPwOfg8fAFehy/Cl+DL8BX4KnwNvg7fgG/CG/AmfAve
+gnN0wXEbORzbyOG4gxyOu8jhuIccjvvI4XiAHI6HyOF4hByOx8jheIIcjqfI
+4XiGHI7nyOF4gRyOl6PTVg8U3HC88v7BTFs9UbZ6om33xI6meiLhstUbbbsX
+XmuqB9JWDxTctnvgzeiEC2443mIfLrjheId9uOCG4z324YLbdu990FTvJVy2
+erBt997H0QmXrV5sOD5pqicTLrht9+bn0QkX3HB8wb6t/2vZq9q3/Y7tauod
+S7h2x/uNPL5iHy64bb+r3zTVywmXva19+bCnZ0318iS7p9O5enl2Lhe8gBte
++nvu8b3R0954P5HPcMELWz3f8NLfd8/vy+r1CU54hkv2O7JwLrdz3V/aPt9H
+T3DCM1z//Qe6d7Pz
+            "]]}}, {}},
+        AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+        Axes->True,
+        AxesLabel->{None, None},
+        AxesOrigin->{0, 0},
+        ImageSize->{600, 350},
+        Method->{},
+        PlotRange->{{0, 156.}, {0, 51}},
+        PlotRangeClipping->True,
+        PlotRangePadding->{{3.12, 3.12}, {0., 0.}}]}
+     },
+     DefaultBaseStyle->"Column",
+     GridBoxAlignment->{"Columns" -> {{Left}}},
+     GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+    "Column"], ",", 
+   TagBox[GridBox[{
+      {
+       RowBox[{"{", 
+        RowBox[{"208", ",", "\<\"media-libs/libv4l\"\>"}], "}"}]},
+      {
+       GraphicsBox[{{}, {{}, {}, 
+          {RGBColor[0.24720000000000014`, 0.24, 0.6], LineBox[CompressedData["
+
+1:eJxd1TlKREEUheGDkaGBgYHBsxEREXGetct5ntp5firGbuEuxKCXcpfSS3AJ
+KtZF6i8oLh+HE5+B14/We5ekz5//e//eV1PlSyW74R64F+6D++EKbsCD8BA8
+DI/Ao/AYPA5PwJPwFDwNz8Cz8Bw8Dy/Ai/ASvAyvwKtwE06lDdYacljryGFt
+IIe1iRzWFnJY28hh7SCHtYsc1h5yWPvIYR0gh3WIHNYRcljHyGGdIId1WjrB
+BjusM/Rhgx1WC33YYId1jj5ssMO6QB822GFdog8b7LCu0IcNdljX6MMGO6wb
+9GGDHdYt+rDBDusOfdhgh3Uf/rsJNthhPaAPG+ywHvPNu5jCeRctnHfQYT2V
+TuG8kwZ7OHbzOd9G7ofzblo476aHYzfrMq/qMk9wDRvchj2cd7kD66V0Fc47
+ncJ5h2vYwnmH27DDnXDs9GvpKpx3OoXzLtewwW3Yw3nnO+F4b6UrOME1bP/+
+BsU9lUM=
+            "]]}}, {}},
+        AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+        Axes->True,
+        AxesLabel->{None, None},
+        AxesOrigin->{0, 0},
+        ImageSize->{600, 350},
+        Method->{},
+        PlotRange->{{0, 156.}, {0, 25}},
+        PlotRangeClipping->True,
+        PlotRangePadding->{{3.12, 3.12}, {0., 0.}}]}
+     },
+     DefaultBaseStyle->"Column",
+     GridBoxAlignment->{"Columns" -> {{Left}}},
+     GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+    "Column"], ",", 
+   TagBox[GridBox[{
+      {
+       RowBox[{"{", 
+        RowBox[{"128", ",", "\<\"media-libs/gst-plugins-good\"\>"}], "}"}]},
+      {
+       GraphicsBox[{{}, {{}, {}, 
+          {RGBColor[0.24720000000000014`, 0.24, 0.6], LineBox[CompressedData["
+
+1:eJxd1TlOZFEMhWGLiLADAgKCAiGEEELM82CG7maeoZv5UYiYLXghBLUUL6WW
+0EtoELaQ/yuVrE/nWrei8wbbb+evPSLy/vH7nF/n34bUo5W98A+4D+6HB+AW
+PAQPwyPwKDwGj8MT8CQ8BU/DM/AsPAfPwwvwIrwEL8Mr8Cq8Bq/DG7BWGyyb
+yGHZQg7LNnJYdpDD8hM5LL+Qw/IbOSy7yGHZQw7LPnJYDpDDcogcliPksBwj
+h+UEOSyn1Qob7LCcYR822GE5xz5s6eglh+WiWtPRU5aOXvJ09tBlzOghTUfv
+GOywXMWM3tF09IzBDst1zOghTUcPGezp7KU/1QpbOveRy9+aK2yww3KDfdjS
+8Z6ns0dvY0ZPajp60mBPZ2/eVSts6dxHLvcxo3cVNtjT2cMP1fpQ7xtyT2ev
+P1brY71vyB2WJ+zDBjssTX2v1dRc4SYd3x1D3oEd7sLyjPdhfa73G9jgDuzp
++L9dWNrVrXR8RxVucN/gDu473E3nealuwQo3sH37P1B4qic=
+            "]]}}, {}},
+        AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+        Axes->True,
+        AxesLabel->{None, None},
+        AxesOrigin->{0, 0},
+        ImageSize->{600, 350},
+        Method->{},
+        PlotRange->{{0, 156.}, {0, 29}},
+        PlotRangeClipping->True,
+        PlotRangePadding->{{3.12, 3.12}, {0., 0.}}]}
+     },
+     DefaultBaseStyle->"Column",
+     GridBoxAlignment->{"Columns" -> {{Left}}},
+     GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+    "Column"], ",", 
+   TagBox[GridBox[{
+      {
+       RowBox[{"{", 
+        RowBox[{"188", ",", "\<\"app-admin/eselect-python\"\>"}], "}"}]},
+      {
+       GraphicsBox[{{}, {{}, {}, 
+          {RGBColor[0.24720000000000014`, 0.24, 0.6], LineBox[CompressedData["
+
+1:eJxd1btOVFEYxfEVK0uKKSwsjsYQY4wRxfuFrSJ4QUW8X5AjhNrGB/gKCwtU
+FO+hoPQBeICvoKC0tLDgEXwENXsdzfmfZLLymzVr9iQzk7Nr/tnM4jZJq38e
+f7Nev8bUv0qf2+EheADvgHfCDbwb3gMPw3vhffB++AB8EB6BD8GH4VH4CHwU
+PgYfh0/AJ+FT8Gn4DHwWHoNL3wHrHHpY59HDuoAe1jh6WBfRw5pAD2sSPaxL
+6GFdRg/rCnpYV9HDmkIP6xp6WNfRw7qBHtZ03wUOOGHdxB4OOGHNYA8HnLBu
+YQ8HnLBuYw8HnLDuYA8HnLDuYg8HnLDuYQ8HnLDuYw8HnJ27+8SDvgsccMJ6
+iD0ccMJ61H2+mgUOOGE9xh4OOGHNOn1fLHDY3f86Z/upJzW/vfLe3nztnf3y
+jXf2d1tzNYeWvbfX7bCn3npvh63W+a5mY4dd7MFKzdZetcMu72uu2Rt2dvsP
+Nbfs57ae+nm7sZc++n3tn3ZrN598vj1tr9kbdtqDzz6ne72t+ZrrdmOPf/H5
+9gu7tX/YYY9+9fl29/1nZ/9etv7Z10LfDVzgFo7//g2wHbqO
+            "]]}}, {}},
+        AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+        Axes->True,
+        AxesLabel->{None, None},
+        AxesOrigin->{0, 0},
+        ImageSize->{600, 350},
+        Method->{},
+        PlotRange->{{0, 156.}, {0, 1677}},
+        PlotRangeClipping->True,
+        PlotRangePadding->{{3.12, 3.12}, {0., 0.}}]}
+     },
+     DefaultBaseStyle->"Column",
+     GridBoxAlignment->{"Columns" -> {{Left}}},
+     GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+    "Column"], ",", 
+   TagBox[GridBox[{
+      {
+       RowBox[{"{", 
+        RowBox[{"88", ",", "\<\"x11-libs/libXt\"\>"}], "}"}]},
+      {
+       GraphicsBox[{{}, {{}, {}, 
+          {RGBColor[0.24720000000000014`, 0.24, 0.6], LineBox[CompressedData["
+
+1:eJxd0ztrFGEUxvGD1ZYWFltYjCKyiATvxmtOvK73GC87xkTHDQHBwtXK8i0S
+DYqQ0sJiSsuUlu9HSGm5H8HSUmX+R3mfgeXw43mfObuzzL7x68W1XWb29c/n
+7+yun3NWXl6yJ94t3iPui/eKK/F+8QHxQfFAfEh8WDwjPiI+Kj4mPi4+IT4p
+PiU+LZ4VnxGfFZ8TnxdfEF8Uz4m9dBLbvORiuyS52C5LLrYrkovtquRiuya5
+2K5LLrah5GK7IbnYbkoutluSi+225GK7I7nY7koutnuSi22htIuTOIvtvvTF
+Kcx7k8PxXiwy+V89zHNMOI3o4+oV5x7QmzBxfkMPT3DGLbaH3Zxix9Vb+uKM
+G2yP6GHHbfTx9if6eAvb427uYMfvcMKb0ceT6I/K846b6I+kj+vo1+V5xy+j
+X5ffN+PJZ/pP6GHHNU444YzzJv0l9kcfD6O/VN4v41/Rf9rN2Y/08RAn7Djj
+Fttymbs44Sb6y+X9bUX24170cYr+Snl/e9bNQfRxes/EO+v0I8f2vJv9Dfq4
+wgkPccYL2Jpu1rjCHvfDP9jXyPmEG9zi7dgnnuI+v89edHOAK1xhl7zBHs9H
+zrd4C2fc4in+FvvH3fwS+8dl3/H32I/9A/txD7eSZzzAU/zvWi1diV3ciNN/
+/wbDa+D0
+            "]]}}, {}},
+        AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+        Axes->True,
+        AxesLabel->{None, None},
+        AxesOrigin->{0, 0},
+        ImageSize->{600, 350},
+        Method->{},
+        PlotRange->{{0, 156.}, {0, 944}},
+        PlotRangeClipping->True,
+        PlotRangePadding->{{3.12, 3.12}, {0., 0.}}]}
+     },
+     DefaultBaseStyle->"Column",
+     GridBoxAlignment->{"Columns" -> {{Left}}},
+     GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+    "Column"], ",", 
+   TagBox[GridBox[{
+      {
+       RowBox[{"{", 
+        RowBox[{"78", ",", "\<\"dev-python/gnome-python-extras\"\>"}], 
+        "}"}]},
+      {
+       GraphicsBox[{{}, {{}, {}, 
+          {RGBColor[0.24720000000000014`, 0.24, 0.6], LineBox[CompressedData["
+
+1:eJxd1ktOlFEQxfGKI4YMHDhg8GGMIYQYwQfIq6+K4htoeYPw0YaxW6iFOOil
+1FJ6CS4BCHVi6n+TTuWXc2++dPftk54d/RlePzCzv7evu3m//g2srlY5BU/D
+D+FH8AzcwY/hJ/BTeA6ehxfgZ/BzeBFegl/AL+FX8Gt4GV6B38Cr8Bq8Dm/A
+m/AAbtUO21vksL1DDtt75LBtIYftA3LYPiKHbRs5bJ+Qw/YZOWxfkMP2FTls
+35DD9h05bD+Qw7aDHLbd6gY7HLDt4bycPeFy9kLI6oFhzuyBBjscsP3EeTl7
+wuXsiUBu+9Vtv+53OGT1yEF1g13OHgrkdpgze6jBDgdsRzgPOxyyeu64usEu
+Zw+GrB48qW4ndb/DAdspng/7ad0fsJ3lzJ5ssMMhq3fPc2ZPNzl72uGA7VfO
+7P0m6/3DAdtFTn1+FzV3OGR9f5fVDXZZ52Hr6/4ObnAv637BYzjkvO8T2K6q
+O1n3GXkPu5y/z7Gc/xsCnsA2qu7gBvey+gkewwFPZK3f1R3c4B72/74BG9un
+sA==
+            "]]}}, {}},
+        AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+        Axes->True,
+        AxesLabel->{None, None},
+        AxesOrigin->{0, 0},
+        ImageSize->{600, 350},
+        Method->{},
+        PlotRange->{{0, 156.}, {0, 26}},
+        PlotRangeClipping->True,
+        PlotRangePadding->{{3.12, 3.12}, {0., 0.}}]}
+     },
+     DefaultBaseStyle->"Column",
+     GridBoxAlignment->{"Columns" -> {{Left}}},
+     GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+    "Column"]}], "}"}]], "Output",
+ CellChangeTimes->{{3.6156980829417562`*^9, 3.615698093104651*^9}, {
+   3.615698123449086*^9, 3.615698135803979*^9}, {3.615698328232191*^9, 
+   3.615698346741873*^9}, 3.615698435986569*^9, 3.61569851300247*^9, {
+   3.615698586130518*^9, 3.615698600664033*^9}, 3.615699034611651*^9, 
+   3.615704149607853*^9, 3.615704205018435*^9, 3.6157042944052277`*^9, 
+   3.61571441423901*^9}]
+}, Open  ]]
+},
+WindowSize->{1440, 882},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+PrivateNotebookOptions->{"VersionedStylesheet"->{"Default.nb"[8.] -> False}},
+FrontEndVersion->"9.0 for Linux x86 (64-bit) (February 7, 2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 361, 6, 32, "Input"],
+Cell[943, 30, 614, 11, 32, "Output"]
+}, Open  ]],
+Cell[1572, 44, 131, 2, 32, "Input"],
+Cell[CellGroupData[{
+Cell[1728, 50, 179, 3, 32, "Input"],
+Cell[1910, 55, 1106, 15, 32, "Output"]
+}, Open  ]],
+Cell[3031, 73, 831, 19, 32, "Input"],
+Cell[CellGroupData[{
+Cell[3887, 96, 2058, 56, 143, "Input"],
+Cell[5948, 154, 121, 2, 32, "Output"],
+Cell[6072, 158, 797, 20, 40, "Output"]
+}, Open  ]],
+Cell[6884, 181, 98, 1, 32, InheritFromParent],
+Cell[CellGroupData[{
+Cell[7007, 186, 192, 3, 32, "Input"],
+Cell[7202, 191, 196, 3, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7435, 199, 213, 3, 32, "Input"],
+Cell[7651, 204, 771, 19, 40, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8459, 228, 249, 7, 32, "Input"],
+Cell[8711, 237, 746, 19, 70, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9494, 261, 248, 7, 32, "Input"],
+Cell[9745, 270, 749, 19, 70, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10531, 294, 360, 11, 32, "Input"],
+Cell[10894, 307, 12022, 275, 4489, "Output"]
+}, Open  ]],
+Cell[22931, 585, 1150, 32, 32, "Input"],
+Cell[CellGroupData[{
+Cell[24106, 621, 266, 4, 32, "Input"],
+Cell[24375, 627, 1371, 32, 385, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[25783, 664, 840, 16, 32, "Input"],
+Cell[26626, 682, 1689, 35, 476, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[28352, 722, 443, 9, 32, "Input"],
+Cell[28798, 733, 405, 8, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[29240, 746, 480, 13, 32, "Input"],
+Cell[29723, 761, 14447, 347, 3752, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[44207, 1113, 384, 10, 32, "Input"],
+Cell[44594, 1125, 13746, 335, 1993, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

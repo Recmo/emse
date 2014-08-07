@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.4.18)  30 JUL 2014 22:08
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.4.18)  7 AUG 2014 14:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -592,6 +592,14 @@ Package: translator 2010/06/12 ver 1.10
 .tex))) (/usr/share/texlive/texmf-dist/tex/latex/base/alltt.sty
 Package: alltt 1997/06/16 v2.0g defines alltt environment
 )
+(/usr/share/texlive/texmf-dist/tex/latex/wrapfig/wrapfig.sty
+\wrapoverhang=\dimen184
+\WF@size=\dimen185
+\c@WF@wrappedlines=\count174
+\WF@box=\box53
+\WF@everypar=\toks24
+Package: wrapfig 2003/01/31  v 3.6
+)
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2012/11/06 v6.83m Hypertext links for LaTeX
 
@@ -648,14 +656,14 @@ Package: auxhook 2011/03/04 v1.3 Hooks for auxiliary files (HO)
 (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
 Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
 )
-\@linkdim=\dimen184
-\Hy@linkcounter=\count174
-\Hy@pagecounter=\count175
+\@linkdim=\dimen186
+\Hy@linkcounter=\count175
+\Hy@pagecounter=\count176
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2012/11/06 v6.83m Hyperref: PDFDocEncoding definition (HO)
 )
-\Hy@SavedSpaceFactor=\count176
+\Hy@SavedSpaceFactor=\count177
 
 (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/hyperref.cfg
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
@@ -669,17 +677,17 @@ Package hyperref Info: Plain pages OFF on input line 4458.
 Package hyperref Info: Backreferencing OFF on input line 4463.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4688.
-\c@Hy@tempcnt=\count177
+\c@Hy@tempcnt=\count178
 
 (/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 5041.
-\XeTeXLinkMargin=\dimen185
-\Fld@menulength=\count178
-\Field@Width=\dimen186
-\Fld@charsize=\dimen187
+\XeTeXLinkMargin=\dimen187
+\Fld@menulength=\count179
+\Field@Width=\dimen188
+\Fld@charsize=\dimen189
 Package hyperref Info: Hyper figures OFF on input line 6295.
 Package hyperref Info: Link nesting OFF on input line 6300.
 Package hyperref Info: Hyper index ON on input line 6303.
@@ -689,17 +697,17 @@ Package hyperref Info: Link coloring with OCG OFF on input line 6320.
 Package hyperref Info: PDF/A mode OFF on input line 6325.
 LaTeX Info: Redefining \ref on input line 6365.
 LaTeX Info: Redefining \pageref on input line 6369.
-\Hy@abspage=\count179
-\c@Item=\count180
-\c@Hfootnote=\count181
+\Hy@abspage=\count180
+\c@Item=\count181
+\c@Hfootnote=\count182
 )
 
 Package hyperref Message: Driver (autodetected): hpdftex.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
 File: hpdftex.def 2012/11/06 v6.83m Hyperref driver for pdfTeX
-\Fld@listcount=\count182
-\c@bookmark@seq@number=\count183
+\Fld@listcount=\count183
+\c@bookmark@seq@number=\count184
 
 (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
 Package: rerunfilecheck 2011/04/15 v1.7 Rerun checks for auxiliary files (HO)
@@ -719,10 +727,10 @@ Package xcolor Info: Driver file: pdftex.def on input line 225.
 
 (/usr/share/texlive/texmf-dist/tex/latex/colortbl/colortbl.sty
 Package: colortbl 2012/02/13 v1.0a Color table columns (DPC)
-\everycr=\toks24
+\everycr=\toks25
 \minrowclearance=\skip62
 )
-\rownum=\count184
+\rownum=\count185
 Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
 Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1341.
 Package xcolor Info: Model `RGB' extended on input line 1353.
@@ -743,14 +751,14 @@ File: svgnam.def 2007/01/21 v2.11 Predefined colors according to SVG 1.1 (UK)
 Package: subfigure 2002/03/15 v2.1.5 subfigure package
 \subfigtopskip=\skip63
 \subfigcapskip=\skip64
-\subfigcaptopadj=\dimen188
+\subfigcaptopadj=\dimen190
 \subfigbottomskip=\skip65
-\subfigcapmargin=\dimen189
+\subfigcapmargin=\dimen191
 \subfiglabelskip=\skip66
-\c@subfigure=\count185
-\c@lofdepth=\count186
-\c@subtable=\count187
-\c@lotdepth=\count188
+\c@subfigure=\count186
+\c@lofdepth=\count187
+\c@subtable=\count188
+\c@lotdepth=\count189
 
 ****************************************
 * Local config file subfigure.cfg used *
@@ -761,46 +769,46 @@ Package: subfigure 2002/03/15 v2.1.5 subfigure package
 ) (./paper.aux)
 \openout1 = `paper.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
 Package nag Info: Command \frontmatter not defined, skipping amendment on input
- line 23.
+ line 24.
 Package nag Info: Command \mainmatter not defined, skipping amendment on input 
-line 23.
+line 24.
 Package nag Info: Command \backmatter not defined, skipping amendment on input 
-line 23.
+line 24.
 Package nag Info: Command \RaggedLeft not defined, skipping amendment on input 
-line 23.
+line 24.
 Package nag Info: Command \RaggedRight not defined, skipping amendment on input
- line 23.
+ line 24.
 
 Unknown journal: specify \journalname{<name of your journal>} in preambel
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count189
-\scratchdimen=\dimen190
-\scratchbox=\box53
-\nofMPsegments=\count190
-\nofMParguments=\count191
-\everyMPshowfont=\toks25
-\MPscratchCnt=\count192
-\MPscratchDim=\dimen191
-\MPnumerator=\count193
-\makeMPintoPDFobject=\count194
-\everyMPtoPDFconversion=\toks26
+\scratchcounter=\count190
+\scratchdimen=\dimen192
+\scratchbox=\box54
+\nofMPsegments=\count191
+\nofMParguments=\count192
+\everyMPshowfont=\toks26
+\MPscratchCnt=\count193
+\MPscratchDim=\dimen193
+\MPnumerator=\count194
+\makeMPintoPDFobject=\count195
+\everyMPtoPDFconversion=\toks27
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
 
@@ -816,7 +824,7 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Info: Redefining \microtypecontext on input line 23.
+LaTeX Info: Redefining \microtypecontext on input line 24.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -839,40 +847,40 @@ Dictionary: translator-basic-dictionary, Language: English
 fg
 File: siunitx-abbreviations.cfg 2013/07/31 v2.5s siunitx: Abbreviated units
 )
-\AtBeginShipoutBox=\box54
-Package hyperref Info: Link coloring OFF on input line 23.
+\AtBeginShipoutBox=\box55
+Package hyperref Info: Link coloring OFF on input line 24.
  (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count195
+\c@section@level=\count196
 )
-LaTeX Info: Redefining \ref on input line 23.
-LaTeX Info: Redefining \pageref on input line 23.
-LaTeX Info: Redefining \nameref on input line 23.
+LaTeX Info: Redefining \ref on input line 24.
+LaTeX Info: Redefining \pageref on input line 24.
+LaTeX Info: Redefining \nameref on input line 24.
 
 (./paper.out) (./paper.out)
 \@outlinefile=\write3
 \openout3 = `paper.out'.
 
 Package nag Info: Command \caption@xlabel not defined, skipping amendment on in
-put line 23.
+put line 24.
 Package nag Info: Command \captionabove not defined, skipping amendment on inpu
-t line 23.
+t line 24.
 Package nag Info: Command \captionbelow not defined, skipping amendment on inpu
-t line 23.
+t line 24.
 Package nag Info: Command \hc@caption not defined, skipping amendment on input 
-line 23.
+line 24.
 Package nag Info: Command \topcaption not defined, skipping amendment on input 
-line 23.
-\c__siunitx_mathsf_int=\count196
+line 24.
+\c__siunitx_mathsf_int=\count197
 Package microtype Info: Loading generic settings for font family
 (microtype)             `cmss' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-\c__siunitx_mathtt_int=\count197
+\c__siunitx_mathtt_int=\count198
 Package microtype Info: Loading generic settings for font family
 (microtype)             `cmtt' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
@@ -882,61 +890,94 @@ SVJour3 warning: Missing \journalname
 SVJour3 warning: Missing \date
 
 LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <13> not available
-(Font)              size <12> substituted on input line 32.
+(Font)              size <12> substituted on input line 33.
 
+(./paper.toc)
+\tf@toc=\write4
+\openout4 = `paper.toc'.
 
-Package nag Warning: Command \it is an old LaTeX 2.09 command. 
-(nag)                Use \itshape or \textit instead on input line 32.
+ <depgraph.pdf, id=54, 682.55pt x 260.975pt>
+File: depgraph.pdf Graphic file (type pdf)
+ <use depgraph.pdf>
+Package pdftex.def Info: depgraph.pdf used on input line 47.
+(pdftex.def)             Requested size: 338.0pt x 129.23679pt.
 
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ü in font cmr10!
 Missing character: There is no í in font cmr10!
+ [2 <./depgraph.pdf>]
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no î in font cmr10!
-[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (33.2191pt too wide) in paragraph at lines 87--88
+
+Overfull \hbox (33.2191pt too wide) in paragraph at lines 102--103
 \OT1/cmr/m/n/10 (-20) Up-grade-abil-ity De-scrip-tion For-mat, CUDF [http://www
 .mancoosi.org/reports/tr3.pdf],
  []
 
-<depgraph.pdf, id=77, 682.55pt x 260.975pt>
-File: depgraph.pdf Graphic file (type pdf)
- <use depgraph.pdf>
-Package pdftex.def Info: depgraph.pdf used on input line 102.
-(pdftex.def)             Requested size: 338.0pt x 129.23679pt.
- [2] [3 <./depgraph.pdf>] [4] [5]
-<packageCountUnfiltered2.pdf, id=113, 301.125pt x 182.20872pt>
+[3] [4] <Bass.pdf, id=118, 301.125pt x 182.14851pt>
+File: Bass.pdf Graphic file (type pdf)
+ <use Bass.pdf>
+Package pdftex.def Info: Bass.pdf used on input line 150.
+(pdftex.def)             Requested size: 301.12425pt x 182.14806pt.
+ [5 <./Bass.pdf>] [6] [7] [8] [9]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [10]
+<packageCountUnfiltered2.pdf, id=195, 301.125pt x 182.20872pt>
 File: packageCountUnfiltered2.pdf Graphic file (type pdf)
 
 <use packageCountUnfiltered2.pdf>
-Package pdftex.def Info: packageCountUnfiltered2.pdf used on input line 181.
-(pdftex.def)             Requested size: 338.0pt x 204.54224pt.
+Package pdftex.def Info: packageCountUnfiltered2.pdf used on input line 327.
+(pdftex.def)             Requested size: 160.54948pt x 97.15123pt.
 
-<packageCountDeltaUnfiltered2.pdf, id=114, 301.125pt x 184.05362pt>
+
+Package wrapfig Warning: Collision between wrapping environments on input line 
+331.
+
+<packageCountDeltaUnfiltered2.pdf, id=196, 301.125pt x 184.05362pt>
 File: packageCountDeltaUnfiltered2.pdf Graphic file (type pdf)
 
 <use packageCountDeltaUnfiltered2.pdf>
-Package pdftex.def Info: packageCountDeltaUnfiltered2.pdf used on input line 18
-7.
-(pdftex.def)             Requested size: 338.0pt x 206.61324pt.
- [6 <./packageCountUnfiltered2.pdf>]
-<histo-out.pdf, id=195, 361.35pt x 222.66989pt>
+Package pdftex.def Info: packageCountDeltaUnfiltered2.pdf used on input line 33
+3.
+(pdftex.def)             Requested size: 160.54948pt x 98.1349pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [11]
+Overfull \hbox (0.45871pt too wide) in paragraph at lines 337--338
+\OT1/cmr/m/n/10 (-20) riod of rapid growth be-tween 2002---
+ []
+
+<histo-out.pdf, id=207, 361.35pt x 222.66989pt>
 File: histo-out.pdf Graphic file (type pdf)
  <use histo-out.pdf>
-Package pdftex.def Info: histo-out.pdf used on input line 199.
-(pdftex.def)             Requested size: 338.0pt x 208.28362pt.
+Package pdftex.def Info: histo-out.pdf used on input line 345.
+(pdftex.def)             Requested size: 169.0pt x 104.1418pt.
+ [12 <./packageCountUnfiltered2.pdf> <./packageCountDeltaUnfiltered2.pdf
 
-<histo-in.pdf, id=196, 361.35pt x 219.02528pt>
+pdfTeX warning: /usr/bin/pdflatex (file ./packageCountDeltaUnfiltered2.pdf): PD
+F inclusion: multiple pdfs with page group included in a single page
+>]
+
+Package wrapfig Warning: Collision between wrapping environments on input line 
+349.
+
+<histo-in.pdf, id=368, 361.35pt x 219.02528pt>
 File: histo-in.pdf Graphic file (type pdf)
  <use histo-in.pdf>
-Package pdftex.def Info: histo-in.pdf used on input line 205.
-(pdftex.def)             Requested size: 338.0pt x 204.87448pt.
+Package pdftex.def Info: histo-in.pdf used on input line 351.
+(pdftex.def)             Requested size: 169.0pt x 102.43724pt.
+ [13 <./histo-out.pdf> <./histo-in.pdf>] <kde.pdf, id=394, 597.23125pt x 845.15
+75pt>
+File: kde.pdf Graphic file (type pdf)
 
-Underfull \vbox (badness 2573) has occurred while \output is active []
-
- [7 <./packageCountDeltaUnfiltered2.pdf>] [8 <./histo-out.pdf> <./histo-in.pdf>
-]
+<use kde.pdf>
+Package pdftex.def Info: kde.pdf used on input line 367.
+(pdftex.def)             Requested size: 338.0pt x 333.17262pt.
+ [14] [15 <./kde.pdf>]
 Missing character: There is no ¬ in font cmr10!
 Missing character: There is no ∑ in font cmr10!
 Missing character: There is no ¬ in font cmr10!
@@ -981,323 +1022,323 @@ Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ù in font cmr10!
 
-<sparkline-173-app-arch-lzma-utils.pdf, id=308, 100.375pt x 25.09375pt>
+<sparkline-173-app-arch-lzma-utils.pdf, id=409, 100.375pt x 25.09375pt>
 File: sparkline-173-app-arch-lzma-utils.pdf Graphic file (type pdf)
 
 <use sparkline-173-app-arch-lzma-utils.pdf>
 Package pdftex.def Info: sparkline-173-app-arch-lzma-utils.pdf used on input li
-ne 257.
+ne 422.
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-74-app-text-asciidoc.pdf, id=309, 100.375pt x 25.09375pt>
+<sparkline-74-app-text-asciidoc.pdf, id=410, 100.375pt x 25.09375pt>
 File: sparkline-74-app-text-asciidoc.pdf Graphic file (type pdf)
 
 <use sparkline-74-app-text-asciidoc.pdf>
 Package pdftex.def Info: sparkline-74-app-text-asciidoc.pdf used on input line 
-258.
+423.
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-23-app-text-sword-modules.pdf, id=310, 100.375pt x 25.09375pt>
+<sparkline-23-app-text-sword-modules.pdf, id=411, 100.375pt x 25.09375pt>
 File: sparkline-23-app-text-sword-modules.pdf Graphic file (type pdf)
 
 <use sparkline-23-app-text-sword-modules.pdf>
 Package pdftex.def Info: sparkline-23-app-text-sword-modules.pdf used on input 
-line 259.
+line 424.
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-35-dev-dotnet-gnome-sharp.pdf, id=311, 100.375pt x 25.09375pt>
+<sparkline-35-dev-dotnet-gnome-sharp.pdf, id=412, 100.375pt x 25.09375pt>
 File: sparkline-35-dev-dotnet-gnome-sharp.pdf Graphic file (type pdf)
 
 <use sparkline-35-dev-dotnet-gnome-sharp.pdf>
 Package pdftex.def Info: sparkline-35-dev-dotnet-gnome-sharp.pdf used on input 
-line 260.
+line 425.
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-166-dev-haskell-hscolour.pdf, id=312, 100.375pt x 25.09375pt>
+<sparkline-166-dev-haskell-hscolour.pdf, id=413, 100.375pt x 25.09375pt>
 File: sparkline-166-dev-haskell-hscolour.pdf Graphic file (type pdf)
 
 <use sparkline-166-dev-haskell-hscolour.pdf>
 Package pdftex.def Info: sparkline-166-dev-haskell-hscolour.pdf used on input l
-ine 261.
+ine 426.
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-159-dev-haskell-mtl.pdf, id=313, 100.375pt x 25.09375pt>
+<sparkline-159-dev-haskell-mtl.pdf, id=414, 100.375pt x 25.09375pt>
 File: sparkline-159-dev-haskell-mtl.pdf Graphic file (type pdf)
 
 <use sparkline-159-dev-haskell-mtl.pdf>
-Package pdftex.def Info: sparkline-159-dev-haskell-mtl.pdf used on input line 2
-62.
+Package pdftex.def Info: sparkline-159-dev-haskell-mtl.pdf used on input line 4
+27.
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-146-dev-java-sun-jaf.pdf, id=314, 100.375pt x 25.09375pt>
+<sparkline-146-dev-java-sun-jaf.pdf, id=415, 100.375pt x 25.09375pt>
 File: sparkline-146-dev-java-sun-jaf.pdf Graphic file (type pdf)
 
 <use sparkline-146-dev-java-sun-jaf.pdf>
 Package pdftex.def Info: sparkline-146-dev-java-sun-jaf.pdf used on input line 
-263.
+428.
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-39-dev-libs-liboil.pdf, id=315, 100.375pt x 25.09375pt>
+<sparkline-39-dev-libs-liboil.pdf, id=416, 100.375pt x 25.09375pt>
 File: sparkline-39-dev-libs-liboil.pdf Graphic file (type pdf)
 
 <use sparkline-39-dev-libs-liboil.pdf>
-Package pdftex.def Info: sparkline-39-dev-libs-liboil.pdf used on input line 26
-4.
+Package pdftex.def Info: sparkline-39-dev-libs-liboil.pdf used on input line 42
+9.
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-222-dev-php-pear.pdf, id=316, 100.375pt x 25.09375pt>
+<sparkline-222-dev-php-pear.pdf, id=417, 100.375pt x 25.09375pt>
 File: sparkline-222-dev-php-pear.pdf Graphic file (type pdf)
 
 <use sparkline-222-dev-php-pear.pdf>
-Package pdftex.def Info: sparkline-222-dev-php-pear.pdf used on input line 265.
+Package pdftex.def Info: sparkline-222-dev-php-pear.pdf used on input line 430.
 
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-150-dev-ruby-hoe.pdf, id=317, 100.375pt x 25.09375pt>
+<sparkline-150-dev-ruby-hoe.pdf, id=418, 100.375pt x 25.09375pt>
 File: sparkline-150-dev-ruby-hoe.pdf Graphic file (type pdf)
 
 <use sparkline-150-dev-ruby-hoe.pdf>
-Package pdftex.def Info: sparkline-150-dev-ruby-hoe.pdf used on input line 266.
+Package pdftex.def Info: sparkline-150-dev-ruby-hoe.pdf used on input line 431.
 
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-51-dev-ruby-rake.pdf, id=318, 100.375pt x 25.09375pt>
+<sparkline-51-dev-ruby-rake.pdf, id=419, 100.375pt x 25.09375pt>
 File: sparkline-51-dev-ruby-rake.pdf Graphic file (type pdf)
 
 <use sparkline-51-dev-ruby-rake.pdf>
-Package pdftex.def Info: sparkline-51-dev-ruby-rake.pdf used on input line 267.
+Package pdftex.def Info: sparkline-51-dev-ruby-rake.pdf used on input line 432.
 
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-6-dev-util-cmake.pdf, id=319, 100.375pt x 25.09375pt>
+<sparkline-6-dev-util-cmake.pdf, id=420, 100.375pt x 25.09375pt>
 File: sparkline-6-dev-util-cmake.pdf Graphic file (type pdf)
 
 <use sparkline-6-dev-util-cmake.pdf>
-Package pdftex.def Info: sparkline-6-dev-util-cmake.pdf used on input line 268.
+Package pdftex.def Info: sparkline-6-dev-util-cmake.pdf used on input line 433.
 
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-198-dev-util-xfce4-dev-tools.pdf, id=320, 100.375pt x 25.09375pt>
+<sparkline-198-dev-util-xfce4-dev-tools.pdf, id=421, 100.375pt x 25.09375pt>
 File: sparkline-198-dev-util-xfce4-dev-tools.pdf Graphic file (type pdf)
 
 <use sparkline-198-dev-util-xfce4-dev-tools.pdf>
 Package pdftex.def Info: sparkline-198-dev-util-xfce4-dev-tools.pdf used on inp
-ut line 269.
+ut line 434.
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-122-games-fps-quake3-bin.pdf, id=321, 100.375pt x 25.09375pt>
+<sparkline-122-games-fps-quake3-bin.pdf, id=422, 100.375pt x 25.09375pt>
 File: sparkline-122-games-fps-quake3-bin.pdf Graphic file (type pdf)
 
 <use sparkline-122-games-fps-quake3-bin.pdf>
 Package pdftex.def Info: sparkline-122-games-fps-quake3-bin.pdf used on input l
-ine 270.
+ine 435.
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-60-kde-base-libkdepim.pdf, id=322, 100.375pt x 25.09375pt>
+<sparkline-60-kde-base-libkdepim.pdf, id=423, 100.375pt x 25.09375pt>
 File: sparkline-60-kde-base-libkdepim.pdf Graphic file (type pdf)
 
 <use sparkline-60-kde-base-libkdepim.pdf>
 Package pdftex.def Info: sparkline-60-kde-base-libkdepim.pdf used on input line
- 271.
+ 436.
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-221-kde-base-oxygen-icons.pdf, id=323, 100.375pt x 25.09375pt>
+<sparkline-221-kde-base-oxygen-icons.pdf, id=424, 100.375pt x 25.09375pt>
 File: sparkline-221-kde-base-oxygen-icons.pdf Graphic file (type pdf)
 
 <use sparkline-221-kde-base-oxygen-icons.pdf>
 Package pdftex.def Info: sparkline-221-kde-base-oxygen-icons.pdf used on input 
-line 272.
+line 437.
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-152-mail-client-claws-mail.pdf, id=324, 100.375pt x 25.09375pt>
+<sparkline-152-mail-client-claws-mail.pdf, id=425, 100.375pt x 25.09375pt>
 File: sparkline-152-mail-client-claws-mail.pdf Graphic file (type pdf)
 
 <use sparkline-152-mail-client-claws-mail.pdf>
 Package pdftex.def Info: sparkline-152-mail-client-claws-mail.pdf used on input
- line 273.
+ line 438.
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-119-media-fonts-font-cursor-misc.pdf, id=325, 100.375pt x 25.09375pt
+<sparkline-119-media-fonts-font-cursor-misc.pdf, id=426, 100.375pt x 25.09375pt
 >
 File: sparkline-119-media-fonts-font-cursor-misc.pdf Graphic file (type pdf)
  <use sparkline-119-media-fonts-font-cursor-misc.pdf>
 Package pdftex.def Info: sparkline-119-media-fonts-font-cursor-misc.pdf used on
- input line 274.
+ input line 439.
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-79-media-libs-glew.pdf, id=326, 100.375pt x 25.09375pt>
+<sparkline-79-media-libs-glew.pdf, id=427, 100.375pt x 25.09375pt>
 File: sparkline-79-media-libs-glew.pdf Graphic file (type pdf)
 
 <use sparkline-79-media-libs-glew.pdf>
-Package pdftex.def Info: sparkline-79-media-libs-glew.pdf used on input line 27
-5.
+Package pdftex.def Info: sparkline-79-media-libs-glew.pdf used on input line 44
+0.
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-187-x11-libs-qt-phonon.pdf, id=327, 100.375pt x 25.09375pt>
+<sparkline-187-x11-libs-qt-phonon.pdf, id=428, 100.375pt x 25.09375pt>
 File: sparkline-187-x11-libs-qt-phonon.pdf Graphic file (type pdf)
 
 <use sparkline-187-x11-libs-qt-phonon.pdf>
 Package pdftex.def Info: sparkline-187-x11-libs-qt-phonon.pdf used on input lin
-e 276.
+e 441.
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-193-sys-apps-openrc.pdf, id=328, 100.375pt x 25.09375pt>
+<sparkline-193-sys-apps-openrc.pdf, id=429, 100.375pt x 25.09375pt>
 File: sparkline-193-sys-apps-openrc.pdf Graphic file (type pdf)
 
 <use sparkline-193-sys-apps-openrc.pdf>
-Package pdftex.def Info: sparkline-193-sys-apps-openrc.pdf used on input line 2
-77.
+Package pdftex.def Info: sparkline-193-sys-apps-openrc.pdf used on input line 4
+42.
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-72-sys-apps-sandbox.pdf, id=329, 100.375pt x 25.09375pt>
+<sparkline-72-sys-apps-sandbox.pdf, id=430, 100.375pt x 25.09375pt>
 File: sparkline-72-sys-apps-sandbox.pdf Graphic file (type pdf)
 
 <use sparkline-72-sys-apps-sandbox.pdf>
-Package pdftex.def Info: sparkline-72-sys-apps-sandbox.pdf used on input line 2
-78.
+Package pdftex.def Info: sparkline-72-sys-apps-sandbox.pdf used on input line 4
+43.
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-48-sys-devel-automake-wrapper.pdf, id=330, 100.375pt x 25.09375pt>
+<sparkline-48-sys-devel-automake-wrapper.pdf, id=431, 100.375pt x 25.09375pt>
 File: sparkline-48-sys-devel-automake-wrapper.pdf Graphic file (type pdf)
 
 <use sparkline-48-sys-devel-automake-wrapper.pdf>
 Package pdftex.def Info: sparkline-48-sys-devel-automake-wrapper.pdf used on in
-put line 279.
+put line 444.
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-199-x11-libs-libpciaccess.pdf, id=331, 100.375pt x 25.09375pt>
+<sparkline-199-x11-libs-libpciaccess.pdf, id=432, 100.375pt x 25.09375pt>
 File: sparkline-199-x11-libs-libpciaccess.pdf Graphic file (type pdf)
 
 <use sparkline-199-x11-libs-libpciaccess.pdf>
 Package pdftex.def Info: sparkline-199-x11-libs-libpciaccess.pdf used on input 
-line 280.
+line 445.
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-109-x11-libs-libSM.pdf, id=332, 100.375pt x 25.09375pt>
+<sparkline-109-x11-libs-libSM.pdf, id=433, 100.375pt x 25.09375pt>
 File: sparkline-109-x11-libs-libSM.pdf Graphic file (type pdf)
 
 <use sparkline-109-x11-libs-libSM.pdf>
-Package pdftex.def Info: sparkline-109-x11-libs-libSM.pdf used on input line 28
-1.
+Package pdftex.def Info: sparkline-109-x11-libs-libSM.pdf used on input line 44
+6.
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-86-x11-libs-libXaw.pdf, id=333, 100.375pt x 25.09375pt>
+<sparkline-86-x11-libs-libXaw.pdf, id=434, 100.375pt x 25.09375pt>
 File: sparkline-86-x11-libs-libXaw.pdf Graphic file (type pdf)
 
 <use sparkline-86-x11-libs-libXaw.pdf>
-Package pdftex.def Info: sparkline-86-x11-libs-libXaw.pdf used on input line 28
-2.
+Package pdftex.def Info: sparkline-86-x11-libs-libXaw.pdf used on input line 44
+7.
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-104-x11-libs-libXdmcp.pdf, id=334, 100.375pt x 25.09375pt>
+<sparkline-104-x11-libs-libXdmcp.pdf, id=435, 100.375pt x 25.09375pt>
 File: sparkline-104-x11-libs-libXdmcp.pdf Graphic file (type pdf)
 
 <use sparkline-104-x11-libs-libXdmcp.pdf>
 Package pdftex.def Info: sparkline-104-x11-libs-libXdmcp.pdf used on input line
- 283.
+ 448.
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-196-x11-libs-qt-demo.pdf, id=335, 100.375pt x 25.09375pt>
+<sparkline-196-x11-libs-qt-demo.pdf, id=436, 100.375pt x 25.09375pt>
 File: sparkline-196-x11-libs-qt-demo.pdf Graphic file (type pdf)
 
 <use sparkline-196-x11-libs-qt-demo.pdf>
 Package pdftex.def Info: sparkline-196-x11-libs-qt-demo.pdf used on input line 
-284.
+449.
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-180-x11-libs-qt-opengl.pdf, id=336, 100.375pt x 25.09375pt>
+<sparkline-180-x11-libs-qt-opengl.pdf, id=437, 100.375pt x 25.09375pt>
 File: sparkline-180-x11-libs-qt-opengl.pdf Graphic file (type pdf)
 
 <use sparkline-180-x11-libs-qt-opengl.pdf>
 Package pdftex.def Info: sparkline-180-x11-libs-qt-opengl.pdf used on input lin
-e 285.
+e 450.
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-185-x11-libs-qt-script.pdf, id=337, 100.375pt x 25.09375pt>
+<sparkline-185-x11-libs-qt-script.pdf, id=438, 100.375pt x 25.09375pt>
 File: sparkline-185-x11-libs-qt-script.pdf Graphic file (type pdf)
 
 <use sparkline-185-x11-libs-qt-script.pdf>
 Package pdftex.def Info: sparkline-185-x11-libs-qt-script.pdf used on input lin
-e 286.
+e 451.
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-34-dev-dotnet-gconf-sharp.pdf, id=338, 100.375pt x 25.09375pt>
+<sparkline-34-dev-dotnet-gconf-sharp.pdf, id=439, 100.375pt x 25.09375pt>
 File: sparkline-34-dev-dotnet-gconf-sharp.pdf Graphic file (type pdf)
 
 <use sparkline-34-dev-dotnet-gconf-sharp.pdf>
 Package pdftex.def Info: sparkline-34-dev-dotnet-gconf-sharp.pdf used on input 
-line 297.
+line 462.
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-65-dev-haskell-cabal.pdf, id=339, 100.375pt x 25.09375pt>
+<sparkline-65-dev-haskell-cabal.pdf, id=440, 100.375pt x 25.09375pt>
 File: sparkline-65-dev-haskell-cabal.pdf Graphic file (type pdf)
 
 <use sparkline-65-dev-haskell-cabal.pdf>
 Package pdftex.def Info: sparkline-65-dev-haskell-cabal.pdf used on input line 
-298.
+463.
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-218-dev-libs-libunique.pdf, id=340, 100.375pt x 25.09375pt>
+<sparkline-218-dev-libs-libunique.pdf, id=441, 100.375pt x 25.09375pt>
 File: sparkline-218-dev-libs-libunique.pdf Graphic file (type pdf)
 
 <use sparkline-218-dev-libs-libunique.pdf>
 Package pdftex.def Info: sparkline-218-dev-libs-libunique.pdf used on input lin
-e 299.
+e 464.
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-77-dev-python-lxml.pdf, id=341, 100.375pt x 25.09375pt>
+<sparkline-77-dev-python-lxml.pdf, id=442, 100.375pt x 25.09375pt>
 File: sparkline-77-dev-python-lxml.pdf Graphic file (type pdf)
 
 <use sparkline-77-dev-python-lxml.pdf>
-Package pdftex.def Info: sparkline-77-dev-python-lxml.pdf used on input line 30
-0.
+Package pdftex.def Info: sparkline-77-dev-python-lxml.pdf used on input line 46
+5.
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-157-dev-python-simplejson.pdf, id=342, 100.375pt x 25.09375pt>
+<sparkline-157-dev-python-simplejson.pdf, id=443, 100.375pt x 25.09375pt>
 File: sparkline-157-dev-python-simplejson.pdf Graphic file (type pdf)
 
 <use sparkline-157-dev-python-simplejson.pdf>
 Package pdftex.def Info: sparkline-157-dev-python-simplejson.pdf used on input 
-line 301.
+line 466.
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-240-dev-vcs-git.pdf, id=343, 100.375pt x 25.09375pt>
+<sparkline-240-dev-vcs-git.pdf, id=444, 100.375pt x 25.09375pt>
 File: sparkline-240-dev-vcs-git.pdf Graphic file (type pdf)
 
 <use sparkline-240-dev-vcs-git.pdf>
-Package pdftex.def Info: sparkline-240-dev-vcs-git.pdf used on input line 302.
+Package pdftex.def Info: sparkline-240-dev-vcs-git.pdf used on input line 467.
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-242-dev-vcs-mercurial.pdf, id=344, 100.375pt x 25.09375pt>
+<sparkline-242-dev-vcs-mercurial.pdf, id=445, 100.375pt x 25.09375pt>
 File: sparkline-242-dev-vcs-mercurial.pdf Graphic file (type pdf)
 
 <use sparkline-242-dev-vcs-mercurial.pdf>
 Package pdftex.def Info: sparkline-242-dev-vcs-mercurial.pdf used on input line
- 303.
+ 468.
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-17-gnome-base-gnome-keyring.pdf, id=345, 100.375pt x 25.09375pt>
+<sparkline-17-gnome-base-gnome-keyring.pdf, id=446, 100.375pt x 25.09375pt>
 File: sparkline-17-gnome-base-gnome-keyring.pdf Graphic file (type pdf)
 
 <use sparkline-17-gnome-base-gnome-keyring.pdf>
 Package pdftex.def Info: sparkline-17-gnome-base-gnome-keyring.pdf used on inpu
-t line 304.
+t line 469.
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-206-media-libs-libcanberra.pdf, id=346, 100.375pt x 25.09375pt>
+<sparkline-206-media-libs-libcanberra.pdf, id=447, 100.375pt x 25.09375pt>
 File: sparkline-206-media-libs-libcanberra.pdf Graphic file (type pdf)
 
 <use sparkline-206-media-libs-libcanberra.pdf>
 Package pdftex.def Info: sparkline-206-media-libs-libcanberra.pdf used on input
- line 305.
+ line 470.
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 
-<sparkline-143-x11-misc-xdg-utils.pdf, id=347, 100.375pt x 25.09375pt>
+<sparkline-143-x11-misc-xdg-utils.pdf, id=448, 100.375pt x 25.09375pt>
 File: sparkline-143-x11-misc-xdg-utils.pdf Graphic file (type pdf)
 
 <use sparkline-143-x11-misc-xdg-utils.pdf>
 Package pdftex.def Info: sparkline-143-x11-misc-xdg-utils.pdf used on input lin
-e 306.
+e 471.
 (pdftex.def)             Requested size: 27.19963pt x 6.80011pt.
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
@@ -1305,223 +1346,217 @@ Missing character: There is no ú in font cmr10!
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ù in font cmr10!
- [9] [10 <./sparkline-173-app-arch-lzma-utils.pdf> <./sparkline-74-app-text-asc
-iidoc.pdf> <./sparkline-23-app-text-sword-modules.pdf> <./sparkline-35-dev-dotn
-et-gnome-sharp.pdf> <./sparkline-166-dev-haskell-hscolour.pdf> <./sparkline-159
--dev-haskell-mtl.pdf> <./sparkline-146-dev-java-sun-jaf.pdf> <./sparkline-39-de
-v-libs-liboil.pdf> <./sparkline-222-dev-php-pear.pdf> <./sparkline-150-dev-ruby
--hoe.pdf> <./sparkline-51-dev-ruby-rake.pdf> <./sparkline-6-dev-util-cmake.pdf>
- <./sparkline-198-dev-util-xfce4-dev-tools.pdf> <./sparkline-122-games-fps-quak
-e3-bin.pdf> <./sparkline-60-kde-base-libkdepim.pdf> <./sparkline-221-kde-base-o
-xygen-icons.pdf> <./sparkline-152-mail-client-claws-mail.pdf> <./sparkline-119-
-media-fonts-font-cursor-misc.pdf> <./sparkline-79-media-libs-glew.pdf> <./spark
-line-187-x11-libs-qt-phonon.pdf> <./sparkline-193-sys-apps-openrc.pdf> <./spark
-line-72-sys-apps-sandbox.pdf> <./sparkline-48-sys-devel-automake-wrapper.pdf> <
-./sparkline-199-x11-libs-libpciaccess.pdf> <./sparkline-109-x11-libs-libSM.pdf>
- <./sparkline-86-x11-libs-libXaw.pdf> <./sparkline-104-x11-libs-libXdmcp.pdf> <
-./sparkline-196-x11-libs-qt-demo.pdf> <./sparkline-180-x11-libs-qt-opengl.pdf> 
-<./sparkline-185-x11-libs-qt-script.pdf> <./sparkline-34-dev-dotnet-gconf-sharp
-.pdf> <./sparkline-65-dev-haskell-cabal.pdf> <./sparkline-218-dev-libs-libuniqu
-e.pdf> <./sparkline-77-dev-python-lxml.pdf> <./sparkline-157-dev-python-simplej
-son.pdf> <./sparkline-240-dev-vcs-git.pdf> <./sparkline-242-dev-vcs-mercurial.p
-df> <./sparkline-17-gnome-base-gnome-keyring.pdf> <./sparkline-206-media-libs-l
-ibcanberra.pdf> <./sparkline-143-x11-misc-xdg-utils.pdf>]
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ú in font cmr10!
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ù in font cmr10!
-
-<BassFit-34-dev-dotnet-gconf-sharp.pdf, id=440, 602.25pt x 388.20331pt>
+ [16] [17 <./sparkline-173-app-arch-lzma-utils.pdf> <./sparkline-74-app-text-as
+ciidoc.pdf> <./sparkline-23-app-text-sword-modules.pdf> <./sparkline-35-dev-dot
+net-gnome-sharp.pdf> <./sparkline-166-dev-haskell-hscolour.pdf> <./sparkline-15
+9-dev-haskell-mtl.pdf> <./sparkline-146-dev-java-sun-jaf.pdf> <./sparkline-39-d
+ev-libs-liboil.pdf> <./sparkline-222-dev-php-pear.pdf> <./sparkline-150-dev-rub
+y-hoe.pdf> <./sparkline-51-dev-ruby-rake.pdf> <./sparkline-6-dev-util-cmake.pdf
+> <./sparkline-198-dev-util-xfce4-dev-tools.pdf> <./sparkline-122-games-fps-qua
+ke3-bin.pdf> <./sparkline-60-kde-base-libkdepim.pdf> <./sparkline-221-kde-base-
+oxygen-icons.pdf> <./sparkline-152-mail-client-claws-mail.pdf> <./sparkline-119
+-media-fonts-font-cursor-misc.pdf> <./sparkline-79-media-libs-glew.pdf> <./spar
+kline-187-x11-libs-qt-phonon.pdf> <./sparkline-193-sys-apps-openrc.pdf> <./spar
+kline-72-sys-apps-sandbox.pdf> <./sparkline-48-sys-devel-automake-wrapper.pdf> 
+<./sparkline-199-x11-libs-libpciaccess.pdf> <./sparkline-109-x11-libs-libSM.pdf
+> <./sparkline-86-x11-libs-libXaw.pdf> <./sparkline-104-x11-libs-libXdmcp.pdf> 
+<./sparkline-196-x11-libs-qt-demo.pdf> <./sparkline-180-x11-libs-qt-opengl.pdf>
+ <./sparkline-185-x11-libs-qt-script.pdf> <./sparkline-34-dev-dotnet-gconf-shar
+p.pdf> <./sparkline-65-dev-haskell-cabal.pdf> <./sparkline-218-dev-libs-libuniq
+ue.pdf> <./sparkline-77-dev-python-lxml.pdf> <./sparkline-157-dev-python-simple
+json.pdf> <./sparkline-240-dev-vcs-git.pdf> <./sparkline-242-dev-vcs-mercurial.
+pdf> <./sparkline-17-gnome-base-gnome-keyring.pdf> <./sparkline-206-media-libs-
+libcanberra.pdf> <./sparkline-143-x11-misc-xdg-utils.pdf>]
+<BassFit-34-dev-dotnet-gconf-sharp.pdf, id=541, 602.25pt x 388.20331pt>
 File: BassFit-34-dev-dotnet-gconf-sharp.pdf Graphic file (type pdf)
 
 <use BassFit-34-dev-dotnet-gconf-sharp.pdf>
 Package pdftex.def Info: BassFit-34-dev-dotnet-gconf-sharp.pdf used on input li
-ne 345.
+ne 510.
 (pdftex.def)             Requested size: 152.09897pt x 98.03981pt.
 
 
-Package nag Warning: \label in float, but not after \caption on input line 345.
+Package nag Warning: \label in float, but not after \caption on input line 510.
 
 
-<BassFit-65-dev-haskell-cabal.pdf, id=441, 602.25pt x 381.30254pt>
+<BassFit-65-dev-haskell-cabal.pdf, id=542, 602.25pt x 381.30254pt>
 File: BassFit-65-dev-haskell-cabal.pdf Graphic file (type pdf)
 
 <use BassFit-65-dev-haskell-cabal.pdf>
-Package pdftex.def Info: BassFit-65-dev-haskell-cabal.pdf used on input line 34
-6.
+Package pdftex.def Info: BassFit-65-dev-haskell-cabal.pdf used on input line 51
+1.
 (pdftex.def)             Requested size: 152.09897pt x 96.29703pt.
 
 
-Package nag Warning: \label in float, but not after \caption on input line 346.
+Package nag Warning: \label in float, but not after \caption on input line 511.
 
 
-<BassFit-218-dev-libs-libunique.pdf, id=442, 602.25pt x 388.20331pt>
+<BassFit-218-dev-libs-libunique.pdf, id=543, 602.25pt x 388.20331pt>
 File: BassFit-218-dev-libs-libunique.pdf Graphic file (type pdf)
 
 <use BassFit-218-dev-libs-libunique.pdf>
 Package pdftex.def Info: BassFit-218-dev-libs-libunique.pdf used on input line 
-347.
+512.
 (pdftex.def)             Requested size: 152.09897pt x 98.03981pt.
 
 
-Package nag Warning: \label in float, but not after \caption on input line 347.
+Package nag Warning: \label in float, but not after \caption on input line 512.
 
 
-<BassFit-77-dev-python-lxml.pdf, id=443, 602.25pt x 388.20331pt>
+<BassFit-77-dev-python-lxml.pdf, id=544, 602.25pt x 388.20331pt>
 File: BassFit-77-dev-python-lxml.pdf Graphic file (type pdf)
 
 <use BassFit-77-dev-python-lxml.pdf>
-Package pdftex.def Info: BassFit-77-dev-python-lxml.pdf used on input line 348.
+Package pdftex.def Info: BassFit-77-dev-python-lxml.pdf used on input line 513.
 
 (pdftex.def)             Requested size: 152.09897pt x 98.03981pt.
 
 
-Package nag Warning: \label in float, but not after \caption on input line 348.
+Package nag Warning: \label in float, but not after \caption on input line 513.
 
 
-<BassFit-157-dev-python-simplejson.pdf, id=444, 602.25pt x 388.20331pt>
+<BassFit-157-dev-python-simplejson.pdf, id=545, 602.25pt x 388.20331pt>
 File: BassFit-157-dev-python-simplejson.pdf Graphic file (type pdf)
 
 <use BassFit-157-dev-python-simplejson.pdf>
 Package pdftex.def Info: BassFit-157-dev-python-simplejson.pdf used on input li
-ne 349.
+ne 514.
 (pdftex.def)             Requested size: 152.09897pt x 98.03981pt.
 
 
-Package nag Warning: \label in float, but not after \caption on input line 349.
+Package nag Warning: \label in float, but not after \caption on input line 514.
 
 
-<BassFit-240-dev-vcs-git.pdf, id=445, 602.25pt x 384.88893pt>
+<BassFit-240-dev-vcs-git.pdf, id=546, 602.25pt x 384.88893pt>
 File: BassFit-240-dev-vcs-git.pdf Graphic file (type pdf)
 
 <use BassFit-240-dev-vcs-git.pdf>
-Package pdftex.def Info: BassFit-240-dev-vcs-git.pdf used on input line 350.
+Package pdftex.def Info: BassFit-240-dev-vcs-git.pdf used on input line 515.
 (pdftex.def)             Requested size: 152.09897pt x 97.20277pt.
 
 
-Package nag Warning: \label in float, but not after \caption on input line 350.
+Package nag Warning: \label in float, but not after \caption on input line 515.
 
 
-<BassFit-242-dev-vcs-mercurial.pdf, id=446, 602.25pt x 410.71243pt>
+<BassFit-242-dev-vcs-mercurial.pdf, id=547, 602.25pt x 410.71243pt>
 File: BassFit-242-dev-vcs-mercurial.pdf Graphic file (type pdf)
 
 <use BassFit-242-dev-vcs-mercurial.pdf>
-Package pdftex.def Info: BassFit-242-dev-vcs-mercurial.pdf used on input line 3
-51.
+Package pdftex.def Info: BassFit-242-dev-vcs-mercurial.pdf used on input line 5
+16.
 (pdftex.def)             Requested size: 152.09897pt x 103.72443pt.
 
 
-Package nag Warning: \label in float, but not after \caption on input line 351.
+Package nag Warning: \label in float, but not after \caption on input line 516.
 
 
-<BassFit-17-gnome-base-gnome-keyring.pdf, id=447, 602.25pt x 403.80562pt>
+<BassFit-17-gnome-base-gnome-keyring.pdf, id=548, 602.25pt x 403.80562pt>
 File: BassFit-17-gnome-base-gnome-keyring.pdf Graphic file (type pdf)
 
 <use BassFit-17-gnome-base-gnome-keyring.pdf>
 Package pdftex.def Info: BassFit-17-gnome-base-gnome-keyring.pdf used on input 
-line 352.
+line 517.
 (pdftex.def)             Requested size: 152.09897pt x 101.98013pt.
 
 
-Package nag Warning: \label in float, but not after \caption on input line 352.
+Package nag Warning: \label in float, but not after \caption on input line 517.
 
 
-<BassFit-206-media-libs-libcanberra.pdf, id=448, 602.25pt x 388.20331pt>
+<BassFit-206-media-libs-libcanberra.pdf, id=549, 602.25pt x 388.20331pt>
 File: BassFit-206-media-libs-libcanberra.pdf Graphic file (type pdf)
 
 <use BassFit-206-media-libs-libcanberra.pdf>
 Package pdftex.def Info: BassFit-206-media-libs-libcanberra.pdf used on input l
-ine 353.
+ine 518.
 (pdftex.def)             Requested size: 152.09897pt x 98.03981pt.
 
 
-Package nag Warning: \label in float, but not after \caption on input line 353.
+Package nag Warning: \label in float, but not after \caption on input line 518.
 
 
-<BassFit-143-x11-misc-xdg-utils.pdf, id=449, 602.25pt x 388.20331pt>
+<BassFit-143-x11-misc-xdg-utils.pdf, id=550, 602.25pt x 388.20331pt>
 File: BassFit-143-x11-misc-xdg-utils.pdf Graphic file (type pdf)
 
 <use BassFit-143-x11-misc-xdg-utils.pdf>
 Package pdftex.def Info: BassFit-143-x11-misc-xdg-utils.pdf used on input line 
-354.
+519.
 (pdftex.def)             Requested size: 152.09897pt x 98.03981pt.
 
 
-Package nag Warning: \label in float, but not after \caption on input line 354.
+Package nag Warning: \label in float, but not after \caption on input line 519.
 
 
 
-LaTeX Warning: Float too large for page by 69.21317pt on input line 356.
+LaTeX Warning: Float too large for page by 69.21317pt on input line 521.
 
 File: sparkline-218-dev-libs-libunique.pdf Graphic file (type pdf)
 <use sparkline-218-dev-libs-libunique.pdf>
 Package pdftex.def Info: sparkline-218-dev-libs-libunique.pdf used on input lin
-e 360.
+e 525.
 (pdftex.def)             Requested size: 9.684pt x 8.00003pt.
 
-<sparkline-140-net-libs-xulrunner.pdf, id=451, 100.375pt x 25.09375pt>
+<sparkline-140-net-libs-xulrunner.pdf, id=552, 100.375pt x 25.09375pt>
 File: sparkline-140-net-libs-xulrunner.pdf Graphic file (type pdf)
 
 <use sparkline-140-net-libs-xulrunner.pdf>
 Package pdftex.def Info: sparkline-140-net-libs-xulrunner.pdf used on input lin
-e 360.
+e 525.
 (pdftex.def)             Requested size: 22.43668pt x 8.00003pt.
- [11 <./sparkline-140-net-libs-xulrunner.pdf>] [12 <./BassFit-34-dev-dotnet-gco
-nf-sharp.pdf> <./BassFit-65-dev-haskell-cabal.pdf> <./BassFit-218-dev-libs-libu
-nique.pdf> <./BassFit-77-dev-python-lxml.pdf> <./BassFit-157-dev-python-simplej
-son.pdf> <./BassFit-240-dev-vcs-git.pdf> <./BassFit-242-dev-vcs-mercurial.pdf> 
-<./BassFit-17-gnome-base-gnome-keyring.pdf> <./BassFit-206-media-libs-libcanber
-ra.pdf> <./BassFit-143-x11-misc-xdg-utils.pdf>] <kde.pdf, id=558, 597.23125pt x
- 845.1575pt>
-File: kde.pdf Graphic file (type pdf)
- <use kde.pdf>
-Package pdftex.def Info: kde.pdf used on input line 370.
-(pdftex.def)             Requested size: 338.0pt x 333.17262pt.
- [13 <./kde.pdf>] [14] [15] [16] <Bass.pdf, id=615, 301.125pt x 182.14851pt>
-File: Bass.pdf Graphic file (type pdf)
 
-<use Bass.pdf>
-Package pdftex.def Info: Bass.pdf used on input line 468.
-(pdftex.def)             Requested size: 301.12425pt x 182.14806pt.
- [17 <./Bass.pdf>] [18] [19]
-<BassFit-git2.pdf, id=667, 602.25pt x 374.34656pt>
+<BassFit-git2.pdf, id=555, 602.25pt x 374.34656pt>
 File: BassFit-git2.pdf Graphic file (type pdf)
  <use BassFit-git2.pdf>
-Package pdftex.def Info: BassFit-git2.pdf used on input line 556.
+Package pdftex.def Info: BassFit-git2.pdf used on input line 552.
 (pdftex.def)             Requested size: 338.0pt x 210.10103pt.
 
-[20] [21 <./BassFit-git2.pdf>]
-<BassFit-libmad2.pdf, id=771, 602.25pt x 377.13799pt>
+[18 <./sparkline-140-net-libs-xulrunner.pdf>] [19 <./BassFit-34-dev-dotnet-gcon
+f-sharp.pdf> <./BassFit-65-dev-haskell-cabal.pdf> <./BassFit-218-dev-libs-libun
+ique.pdf> <./BassFit-77-dev-python-lxml.pdf> <./BassFit-157-dev-python-simplejs
+on.pdf> <./BassFit-240-dev-vcs-git.pdf> <./BassFit-242-dev-vcs-mercurial.pdf> <
+./BassFit-17-gnome-base-gnome-keyring.pdf> <./BassFit-206-media-libs-libcanberr
+a.pdf> <./BassFit-143-x11-misc-xdg-utils.pdf>]
+Underfull \vbox (badness 6316) has occurred while \output is active []
+
+ [20 <./BassFit-git2.pdf>] <BassFit-libmad2.pdf, id=760, 602.25pt x 377.13799pt
+>
 File: BassFit-libmad2.pdf Graphic file (type pdf)
 
 <use BassFit-libmad2.pdf>
-Package pdftex.def Info: BassFit-libmad2.pdf used on input line 578.
+Package pdftex.def Info: BassFit-libmad2.pdf used on input line 574.
 (pdftex.def)             Requested size: 338.0pt x 211.66771pt.
 
-<BassFit-xulrunner-22.pdf, id=773, 602.25pt x 377.13799pt>
+<BassFit-xulrunner-22.pdf, id=762, 602.25pt x 377.13799pt>
 File: BassFit-xulrunner-22.pdf Graphic file (type pdf)
 
 <use BassFit-xulrunner-22.pdf>
-Package pdftex.def Info: BassFit-xulrunner-22.pdf used on input line 594.
+Package pdftex.def Info: BassFit-xulrunner-22.pdf used on input line 590.
 (pdftex.def)             Requested size: 338.0pt x 211.66771pt.
- [22 <./BassFit-libmad2.pdf>] [23 <./BassFit-xulrunner-22.pdf>]
-Underfull \vbox (badness 6493) has occurred while \output is active []
 
- [24]
-[25] (./paper.bbl [26])
+Underfull \vbox (badness 1931) has occurred while \output is active []
 
-Package nag Warning: 11 complaints in total.
+ [21]
+[22 <./BassFit-libmad2.pdf> <./BassFit-xulrunner-22.pdf
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 638.
-[27]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 638.
+pdfTeX warning: /usr/bin/pdflatex (file ./BassFit-xulrunner-22.pdf): PDF inclus
+ion: multiple pdfs with page group included in a single page
+>] [23] [24] (./paper.bbl [25])
+
+Package nag Warning: 10 complaints in total.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 634.
+[26]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 634.
  (./paper.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 638.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 638.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 634.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 634.
 Package rerunfilecheck Info: File `paper.out' has not changed.
-(rerunfilecheck)             Checksum: 60493FD8FA5FBDFD73F061BAF8A6ADF8;766.
+(rerunfilecheck)             Checksum: ABC1EF2A4BCBEBBD600286ACA7EE1A09;501.
 
 
 LaTeX Font Warning: Size substitutions with differences
@@ -1530,7 +1565,7 @@ LaTeX Font Warning: Size substitutions with differences
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 638.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 634.
  )
 (\end occurred when \ifx on line 89 was incomplete)
 (\end occurred when \ifx on line 89 was incomplete)
@@ -1623,13 +1658,13 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 638.
 (\end occurred when \ifx on line 64 was incomplete)
 (\end occurred when \ifx on line 64 was incomplete) 
 Here is how much of TeX's memory you used:
- 17518 strings out of 494985
- 335425 string characters out of 6180356
- 437287 words of memory out of 5000000
- 20243 multiletter control sequences out of 15000+600000
- 17099 words of font info for 108 fonts, out of 8000000 for 9000
+ 17583 strings out of 494985
+ 336218 string characters out of 6180356
+ 438493 words of memory out of 5000000
+ 20299 multiletter control sequences out of 15000+600000
+ 17199 words of font info for 110 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 41i,14n,35p,10415b,846s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,14n,35p,10415b,834s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></usr/share/texlive/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/ty
@@ -1650,10 +1685,10 @@ msfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 i10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb
 ></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr
 /share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on paper.pdf (27 pages, 3763451 bytes).
+Output written on paper.pdf (26 pages, 3761849 bytes).
 PDF statistics:
- 1117 PDF objects out of 1200 (max. 8388607)
- 842 compressed objects within 9 object streams
- 100 named destinations out of 1000 (max. 500000)
- 23996 words of extra memory for PDF output out of 24883 (max. 10000000)
+ 1105 PDF objects out of 1200 (max. 8388607)
+ 831 compressed objects within 9 object streams
+ 98 named destinations out of 1000 (max. 500000)
+ 23956 words of extra memory for PDF output out of 24883 (max. 10000000)
 
