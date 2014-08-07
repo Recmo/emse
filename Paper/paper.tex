@@ -42,20 +42,20 @@ Open source distributions such as Gentoo need to accurately track dependency rel
 
 We study software innovation from the adoption perspective. Adoption reflects innovation 'better' than changes within packages. Because reasons.
 
-\begin{figure}
-\centering
+No software project stands entirely on its own. Software is usually developed by taking one or more existing libraries of components and combining those \begin{wrapfigure}{r}{0.5\linewidth}
+\small\centering
 \includegraphics[width=\linewidth]{depgraph.pdf}
 \caption{Example dependency graph.}\label{fig:depgraph-chat}
 \vspace{-1em}
-\end{figure}
+\end{wrapfigure}
+components in ways to create new products. Take for example a simple chat application. The chat application uses a different library for user interface development that provides components such as a window a text entry field and a button (that is labeled "send message" by the chat application). This user interface library in its turn uses a graphics library to draw the lines, rectangles and text necessary for the fields and buttons. The graphics library uses a library to read font files and uses the fonts to turn text into pictures that can be displayed on the screen. The graphics library then sends the contents of the window to the window manager, which in turns uses a graphics card driver to instruct the hardware. The chat application uses a networking library to provide it with the basic components for internet communication and uses a file library to store the users settings. The same file library is also used by the font library to read font files. The dependency graph so described is drawn in figure~\ref{fig:depgraph-chat}. Compared to a real chat application the graph is hugely simplified, tracing a real chat application back to all the components involved will likely result in hundreds of libraries used.
 
-No software project stands entirely on its own. Software is usually developed by taking one or more existing libraries of components and combining those components in ways to create new products. Take for example a simple chat application. The chat application uses a different library for user interface development that provides components such as a window a text entry field and a button (that is labeled "send message" by the chat application). This user interface library in its turn uses a graphics library to draw the lines, rectangles and text necessary for the fields and buttons. The graphics library uses a library to read font files and uses the fonts to turn text into pictures that can be displayed on the screen. The graphics library then sends the contents of the window to the window manager, which in turns uses a graphics card driver to instruct the hardware. The chat application uses a networking library to provide it with the basic components for internet communication and uses a file library to store the users settings. The same file library is also used by the font library to read font files. The dependency graph so described is drawn in figure~\ref{fig:depgraph-chat}. Compared to a real chat application the graph is hugely simplified, tracing a real chat application back to all the components involved will likely result in hundreds of libraries used.
 
 In the remainder of this article, the terms `project', `package' and `library' will be used as synonyms for a node in the dependency graph.
 
 Now that a data source is selected, it is time to extract the required information and process the data into a form that allows easy calculations. The major steps are collecting the raw data, parsing this into a simpler format and producing the final dependency graph from this simpler form. Some post-processing can then be done on the dependency graph. In the process, the dataset will shrink from thirteen gigabytes taking more than a week to collect, to thirty megabytes that can be processed in four seconds.
 
-\section{Related work}
+\section{Related Work}
 
 In \citet{crowston08} published a comprehensive overview of academical research on open source software development. Of the 184 articles they cite, the vast majority of articles are case studies or surveys, with 4\% of the articles describing the development of empirical instruments and/or measurements. Also, most articles look at the level of a particular group or project, with 4\% looking at the societal level of interacting projects. Crowston et al. find no articles that develop instruments or measurements on the level of OSS packages, which this paper aims to do.
 
@@ -153,11 +153,12 @@ Often one is not concerned with the market size $M$ and only interested in the f
 F(t) &= \frac{1 - \e^{-(p+q)t}}{1+\frac{q}{p}\e^{-(p+q)t}}
 \end{align}
 
-\begin{figure}\small\centering
+\begin{wrapfigure}{r}{0.5\linewidth}
+\small\centering
+\includegraphics[width=\linewidth]{Bass.pdf}
 \caption[Bass model of innovation diffusion]{The Bass model of innovation diffusion. The blue trace represents a Bass diffusion with $p=0.01$ and $q=0.90$. The purple trace bass diffusion with $p=0.90$ and $q=0.01$.}
 \label{fig:bass}
-\includegraphics{Bass.pdf}
-\end{figure}
+\end{wrapfigure}
 
 In figure~\ref{fig:bass} two Bass diffusions are plotted using equation \eqref{eq:bass-direct}, one representing an innovation diffusion with many innovators and few imitators and one representing a diffusion with many imitators and few innovators. When there are more imitators it takes a while for the innovation to take of since the majority of the potential users are waiting for someone else to try it first.
 
@@ -172,7 +173,8 @@ Equation~\eqref{eq:bass-model} incorporates the two additions and can be readily
 
 The interpretation of the variables and parameters and their dimensions is presented in table~\ref{tbl:bass-model}. When applying the formula one should note that it is non-linear, so ordinary linear regression can not be used. Instead one can use non-linear least squares regression, but note the correct number of the degrees of freedom. This can be done using existing mathematical/statistical packages. For this thesis the  \verb|NonlinearModelFit| procedure in Mathematica was used. 
 
-\begin{table}\centering\small
+\begin{table}
+\centering\small
 \caption[Bass model variables and parameters]{Overview of the variables and parameters of the Bass model as presented in equation~\eqref{eq:bass-model}.}
 \label{tbl:bass-model}
 \begin{tabular}{cll}
@@ -217,7 +219,7 @@ The solution assumes the innovation is introduced at time zero, to account for t
 
 The empirical data used is the time evolution of the Gentoo Portage package dependency graph \citep{rem14}. This dataset contains the full dependency graph for every month since the project was initiated in $2000$, the resulting graphs have a combined total of 1.3 million packages and 6.9 million dependency relations, with the largest graph having 15 thousand packages and 80 thousand dependency relations.
 
-Special tools where developed to extract the time series of the number of adopters $A_t$ for a given package. This time series was then fit to \eqref{eq:bass} using Mathematica's \texttt{NonLinearModelFit}. The goodness-of-fit was analysed using an ANOVA table and calculated using the adjust coefficient of determination $\bar{R}^2$. The parameters were extracted from the fit, and confidence intervals were calculated under assumptions of normality. In \ref{tbl:results} the relevant parameters are presented with their mean value and a $95\%$ confidence interval. Since normality was assumed, the confidence intervals ignore the $p \ge 0$ and $q \ge 0$ constraints. 
+Special tools where developed to extract the time series of the number of adopters $A_t$ for a given package. This time series was then fit to \eqref{eq:bass} using Mathematica's \texttt{NonLinearModelFit}. The goodness-of-fit was analysed using an ANOVA table and calculated using the adjust coefficient of determination $\overline{R}^2$. The parameters were extracted from the fit, and confidence intervals were calculated under assumptions of normality. In \ref{tbl:results} the relevant parameters are presented with their mean value and a $95\%$ confidence interval. Since normality was assumed, the confidence intervals ignore the $p \ge 0$ and $q \ge 0$ constraints. 
 
 The plots were drawn using a thick red line for the model and shades of red for the prediction bands. The thick red line was drawn according to \eqref{eq:bass}, with the mean values used as parameters. Then single value predictions bands were calculated for $90\%$, $95\%$, $99\%$ and $99.9\%$ confidence and were drawn in progressively darker shades of pink. They represent a prediction for where a single additional value would likely fall. According to the model and the uncertainty introduced by the fit, there is a $90\%$ chance that it will fall in the innermost band, $95\%$ chance that it would falil in the second band, etc. If the data fits the model properly, one would expect to see $90\%$ of the points in the inner band. Finally, the empirical data points were plotted as black dots, connected with a thin vertical line - the residual error of the model.
 
@@ -251,6 +253,7 @@ The final method is a hybrid of the first two, using the Paludis' \verb|instruo|
 Now the data is in 154 snapshots of the package database in a simplified text based format. This is several gigabytes and several millions of files large and needs to be processed into dependency graphs. Obviously it is inhumane to do this by hand, therefore more specialized tools were developed.
 
 \begin{figure}[t]
+\small\centering
 \begin{alltt}
 >=media-libs/taglib-1.6.1[asf,mp4]
 >=media-libs/taglib-extras-1.0.1
@@ -283,21 +286,9 @@ In the Gentoo Portage database the dependencies are sorted in two kinds, compile
 % Package moves
 Sometimes, package get renamed or moved around in the database, this needs to be accounted for. Luckily, to allow users to upgrade from an older version to a newer version the processing of moves and renames has been automated in the Gentoo Portage database. The developers maintain a list of all the moves and renames that have happened in the database in a structured format. The latest version of this list is used to retroactively change all the package names in the historical snapshots to their modern name. This ensures that moves and renames do not harm historical continuity in the dataset.
 
-% Package provides
-Using all the observations and choices made above, a tool was developed to extract dependency graphs from all the simplified database snapshots. The shear scale of the resulting dataset, $1.3$ million packages and $6.9$ million dependency relations, required a solution to store efficiently. Therefore, a compressed format was developed that only stores the changes between the historical snapshots instead of storing whole snapshots. The extraction process took three hours and resulted in a $29$ megabyte file. Reading this file into memory resident data structures and performing simple queries takes about $4$ seconds. The dataset is now in a usable form.
-
-\subsection{Final Remarks}
-
-The dataset collected is available at
-\\\url{http://datahub.io/dataset/gentoo-dependency-graph}\\
-as compressed GML graphs for every snapshot. Raw data is available at
-\\\texttt{http://www.utwente.nl/mb/iebis/staff/amrit/}\\\texttt{timeline.squashfs}\\
-as a SquashFS compressed filesystem. The SquashFS format allows one to mount the compressed data as a read-only disk drive and operate directly on the dataset. It contains the pre-processed ebuild files and the file \verb|graphs.bip| that contains all of the graphs in a custom format specialized for quick processing of large graphs over time. A C++ toolkit to work with the \verb|graphs.bip| file is available at \url{https://github.com/Recmo/depgraph}.
-
-In a separate paper \citep{rem142} we analyzed the changes in the dependency graph over time. In particular the growth of the number of dependers on a given package is explained using the Bass model of innovation diffusion.
-
-\begin{table}
-\centering
+\begin{wraptable}{r}{0.5\textwidth}
+\vspace{-1em}
+\small\centering
 \caption{Key figures of the dataset}\label{tbl:dataset}
 \begin{tabular}{ll}
 \toprule
@@ -325,15 +316,28 @@ Format & Tar+XZ compressed GML \\
 Size & 2 MB \\
 \bottomrule
 \end{tabular}
-\end{table}
+\end{wraptable}
 
 
+% Package provides
+Using all the observations and choices made above, a tool was developed to extract dependency graphs from all the simplified database snapshots. The shear scale of the resulting dataset, $1.3$ million packages and $6.9$ million dependency relations, required a solution to store efficiently. Therefore, a compressed format was developed that only stores the changes between the historical snapshots instead of storing whole snapshots. The extraction process took three hours and resulted in a $29$ megabyte file. Reading this file into memory resident data structures and performing simple queries takes about $4$ seconds. The dataset is now in a usable form.
 
-\section{Exploring the Dataset}
+\subsection{Final Remarks}
+
+The dataset collected is available at
+\\\url{http://datahub.io/dataset/gentoo-dependency-graph}\\
+as compressed GML graphs for every snapshot. Raw data is available at
+\\\texttt{http://www.utwente.nl/mb/iebis/staff/amrit/}\\\texttt{timeline.squashfs}\\
+as a SquashFS compressed filesystem. The SquashFS format allows one to mount the compressed data as a read-only disk drive and operate directly on the dataset. It contains the pre-processed ebuild files and the file \verb|graphs.bip| that contains all of the graphs in a custom format specialized for quick processing of large graphs over time. A C++ toolkit to work with the \verb|graphs.bip| file is available at \url{https://github.com/Recmo/depgraph}.
+
+In a separate paper \citep{rem142} we analyzed the changes in the dependency graph over time. In particular the growth of the number of dependers on a given package is explained using the Bass model of innovation diffusion.
+
+
+\section{Exploration of the Dataset}
 
 
 \begin{figure}
-\centering
+\small\centering
 \subfigure[Total number of packages]{\includegraphics[width=0.45\textwidth]{packageCountUnfiltered2.pdf}\label{fig:pkgsgrowth}}
 \subfigure[Additions and removals]{\includegraphics[width=0.45\textwidth]{packageCountDeltaUnfiltered2.pdf}\label{fig:pkgsgrowthdelta}}
 \caption{Growth of the Gentoo package database over time.}\label{fig:pkgsgrowth}
@@ -346,7 +350,7 @@ The effect of the growth of the entire dataset on the number of dependencies for
 One of the first thing attempted after generating the dataset was to visualize the entire graph of the latest snapshot. The problem is, to make any sense of a graph it has to be laid out visually on a plane, nodes that are connected should be placed close to each other so that connecting lines are short and have little overlap. Software packages such as Graphviz, Tulip, Gephi, Jetty and Cytoscope have been tried, but after days of trying and many hours of calculation, none where able to produce any insightful layout for the sixteen thousand nodes and hundred thousand relations.
 
 \begin{figure}
-\centering
+\small\centering
 \subfigure[Dependencies per package]{\includegraphics[width=0.45\textwidth]{histo-out.pdf}\label{fig:dephisto-out}}
 \subfigure[Dependers per package]{\includegraphics[width=0.45\textwidth]{histo-in.pdf}\label{fig:dephisto-in}}
 \caption{Double logarithmic histograms of the number of incoming and outgoing dependencies per package.}
@@ -363,7 +367,7 @@ The entire graph might be difficult to visualize, but a small part should be eas
 The program Tulip was used to visualize the graph, the result is in figure~\ref{fig:kde2}. First the graph was laid out using a force based method, this clusters packages that are strongly connected close to each other. Then the graphs where colored according to their $k$-core measure, this is a measure for the `connectedness' of a package. At this point there was still an unclear mess of lines between the packages, this was resolved by bundling the edges. Edge bundling merges neighboring lines to a single thicker line, this creates a vein-like structure. 
 
 \begin{figure}
-\centering
+\small\centering
 \includegraphics[clip,trim=0 0 1cm 10cm,width=\linewidth]{kde.pdf}
 \caption{Internal dependencies of modules in the KDE project. Color represents the $k$-core measure. The graph edges have been bundled to improve readability.}\label{fig:kde2}
 \end{figure}
@@ -378,28 +382,28 @@ It is remarkable how only a few dependency relations provide sufficient clues fo
 
 \section{Results}
 
-From the entire list of packages, a few well-known (at least according to the author) packages where selected. The selection criteria was that the package must not have existed before (around) 2004, because the Gentoo Portage database was still too immature then, and the package must have gained a considerable number of dependers since its introduction. In \ref{tbl:results}, we list some selected packages along with their parameters. In all cases the adjusted coefficient of determination $\bar{R}^2$ was more than $99\%$.
+From the entire list of packages, a few well-known (at least according to the author) packages where selected. The selection criteria was that the package must not have existed before (around) 2004, because the Gentoo Portage database was still too immature then, and the package must have gained a considerable number of dependers since its introduction. In \ref{tbl:results}, we list some selected packages along with their parameters. In all cases the adjusted coefficient of determination $\overline{R}^2$ was more than $99\%$.
 
 \begin{table}
-\centering
+\small\centering
 \caption{Results of fitting the Bass model.}\label{tbl:results}
-\begin{tabular}{lr@{ $\pm$}rr@{ $\pm$}rr@{ $\pm$}r}
+\begin{tabular}{lr@{ $\pm$}rr@{ $\pm$}rr@{ $\pm$}rr}
 \toprule
-Package & \multicolumn{2}{c}{$p$} & \multicolumn{2}{c}{$q$} & \multicolumn{2}{c}{$M$} \\
+Package & \multicolumn{2}{c}{$p$} & \multicolumn{2}{c}{$q$} & \multicolumn{2}{c}{$M$} & $\overline{R}^2$\\
 \midrule
-\texttt{git}         & 0.00 & 0.01    & 0.73 & 0.13   & 746 & 394 \\
-\texttt{libnotify}   & 0.05 & 0.08    & 0.72 & 0.30   & 103 &   9 \\
-\texttt{udev}        & 0.01 & 0.01    & 0.50 & 0.12   & 200 &  65 \\
-\texttt{cairo}       & 0.01 & 0.01    & 0.43 & 0.09   & 249 &  44 \\
-\texttt{libmad}      & 0.18 & 0.14    & 1.13 & 0.3    &  55 &   1 \\
-\texttt{libtheora}   & 0.11 & 0.09    & 0.63 & 0.21   &  32 &   1 \\
-\texttt{taglib}      & 0.22 & 0.03    & 0.04 & 0.06   &  62 &  12 \\
+\texttt{git}         & 0.00 & 0.01    & 0.73 & 0.13   & 746 & 394 & 99.27\%\\
+\texttt{libnotify}   & 0.05 & 0.08    & 0.72 & 0.30   & 103 &   9 & 99.23\%\\
+\texttt{udev}        & 0.01 & 0.01    & 0.50 & 0.12   & 200 &  65 & 99.05\%\\
+\texttt{cairo}       & 0.01 & 0.01    & 0.43 & 0.09   & 249 &  44 & 99.73\%\\
+\texttt{libmad}      & 0.18 & 0.14    & 1.13 & 0.3    &  55 &   1 & 99.68\%\\
+\texttt{libtheora}   & 0.11 & 0.09    & 0.63 & 0.21   &  32 &   1 & 99.75\%\\
+\texttt{taglib}      & 0.22 & 0.03    & 0.04 & 0.06   &  62 &  12 & 99.40\%\\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \begin{figure}
-\centering
+\small\centering
 \includegraphics[width=\linewidth]{BassFit-git2.pdf}
 \vspace{-2em}
 \caption{The imitation driven adoption of \texttt{git}.}\label{fig:git}
@@ -421,7 +425,7 @@ The relative slowness of \verb|git|'s growth and its dependence on imitator can 
 \subsection{Innovator Driven Growth}
 
 \begin{figure}
-\centering
+\small\centering
 \includegraphics[width=\linewidth]{BassFit-libmad2.pdf}
 \vspace{-2em}
 \caption{The innovation driven adoption of \texttt{libmad}.}\label{fig:libmad}
@@ -437,7 +441,7 @@ A typical example of innovator driven growth is given by \verb|libmad|. The mode
 \subsection{Growth and Demise}
 
 \begin{figure}
-\centering
+\small\centering
 \includegraphics[width=\linewidth]{BassFit-xulrunner-22.pdf}
 \vspace{-2em}
 \caption{The rise and decline of \texttt{xulrunner}.}\label{fig:xulrunner}
@@ -452,7 +456,21 @@ A real product life-cycle will also include a ``decline stage'' where the produc
 
 The package \verb|xulrunner| in the dataset is a nice example of a short but complete life cycle, see \ref{fig:xulrunner}. When the Bass model is applied naively and a least mean squares best-fit is made, the result is a poor fit. If one looks at the dependency growth of the package, the cause is clear: the package becomes obsolete, which the Bass model as presented in section \ref{eq:bass} does not represent. The decline of the package from approximately 2011 onwards can be seen as blue dots in the figure.
 
-Excluding the blue dots from the data results in the Bass model fit from figure \ref{fig:xulrunner}. The fitness increases to $\bar{R}^2=99.54\%$ and the parameters have tighter and reasonable confidence intervals. This is strong evidence that the initial adoption of the package is a Bass diffusion process. To explain the last part, the model should be extended with an obsolescence term. 
+Excluding the blue dots from the data results in the Bass model fit from figure \ref{fig:xulrunner}. The fitness increases to $\overline{R}^2 =99.54\%$ and the parameters have tighter and reasonable confidence intervals. This is strong evidence that the initial adoption of the package is a Bass diffusion process. To explain the last part, the model should be extended with an obsolescence term. 
+
+
+\subsection{Moooore}
+
+\begin{figure}
+\small\centering
+\caption[Dependee growth after package introduction]{The Bass curve fitted on a number of packages}
+\label{fig:BassFits}
+\subfigure[\texttt{libnotify}: $p=0.05$, $q=0.72$]{\includegraphics[width=0.45\textwidth]{BassFit-libnotify.pdf}}
+\subfigure[\texttt{libtheora}: $p=0.11$, $q=0.63$]{\includegraphics[width=0.45\textwidth]{BassFit-libtheora.pdf}}
+\subfigure[\texttt{taglib}: $p=0.22$, $q=0.04$]{\includegraphics[width=0.45\textwidth]{BassFit-taglib.pdf}}
+\subfigure[\texttt{udev}: $p=0.01$, $q=0.50$]{\includegraphics[width=0.45\textwidth]{BassFit-udev.pdf}}
+\subfigure[\texttt{cairo}: $p=0.005$, $q=0.35$]{\includegraphics[width=0.45\textwidth]{BassFit-cairo.pdf}}
+\end{figure}
 
 
 \subsection{Hypothesis testing}
@@ -491,6 +509,7 @@ To test this hypotheses we do the following:
 \end{itemize}
 
 \begin{table}
+\small\centering
 \caption{Rejected packages}\label{tbl:rejected}
 \begin{tabular}{llll}
 \toprule
@@ -531,6 +550,7 @@ Growth & Package & \multicolumn{2}{l}{Reason for excluding}\\
 \end{table}
 
 \begin{table}
+\small\centering
 \caption{The ten selected packages}\label{tbl:selected}
 \begin{tabular}{rlp{20em}}
 \toprule
@@ -563,6 +583,9 @@ Growth & Package & Description \\
 % 206: 8035/4,    37, 0.201, 0.961
 % 143: 24083/12, 115, 0.041, 0.341
 
+% 34-dev-dotnet-gconf-sharp:
+
+
 No packages where rejected on the 'E' ground, but many of these are covered by the 'C' reason. No extensive check was done on co-occurence of reasons.
 
 
@@ -582,7 +605,7 @@ The growth curves with large discontinuities are rejected. The hypotheses concer
 
 
 \begin{figure}
-\centering
+\small\centering
 % 34, 65, 218, 77, 157, 240, 242, 17, 206, 143
 \subfigure[\texttt{dev-dotnet/gconf-sharp}]{\includegraphics[width=0.45\textwidth]{BassFit-34-dev-dotnet-gconf-sharp.pdf}\label{fig:fit34}}
 \subfigure[\texttt{dev-haskell/cabal}]{\includegraphics[width=0.45\textwidth]{BassFit-65-dev-haskell-cabal.pdf}\label{fig:fit65}}
@@ -597,6 +620,28 @@ The growth curves with large discontinuities are rejected. The hypotheses concer
 \caption{Bass curve fits on ten randomly selected packages that met the criteria.}
 \end{figure}
 
+
+\begin{table}
+\small\centering
+\caption{Results of fitting the Bass model.}\label{tbl:results}
+\begin{tabular}{lr@{ $\pm$}rr@{ $\pm$}rr@{ $\pm$}rr}
+\toprule
+Package & \multicolumn{2}{c}{$p$} & \multicolumn{2}{c}{$q$} & \multicolumn{2}{c}{$M$} & $\overline{R}^2$\\
+\midrule
+% 34, 65, 218, 77, 157, 240, 242, 17, 206, 143
+\texttt{dev-dotnet/gconf-sharp}   & 0.167587 & 0.211648 & 0.754343 & 0.433141 & 21.283 & 0.484352 & 99.6148\%\\
+\texttt{dev-haskell/cabal}        & 0.0554162 & 0.0732542 & 0.153744 & 0.379092 & 245.886 & 437.01 & 98.5521\%\\
+\texttt{dev-libs/libunique}       & 0.0473548 & 0.0983485 & 0.136046 & 0.401718 & 286.948 & 731.387 & 98.5822\%\\
+\texttt{dev-python/lxml}          & 0.00673774 & 0.00829268 & 0.48833 & 0.216921 & 52.883 & 52.4726 & 98.8237\%\\
+\texttt{dev-python/simplejson}    & 0.0108121 & 0.0283649 & 0.463439 & 0.458178 & 97.1942 & 147.927 & 98.9801\%\\
+\texttt{dev-vcs/git}              & 0.000415898 & 0.00512837 & 0.840506 & 0.143992 & 734.243 & 368.631 & 99.2386\%\\
+\texttt{dev-vcs/mercurial}        & 0.00103413 & 0.00494549 & 0.516704 & 0.258352 & 173.8 & 480.637 & 98.2389\%\\
+\texttt{gnome-base/gnome-keyring} & 0.0259038 & 0.0356738 & 0.833393 & 0.132449 & 41.5442 & 1.06264 & 99.6646\%\\
+\texttt{media-libs/libcanberra}   & 0.0551051 & 0.116892 & 1.43593 & 0.438961 & 37.456 & 2.37536 & 99.6823\%\\
+\texttt{x11-misc/xdg-utils}       & 0.0496807 & 0.0427185 & 0.257095 & 0.241258 & 114.925 & 126.964 & 99.5608\%\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 
 The package \texttt{dev-libs/libunique} does not have a good fit, but looking at the graph, \raisebox{-.15em}{\includegraphics[height=.8em,trim=7em 0 0 0,clip=true]{sparkline-218-dev-libs-libunique.pdf}}, it goes down at the end. This is demonstraded even more clearly in \texttt{net-libs/xulrunner}, \raisebox{-.15em}{\includegraphics[height=.8em,trim=3em 0 0 0,clip=true]{sparkline-140-net-libs-xulrunner.pdf}}, which declines almost completely.
@@ -614,7 +659,7 @@ The package dependency graph contains empirical data to test extensions of the B
 
 The scale and complexity of the dependency graphs and open source innovation requires some care. Three notable issues became apparent in this study: First, In the open source community there is a lot of forking. It is not always clear whether a forked project constitutes the continuation of the original project or a separate new project. A more thorough study on the nature of forking could provide the insights to resolve this. Second, due to the public nature of open source development many immature or abandoned projects are visible in the larger datasets. This is good from a scientific perspective: it allows one to research projects from their early beginning and look at projects that failed to grow or became obsolete. But it clouds the `big picture' with many projects that do not significantly contribute to the overall innovation. In large datasets one would have to devise a relevance metric to select the relevant metrics. Such metrics could be the number of developers, the number users or the number of dependees. Third, the sheer scale of the available OSS databases provide challenges for analysis. Specialist tooling is required to transform the raw data into more manageable formats.
 
-\section{Relevance — Implications to practice and research}
+\section{Implications to Practice and Research}
 
 Type four theory: Explains and predicts.
 
