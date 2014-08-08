@@ -58,32 +58,25 @@ Now that a data source is selected, it is time to extract the required informati
 
 \section{Related Work}
 
+
+
+\subsection{Diffusion of Innovation}
+
+
+
+\subsection{ Open Source Software Ecosystems}
 In \citet{crowston08} published a comprehensive overview of academical research on open source software development. Of the 184 articles they cite, the vast majority of articles are case studies or surveys, with 4\% of the articles describing the development of empirical instruments and/or measurements. Also, most articles look at the level of a particular group or project, with 4\% looking at the societal level of interacting projects. Crowston et al. find no articles that develop instruments or measurements on the level of OSS packages, which this paper aims to do.
 
-In their 2008 article \citet{zheng08} analyse the dependency graph of the Gentoo Portage package database as it was in February 2007. The global structure of the graph is analysed in graph theoretic terms of sparsity, clustering coefficient, degree distribution and degree growth rate. The authors conclude that the graph can not be explained well by existing models of network growth and they propose two new models instead. Our study differs in two ways: First, we analyse the changes to the dependency graph over time, whereas Zheng et al. look at a particular instance in 2007. Second, we analyse and model the development of a given software package in the dependency network, instead of the overall development of the network. It can be interesting to study how the Bass diffusion model for the development of individual nodes corresponds to Zheng et al. model for the development of the whole graph.
 
 \citet{haefliger08} study code re-use on six open source projects, they conclude that there is extensive code re-use in open source software. The article proceeds by identifying the process of code re-use, such as the drivers for re-using and the tools used to find relevant code. The study by Haefliger et al. looks at a given project and how it  re-uses existing components, whereas this paper looks at a given project and how it is being re-used by other projects. Additionally, we performed our analysis using a large set of automatically collected and processed empirical data.
 
+\subsection{Diffusion of Innovation and Adoption in Information Systems}
+
 \citet{dedrick04} and \citet{chen06} study the adoption process of open source software by (commercial) end users. Their focus is on the competitive economic strengths of open source software versus commercial software. The conclusion is that cost is the most important driver for open source adoption and freedom and extensibility plays a lesser role. The articles do not provide empirical data on the adoption process itself, which makes it hard to compare it to our present finding of a Bass diffusion adoption process.
 
-
-Why this order?
-
-\subsection{Innovation theory}
-
-
-\subsection{Software innovation}
-
-→ Look for review papers on software innovation and software adoption
-
-
-\subsection{Innovation theoretic models of adoption}
-
-
-\subsection{Innovative adoption in software}
-
-
 \subsection{Software package dependencies}
+
+In their 2008 article \citet{zheng08} analyse the dependency graph of the Gentoo Portage package database as it was in February 2007. The global structure of the graph is analysed in graph theoretic terms of sparsity, clustering coefficient, degree distribution and degree growth rate. The authors conclude that the graph can not be explained well by existing models of network growth and they propose two new models instead. Our study differs in two ways: First, we analyse the changes to the dependency graph over time, whereas Zheng et al. look at a particular instance in 2007. Second, we analyse and model the development of a given software package in the dependency network, instead of the overall development of the network. It can be interesting to study how the Bass diffusion model for the development of individual nodes corresponds to Zheng et al. model for the development of the whole graph.
 
 European research project 2008—2011 aiming to ``solve the upgrade problem''.
 EDOS project
@@ -171,8 +164,7 @@ To fit the model of equation~\eqref{eq:bass-direct} to empirical data two additi
 
 Equation~\eqref{eq:bass-model} incorporates the two additions and can be readily applied to empirical data. In \cite{mahajan95} and many other empirical studies this happens in the differential form, since only absolute sales figures are available and not absolute user figures. The dependency graph method presented later allows one to obtain absolute usage number, so the differential form is not further used. 
 
-
-The interpretation of the variables and parameters and their dimensions is presented in table~\ref{tbl:bass-model}. When applying the formula one should note that it is non-linear, so ordinary linear regression can not be used. Instead one can use non-linear least squares regression, but note the correct number of the degrees of freedom. This can be done using existing mathematical/statistical packages. For this thesis the  \verb|NonlinearModelFit| procedure in Mathematica was used. 
+The interpretation of the variables and parameters and their dimensions is presented in table~\ref{tbl:bass-model}. When applying the formula one should note that it is non-linear, so ordinary linear regression can not be used. Instead one can use non-linear least squares regression, but note the correct number of the degrees of freedom. This can be done using existing mathematical/statistical packages. For this paper the \verb|NonlinearModelFit| procedure in Mathematica was used. 
 
 \begin{table}
 \centering\small
@@ -214,16 +206,17 @@ This first order homogeneous ordinary differential equation can be solved for $A
 The solution assumes the innovation is introduced at time zero, to account for this the substitution $t \rightarrow t - t_0$ is made. This results in four parameters, $t_0$, $M$, $p$ and $q$ that can be fit to the empirical data.
 
 
-
-
 \section{The Gentoo Portage Dataset}
 
 The empirical data used is the time evolution of the Gentoo Portage package dependency graph \citep{rem14}. This dataset contains the full dependency graph for every month since the project was initiated in $2000$, the resulting graphs have a combined total of 1.3 million packages and 6.9 million dependency relations, with the largest graph having 15 thousand packages and 80 thousand dependency relations.
 
-Special tools where developed to extract the time series of the number of adopters $A_t$ for a given package. This time series was then fit to \eqref{eq:bass} using Mathematica's \texttt{NonLinearModelFit}. The goodness-of-fit was analysed using an ANOVA table and calculated using the adjust coefficient of determination $\overline{R}^2$. The parameters were extracted from the fit, and confidence intervals were calculated under assumptions of normality. In \ref{tbl:results} the relevant parameters are presented with their mean value and a $95\%$ confidence interval. Since normality was assumed, the confidence intervals ignore the $p \ge 0$ and $q \ge 0$ constraints. 
-
-The plots were drawn using a thick red line for the model and shades of red for the prediction bands. The thick red line was drawn according to \eqref{eq:bass}, with the mean values used as parameters. Then single value predictions bands were calculated for $90\%$, $95\%$, $99\%$ and $99.9\%$ confidence and were drawn in progressively darker shades of pink. They represent a prediction for where a single additional value would likely fall. According to the model and the uncertainty introduced by the fit, there is a $90\%$ chance that it will fall in the innermost band, $95\%$ chance that it would falil in the second band, etc. If the data fits the model properly, one would expect to see $90\%$ of the points in the inner band. Finally, the empirical data points were plotted as black dots, connected with a thin vertical line - the residual error of the model.
-
+More information about a packages can be found at
+\begin{align}
+\mbox{
+\href{https://packages.gentoo.org/package/dev-vcs/git}{\texttt{https://packages.gentoo.org/package/\textcolor{MidnightBlue}{dev-vcs/git}}}
+}\label{url:pkg}
+\end{align}
+where \texttt{\textcolor{MidnightBlue}{dev-vcs/git}} is replaced with the name of the package.
 
 \subsection{Collecting}
 
@@ -231,12 +224,11 @@ The Gentoo portage database consists of a large number of text files, at least o
 
 Using the \verb|cvs| command one can download the entire database as it was at a certain point in history. For example the following command would download the database, as it was on 1 December 2003:
 
-\begin{center}
-\begin{BVerbatim}
-cvs -d :pserver:anonymous@anoncvs.gentoo.org\
-  /var/cvsroot co -D 12/01/2003 gentoo-x86
-\end{BVerbatim}
-\end{center}
+\begin{align}
+\mbox{\texttt{cvs -d :pserver:anonymous@anoncvs.gentoo.org}}&\;\backslash \notag\\
+\mbox{\texttt{  /var/cvsroot co -D 12/01/2003 gentoo-x86}}
+\label{cmd:cvs}
+\end{align}
 
 Using a small utility written for the task, this command was repeatedly invoked to download all the databases from 1 January 2000 until mid 2012, with increments of one month. The \verb|.ebuild|, \verb|.eclass| and \verb|.eblit| files are stored. Other files are ignored, to save space since they contain no relevant information. This whole downloading processes took about a week and a half and the resulting database consists of three million files occupying thirteen gigabytes of space. There are also files specifying packages renames, but since these only get appended to and never deleted they where taken from the latest version of the database.
 
@@ -253,9 +245,7 @@ The final method is a hybrid of the first two, using the Paludis' \verb|instruo|
 
 \subsection{Producing the Dependency Graphs}
 
-Now the data is in 154 snapshots of the package database in a simplified text based format. This is several gigabytes and several millions of files large and needs to be processed into dependency graphs. Obviously it is inhumane to do this by hand, therefore more specialized tools were developed.
-
-\begin{figure}[t]
+\begin{wrapfigure}{r}{0.5\textwidth}
 \small\centering
 \begin{BVerbatim}
 >=media-libs/taglib-1.6.1[asf,mp4]
@@ -265,13 +255,16 @@ player? (
     >=app-misc/strigi-0.5.7[dbus,qt4]
     || ( >=dev-db/mysql-5.0.76
          =virtual/mysql-5.1 )
-    >=kde-base/kdelibs-4.3[opengl?,semantic-desktop?]
+    >=kde-base/kdelibs-4.3[opengl?,
+                   semantic-desktop?]
     sys-libs/zlib
     x11-libs/qt-script
     >=x11-libs/qtscriptgenerator-0.1.0
 \end{BVerbatim}
 \caption{Fragment of the runtime dependencies of the Amarok music player.}\label{fig:amarokruntime}
-\end{figure}
+\end{wrapfigure}
+
+Now the data is in 154 snapshots of the package database in a simplified text based format. This is several gigabytes and several millions of files large and needs to be processed into dependency graphs. Obviously it is inhumane to do this by hand, therefore more specialized tools were developed.
 
 By design the database can work with complicated dependency relations, such as ``package \verb|amarok| requires package \verb|phonon-kde|, minimum version \verb|4.3|, but only when feature \verb|player| is required''. This is would be coded as \verb|player?| \verb|(| \verb|>=kde-base/phonon-kde-4.3| \verb|)|. An example of the run time dependencies for the Amarok music player is given in figure~\ref{fig:amarokruntime}. The figure includes more complex rules such as ``either package X or package Y is required'', `` package X is required to contain feature Y'', etcetera.
 
@@ -283,9 +276,6 @@ When a database snapshot contains several versions of the same package, only the
 
 % Parsing DEPENDS, RDEPENDS and PDEPENDS
 In the Gentoo Portage database the dependencies are sorted in two kinds, compile time dependencies and runtime dependencies. The first kind are required to build and install the package. The second kind is only required when actually using the package. The reason for this distinction is a technical: it solves installation issues with cyclical dependencies. For the current purposes both kinds of dependencies are considered equal.
-
-% Package moves
-Sometimes, package get renamed or moved around in the database, this needs to be accounted for. Luckily, to allow users to upgrade from an older version to a newer version the processing of moves and renames has been automated in the Gentoo Portage database. The developers maintain a list of all the moves and renames that have happened in the database in a structured format. The latest version of this list is used to retroactively change all the package names in the historical snapshots to their modern name. This ensures that moves and renames do not harm historical continuity in the dataset.
 
 \begin{wraptable}{r}{0.5\textwidth}
 \vspace{-1em}
@@ -320,6 +310,8 @@ Size & 2 MB \\
 \vspace{-1em}
 \end{wraptable}
 
+% Package moves
+Sometimes, package get renamed or moved around in the database, this needs to be accounted for. Luckily, to allow users to upgrade from an older version to a newer version the processing of moves and renames has been automated in the Gentoo Portage database. The developers maintain a list of all the moves and renames that have happened in the database in a structured format. The latest version of this list is used to retroactively change all the package names in the historical snapshots to their modern name. This ensures that moves and renames do not harm historical continuity in the dataset.
 
 % Package provides
 Using all the observations and choices made above, a tool was developed to extract dependency graphs from all the simplified database snapshots. The shear scale of the resulting dataset, $1.3$ million packages and $6.9$ million dependency relations, required a solution to store efficiently. Therefore, a compressed format was developed that only stores the changes between the historical snapshots instead of storing whole snapshots. The extraction process took three hours and resulted in a $29$ megabyte file. Reading this file into memory resident data structures and performing simple queries takes about $4$ seconds. The dataset is now in a usable form.
@@ -327,17 +319,14 @@ Using all the observations and choices made above, a tool was developed to extra
 \subsection{Final Remarks}
 
 The dataset collected is available at
-\begin{center}
-\href{http://datahub.io/dataset/gentoo-dependency-graph}{\texttt{http://datahub.io/dataset/gentoo-dependency-graph}}
-\end{center}
+\begin{align}
+\mbox{\href{http://datahub.io/dataset/gentoo-dependency-graph}{\texttt{http://datahub.io/dataset/gentoo-dependency-graph}}}
+\end{align}
 as compressed GML graphs for every snapshot. Raw data is available at
-\begin{center}
-\url{http://www.utwente.nl/mb/iebis/staff/amrit/timeline.squashfs}\\
-\end{center}
+\begin{align}
+\mbox{\url{http://www.utwente.nl/mb/iebis/staff/amrit/timeline.squashfs}}
+\end{align}
 as a SquashFS compressed filesystem. The SquashFS format allows one to mount the compressed data as a read-only disk drive and operate directly on the dataset. It contains the pre-processed ebuild files and the file \verb|graphs.bip| that contains all of the graphs in a custom format specialized for quick processing of large graphs over time. A C++ toolkit to work with the \verb|graphs.bip| file is available at \url{https://github.com/Recmo/depgraph}.
-
-In a separate paper \citep{rem142} we analyzed the changes in the dependency graph over time. In particular the growth of the number of dependers on a given package is explained using the Bass model of innovation diffusion.
-
 
 \section{Exploration of the Dataset}
 
@@ -383,9 +372,26 @@ Scattered throughout the figure are yellow dots containing packages that are onl
 
 It is remarkable how only a few dependency relations provide sufficient clues for the clustering algorithm to automatically find related areas of technology. Similar but faster clustering techniques where used on the whole snapshot with similar results. Related packages for certain programming languages (Perl, Php, Java, Python, Ruby) would cluster and packages related to either KDE or GNOME would cluster, among many more. Unfortunately the analysis software was struggling with the size of the dataset and the full set was not investigated further.
 
-\section{Results}
+\section{Results and Discussion}
 
-From the entire list of packages, a few well-known (at least according to the author) packages where selected. The selection criteria was that the package must not have existed before (around) 2004, because the Gentoo Portage database was still too immature then, and the package must have gained a considerable number of dependers since its introduction. In \ref{tbl:results}, we list some selected packages along with their parameters. In all cases the adjusted coefficient of determination $\overline{R}^2$ was more than $99\%$.
+% \begin{wrapfigure}{r}{.5\linewidth}
+% \small\centering
+% \label{fig:BassFits}
+% \subfigure[\texttt{libnotify}: $p=0.05$, $q=0.72$]{\includegraphics[width=0.45\textwidth]{BassFit-libnotify.pdf}}
+% \subfigure[\texttt{libtheora}: $p=0.11$, $q=0.63$]{\includegraphics[width=0.45\textwidth]{BassFit-libtheora.pdf}}
+% \subfigure[\texttt{taglib}: $p=0.22$, $q=0.04$]{\includegraphics[width=0.45\textwidth]{BassFit-taglib.pdf}}
+% \subfigure[\texttt{udev}: $p=0.01$, $q=0.50$]{\includegraphics[width=0.45\textwidth]{BassFit-udev.pdf}}
+% \subfigure[\texttt{cairo}: $p=0.005$, $q=0.35$]{\includegraphics[width=0.45\textwidth]{BassFit-cairo.pdf}}
+% \caption{The Bass curve fitted on a number of packages}
+% \end{wrapfigure}
+
+From the entire list of packages, a few well-known (at least according to the author) packages where selected. The selection criteria was that the package must not have existed before (around) 2004, because the Gentoo Portage database was still too immature then, and the package must have gained a considerable number of dependers since its introduction. In table \ref{tbl:results}, we list some the packages along with their parameters. In these cases the adjusted coefficient of determination $\overline{R}^2$ was more than $99\%$.
+
+Special tools where developed to extract the time series of the number of adopters $A_t$ for a given package. This time series was then fit to \eqref{eq:bass} using Mathematica's \texttt{NonLinearModelFit}. The goodness-of-fit was analysed using an ANOVA table and calculated using the adjust coefficient of determination $\overline{R}^2$. The parameters were extracted from the fit, and confidence intervals were calculated under assumptions of normality. In table \ref{tbl:results} the relevant parameters are presented with their mean value and a $95\%$ confidence interval. Since normality was assumed, the confidence intervals ignore the $p \ge 0$ and $q \ge 0$ constraints. 
+
+The plots were drawn using a red line for the model and shades of red for the confidence bands. The red line was drawn according to \eqref{eq:bass}, with the mean values used as parameters. Then single value predictions confidence bands were calculated for $90\%$, $95\%$, $99\%$ and $99.9\%$ confidence and were drawn in progressively darker shades of pink. They represent a prediction for where a single additional value would likely fall. According to the model and the uncertainty introduced by the fit, there is a $90\%$ chance that it will fall in the innermost band, $95\%$ chance that it would falil in the second band, etc. If the data fits the model properly, one would expect to see $90\%$ of the points in the inner band. Finally, the empirical data points were plotted as black dots, connected with a thin vertical line - the residual error of the model.
+
+It turns out the packages can be classified as mostly imitator driven, mostly innovator driven and an exceptional case of growth and demise. They will be discussed in order.
 
 \begin{table}
 \small\centering
@@ -405,15 +411,16 @@ Package & \multicolumn{2}{c}{$p$} & \multicolumn{2}{c}{$q$} & \multicolumn{2}{c}
 \end{tabular}
 \end{table}
 
-\begin{figure}
-\small\centering
-\includegraphics[width=.5\linewidth]{BassFit-git2.pdf}
-\caption{The imitation driven adoption of \texttt{git}.}\label{fig:git}
-\end{figure}
-
 \subsection{Imitator Driven Growth}
 
-The first package we consider is \verb|git|, a modern revision control system that shows an imitator driven adoption. It's growth can be seen in \ref{fig:git}, the corresponding statistics are in \ref{tbl:results}. The package first appeared just before 2005, it had around ten packages depending on it in 2006, twenty in 2008 and is currently used by almost three hundred packages. According to the Bass model, it will continue to grow to approximately 750 users. The innovator inflow is only $0.2\%$ of the potential market per year, so one would expect $0.002\cdot (750 - 300) = 1$ user to adopt \verb|git| out of sheer innovation. Taking the analogy with persons, if someone from the $450$ current non-users where to meet a random person from the entire $750$ market, there is a $\frac{300}{750}= 40\%$ chance of meeting a user which can convince him/her to start using \verb|git|. The chance of this happening is the imitator inflow $q = 0.73$. Therefore, the total number of users \verb|git| can expect to gain from imitation this year is $450\cdot 40\%\cdot 0.73 = 131$. Very much imitator driven!
+\begin{wrapfigure}{r}{0.5\textwidth}
+\small\centering
+\includegraphics[width=\linewidth]{BassFit-git2.pdf}
+\caption{The imitation driven adoption of \texttt{git}.}\label{fig:git}
+\vspace{-1em}
+\end{wrapfigure}
+
+The first package we consider is \verb|git|, a modern revision control system that shows an imitator driven adoption. It's growth can be seen in figure \ref{fig:git}, the corresponding statistics are in table \ref{tbl:results}. The package first appeared just before 2005, it had around ten packages depending on it in 2006, twenty in 2008 and is currently used by almost three hundred packages. According to the Bass model, it will continue to grow to approximately 750 users. The innovator inflow is only $0.2\%$ of the potential market per year, so one would expect $0.002\cdot (750 - 300) = 1$ user to adopt \verb|git| out of sheer innovation. Taking the analogy with persons, if someone from the $450$ current non-users where to meet a random person from the entire $750$ market, there is a $\frac{300}{750}= 40\%$ chance of meeting a user which can convince him/her to start using \verb|git|. The chance of this happening is the imitator inflow $q = 0.73$. Therefore, the total number of users \verb|git| can expect to gain from imitation this year is $450\cdot 40\%\cdot 0.73 = 131$. Very much imitator driven!
 
 The relative slowness of \verb|git|'s growth and its dependence on imitator can be explained. Open source projects, and software project in general, consist of numerous large textual files containing source code. Changes made in one place can hugely and unpredictably affect other places. To complicate matters further, usually more than one developer works on the source code at the same time. There are competing systems such as \verb|cvs|, \verb|subversion|, \verb|mercurial|, etcetera., but the basic functionality of maintaining version is provided by all of them. Thus two explanations can be derived for \verb|git|'s growth: First, the revision control system is not a part that affects the products delivered by the open source project and second, there is little incentive to switch unless the new revision control system is proved to be superior.
 
@@ -423,15 +430,18 @@ The relative slowness of \verb|git|'s growth and its dependence on imitator can 
 
 \verb|cairo| is a graphics library. It provides facilities for drawing lines, circles, text and other graphics primitives and is used by user graphics-heavy projects such as user interface libraries. Much like \verb|udev| it is an architectural change at a low level, this might explain its similar growth pattern.
 
+
 \subsection{Innovator Driven Growth}
 
-\begin{figure}
+\begin{wrapfigure}{r}{0.5\textwidth}
+\vspace{-2em}
 \small\centering
-\includegraphics[width=.5\linewidth]{BassFit-libmad2.pdf}
+\includegraphics[width=\linewidth]{BassFit-libmad2.pdf}
 \caption{The innovation driven adoption of \texttt{libmad}.}\label{fig:libmad}
-\end{figure}
+\vspace{-1em}
+\end{wrapfigure}
 
-A typical example of innovator driven growth is given by \verb|libmad|. The model is fitted resulting in \ref{fig:libmad}. Again, the data is neatly explained by a Bass diffusion process, in particular the rapid steep growth and the stable user base afterwards. The name is an acronym for ``library for MPEG Audio Decoding'' and the package provides a high quality mp3 decoder for use in multimedia applications. This might also explain the rapid growth of its adoption: multimedia applications can benefit a lot from good quality mp3 support.
+A typical example of innovator driven growth is given by \verb|libmad|. The model is fitted resulting in figure \ref{fig:libmad}. Again, the data is neatly explained by a Bass diffusion process, in particular the rapid steep growth and the stable user base afterwards. The name is an acronym for ``library for MPEG Audio Decoding'' and the package provides a high quality mp3 decoder for use in multimedia applications. This might also explain the rapid growth of its adoption: multimedia applications can benefit a lot from good quality mp3 support.
 
 \verb|libtheora| is a library for the Schroedinger video codec. It implements a multimedia standard for use by video players. Just as with \verb|libmad| there is a strong innovator driven growth.
 
@@ -441,10 +451,8 @@ A typical example of innovator driven growth is given by \verb|libmad|. The mode
 
 \begin{figure}
 \small\centering
-\includegraphics[width=\linewidth]{BassFit-xulrunner-22.pdf}
-\vspace{-2em}
-\caption{The rise and decline of \texttt{xulrunner}.}\label{fig:xulrunner}
-\vspace{-1em}
+\includegraphics[width=0.6\linewidth]{BassFit-xulrunner-22.pdf}
+\caption{The rise and decline of \texttt{xulrunner}. The model is fitted to the data up to 2011 (black dots).}\label{fig:xulrunner}
 \end{figure}
 
 The previous examples are all about projects that start and undergo a growth phase that can be explained by a Bass diffusion process. So far, the Bass diffusion model has appeared to give a very accurate explanation of the adoption of an open source software library.
@@ -457,55 +465,43 @@ The package \verb|xulrunner| in the dataset is a nice example of a short but com
 
 Excluding the blue dots from the data results in the Bass model fit from figure \ref{fig:xulrunner}. The fitness increases to $\overline{R}^2 =99.54\%$ and the parameters have tighter and reasonable confidence intervals. This is strong evidence that the initial adoption of the package is a Bass diffusion process. To explain the last part, the model should be extended with an obsolescence term. 
 
+\subsection{Hypothesis Testing}
 
-\subsection{Moooore}
+The above examples of Bass diffusion growth suggests the central hypotheses of this article: \emph{software dependencies are a Bass innovation diffusion process.} This hypotheses is tested using a methodic approach: a random selection of ten software packages is taken and their dependee growth is fitted to the Bass diffusion model.
 
-\begin{figure}
-\small\centering
-\label{fig:BassFits}
-\subfigure[\texttt{libnotify}: $p=0.05$, $q=0.72$]{\includegraphics[width=0.45\textwidth]{BassFit-libnotify.pdf}}
-\subfigure[\texttt{libtheora}: $p=0.11$, $q=0.63$]{\includegraphics[width=0.45\textwidth]{BassFit-libtheora.pdf}}
-\subfigure[\texttt{taglib}: $p=0.22$, $q=0.04$]{\includegraphics[width=0.45\textwidth]{BassFit-taglib.pdf}}
-\subfigure[\texttt{udev}: $p=0.01$, $q=0.50$]{\includegraphics[width=0.45\textwidth]{BassFit-udev.pdf}}
-\subfigure[\texttt{cairo}: $p=0.005$, $q=0.35$]{\includegraphics[width=0.45\textwidth]{BassFit-cairo.pdf}}
-\caption{The Bass curve fitted on a number of packages}
-\end{figure}
+The Gentoo portage database contains over twenty thousand packages, but only a fraction of these packages are suitable. About six thousand packages where introduced before 2004, where the growth of Gentoo itself may be confounded. Of the remaining packages, the vast majority do not have a number of other packages depedending on it, these would for example be applications (as opposed to libraries) or unpopular/niche libraries. These are filtered out by setting a lower bound for the maximum number of dependees a package has during its lifetime. Then there are infrastructural packages in Gentoo, that have no corresponding open source projects, but are used manage the pacakge database. In summary:
+
+\begin{enumerate}
+	\item Start with all the packages in the Gentoo portage database. (21\,380 packages)
+	\item Filter out the packages that existed before 2004-01-01. (14\,706 remaining)
+	\item Filter out packages that do not have at least 20 dependees at some point. (324 remaining)
+	\item Filter out packages labeled ``-virtual'', ``-virtuals'', ``-proto'' or ``-meta''. (259 remaining)
+\end{enumerate}
+
+After this initial automated filtering, packages are randomly selected and manually tested against further selection criteria. If a package is rejected a new one is randomly selected and the process is repeated untill ten packages have been found. The final criteria are:
+
+\begin{enumerate}
+	\item[A.] The dependeee growth does not contain strong discontinuities. It is very uncommon that many independent software project suddenly, within the time resolution of one month, decide to start or stop using a particular library. It is however common that maintainers of Gentoo Portage do reorganizations or mass additions/removals of packages that product such discontinuities. Since they do not reflect actual adoption they are noise and are filtered out.
+	\item[B.] The package corresponds to an open source software project. Some of the packages represent closed source software projects or non-software projects. These are not part of the scope and are therefore excluded.
+	\item[C.] The package has not been forked of or factored out of another package. Some libraries where initially part of a different library that got refactored and split up in separate libraries and packages. Since projects may have been depedending on the initial library and simply switch over to the refactored one, this can not be considered adoption of the library. Such packages are therefore excluded.
+	\item[D.] The first included version should be close to a '1.0' release. The Bass diffusion hypotheses is about the entire growth of an open source software project, it is therefore necessary to have dependee growth data from close to the beginning of the project. Package that had an initial public release long before inclusion in Gentoo Portage are therefore excluded.
+\end{enumerate}
+
+These criteria are verified by consulting the information available through url \eqref{url:pkg}, in particular: the changelog of the ebuild file, any readme or changelog included in the earliest available version of the source code, the projects revision history and the projects homepage.
+
+The manutally rejected packages are listed in table \ref{tbl:rejected}.
+
+C: Xorg, KDE and Qt. Interesting. They actually show Bass diffusion. Refactor/version upgrade has some diffusion to it?
 
 
-\subsection{Hypothesis testing}
+XFree86 to XOrg. There are many packages (libFS, libSM, libICE, libWindowsWM, libX11, libXScrnsaver, etc..) that have been factored out of the X into separate libraries. All introduced in January 2006 and all having a version count starting at 1.0.0.
 
-· Filter on >2004  >30
-· Select 10 randomly where
-	· External confirmation that the project was actually started at that point in time and not as a spin-off or refactor.
-	· No 'noise' Δ > 
+“The modern X.Org Foundation came into being in 2004 when the body that oversaw X standards and published the official reference implementation joined forces with former XFree86 developers. X11R6.7.0, the first version of the X.Org Server, was forked from XFree86 4.4 RC2. The immediate reason for the fork was a disagreement with the new license for the final release version of XFree86 4.4, but several disagreements among the contributors surfaced prior to the split. Many of the previous XFree86 developers have joined the X.Org Server project.”
 
-Hypotheses: “Package dependency growth fits a Bass diffusion process”
+“In 2005 a great effort was put in the modularization of the X.Org server source code,[18] resulting in a dual release by the end of the year. The X11R7.0.0 release added a new modular build system based on the GNU Autotools, while X11R6.9.0 release kept the old imake build system, both releases sharing the same codebase. Since then the X11R6.9 branch is maintained frozen and all the ongoing development is done to the modular (using GNU Autotools) branch. The new build system also brought the use of dlloader standard dynamic linker to load plugins and drivers, deprecating the old own method. As a consequence of the modularization, the X11 binaries were moving out of their own /usr/X11R6 subdirectory tree and into the global /usr tree on many Unix systems.”
 
-To test this hypotheses we do the following: 
 
-→ Explain why discontinuities are unnatural and filter on them
 
-\begin{itemize}
-	\item Start with all the packages in the Gentoo portage database. (21\,380)
-	\item Filter out the packages that existed before 2004-01-01. (14\,706)
-	\item Filter out packages that do not have at least 20 dependees at some point. (324)
-	\item Filter out packages labeled “-virtual”, “-virtuals”, “-proto” or “-meta”. (259)
-	\item Randomly pick packages and manually verify that:
-	\begin{enumerate}
-		\item[A.] The data does not contain strong discontinuities.
-		\item[B.] The package corresponds to an open source project.
-		\item[C.] The package has not been forked of or factored out of another package.
-		\item[D.] The first included version should be close to a '1.0' release.
-		\item[E.] That open source project has not been in Gentoo as (part of) some other package.
-	\end{enumerate}
-	This is verified by consulting
-	\begin{itemize}
-		\item The changelog of the ebuild
-		\item Any readme or changelog included in the source code (earliest available version).
-		\item The projects revision history.
-		\item The projects homepage.
-	\end{itemize}
-\end{itemize}
 
 \begin{table}
 \small\centering
@@ -584,25 +580,6 @@ Growth & Package & Description \\
 
 % 34-dev-dotnet-gconf-sharp:
 
-
-No packages where rejected on the 'E' ground, but many of these are covered by the 'C' reason. No extensive check was done on co-occurence of reasons.
-
-
-XFree86 to XOrg. There are many packages (libFS, libSM, libICE, libWindowsWM, libX11, libXScrnsaver, etc..) that have been factored out of the X into separate libraries. All introduced in January 2006 and all having a version count starting at 1.0.0.
-
-“The modern X.Org Foundation came into being in 2004 when the body that oversaw X standards and published the official reference implementation joined forces with former XFree86 developers. X11R6.7.0, the first version of the X.Org Server, was forked from XFree86 4.4 RC2. The immediate reason for the fork was a disagreement with the new license for the final release version of XFree86 4.4, but several disagreements among the contributors surfaced prior to the split. Many of the previous XFree86 developers have joined the X.Org Server project.”
-
-“In 2005 a great effort was put in the modularization of the X.Org server source code,[18] resulting in a dual release by the end of the year. The X11R7.0.0 release added a new modular build system based on the GNU Autotools, while X11R6.9.0 release kept the old imake build system, both releases sharing the same codebase. Since then the X11R6.9 branch is maintained frozen and all the ongoing development is done to the modular (using GNU Autotools) branch. The new build system also brought the use of dlloader standard dynamic linker to load plugins and drivers, deprecating the old own method. As a consequence of the modularization, the X11 binaries were moving out of their own /usr/X11R6 subdirectory tree and into the global /usr tree on many Unix systems.”
-
-More information about a packages can be found at
-\begin{center}
-\href{https://packages.gentoo.org/package/dev-vcs/git}{\texttt{https://packages.gentoo.org/package/\textcolor{MidnightBlue}{dev-vcs/git}}}
-\end{center}
-where \texttt{\textcolor{MidnightBlue}{dev-vcs/git}} is replaced with the name of the package.
-
-The growth curves with large discontinuities are rejected. The hypotheses concerns open source projects depending on other open source projects. This is reflected in the Gentoo Portage dataset as dependency relations between packages, but this reflection can be quite noisy. It regularly happens that Gentoo developers re-organize the package database and within a datapoint (i.e. a single month) add or drop a large number of dependees to a package. The changes can be as large as a complete drop to zero or suddenly tripling the number of dependees. If this is translated back to dependee behaviour, it would mean that in a short span of time a large number of projects decide to use or drop a certain technology. Since the dependee projects are assumed to operate (mostly) independently, this is very unlikely. Even in instances of deprecation, where a project gets discontinued and tells its dependees to move on, the resulting decline is far from instantaneous. Therefore, growth curves with large discontinuities are rejected.
-
-
 \begin{figure}
 \small\centering
 % 34, 65, 218, 77, 157, 240, 242, 17, 206, 143
@@ -622,7 +599,7 @@ The growth curves with large discontinuities are rejected. The hypotheses concer
 
 \begin{table}
 \small\centering
-\caption{Results of fitting the Bass model.}\label{tbl:results}
+\caption{Results of fitting the Bass model.}\label{tbl:testresults}
 \begin{tabular}{lr@{ $\pm$}rr@{ $\pm$}rr@{ $\pm$}rr}
 \toprule
 Package & \multicolumn{2}{c}{$p$} & \multicolumn{2}{c}{$q$} & \multicolumn{2}{c}{$M$} & $\overline{R}^2$\\
@@ -642,12 +619,24 @@ Package & \multicolumn{2}{c}{$p$} & \multicolumn{2}{c}{$q$} & \multicolumn{2}{c}
 \end{tabular}
 \end{table}
 
-% TODO: Write something about discretization noise
+The number of dependees is integer and can therefore only rise or fall in descrete steps, this introduces discretization noise. This is partciularily problematic in \texttt{dev-dotnet/gconf-sharp} and \texttt{dev-dotnet/lxml}. It also appears to happen in \texttt{dev-haskell/cabal}, but this is an illusion, the steps in the graph are in the order of tens of packages, the reasons for this are unknown and likely related to Gentoo internal matters.
 
-% TODO: 
+The package \texttt{dev-libs/libunique} does not have a good fit, but looking at the graph it goes down at the end, much like the \texttt{net-libs/xulrunner} case that was discussed earlier.
 
 
-The package \texttt{dev-libs/libunique} does not have a good fit, but looking at the graph, \raisebox{-.15em}{\includegraphics[height=.8em,trim=7em 0 0 0,clip=true]{sparkline-218-dev-libs-libunique.pdf}}, it goes down at the end. This is demonstraded even more clearly in \texttt{net-libs/xulrunner}, \raisebox{-.15em}{\includegraphics[height=.8em,trim=3em 0 0 0,clip=true]{sparkline-140-net-libs-xulrunner.pdf}}, which declines almost completely.
+Five packages are good fits with an $\overline{R}^2 > 99\%$. Of the remaining five, \texttt{dev-dotnet/lxml} and \textt{dev-cvs/mercurial} can be explained by discretization noise. It seems that \texttt{dev-haskell/cabal} has a different sort of discretization noise.
+
+\texttt{dev-python/simplejson} is barely under the mark, and apears to have two distinct growth spurts. It is unknonw wether these growth spurts are an artifact of the Gentoo Portage database, or if they represent two specific growth phases in the project. The first spurt coincides with the \texttt{2.0} release, but no such correlation can be found for the second spurt.
+
+\texttt{dev-libs/libunique} is the only one case that clearly does not fit the Bass diffusion model, and it appears to be for the same reasons that \texttt{xulrunner} does not fit.
+
+
+
+5: good fit
+
+2: discretization noise
+
+
 
 
 \section{Conclusions and Future Work}
@@ -662,7 +651,9 @@ The package dependency graph contains empirical data to test extensions of the B
 
 The scale and complexity of the dependency graphs and open source innovation requires some care. Three notable issues became apparent in this study: First, In the open source community there is a lot of forking. It is not always clear whether a forked project constitutes the continuation of the original project or a separate new project. A more thorough study on the nature of forking could provide the insights to resolve this. Second, due to the public nature of open source development many immature or abandoned projects are visible in the larger datasets. This is good from a scientific perspective: it allows one to research projects from their early beginning and look at projects that failed to grow or became obsolete. But it clouds the `big picture' with many projects that do not significantly contribute to the overall innovation. In large datasets one would have to devise a relevance metric to select the relevant metrics. Such metrics could be the number of developers, the number users or the number of dependees. Third, the sheer scale of the available OSS databases provide challenges for analysis. Specialist tooling is required to transform the raw data into more manageable formats.
 
-\section{Implications to Practice and Research}
+\subsection{Limitations}
+
+\subsection{Implications to Research and Practice}
 
 Type four theory: Explains and predicts.
 
