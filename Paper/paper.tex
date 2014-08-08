@@ -10,6 +10,7 @@
 \usepackage{microtype} % Finetunes spacing, load after fonts
 \usepackage{siunitx}
 \usepackage{alltt}
+\usepackage{fancyvrb}
 \usepackage{wrapfig}
 \usepackage[colorlinks=false, pdfborder={0 0 0}]{hyperref} % Should be loaded last
 \usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
@@ -230,10 +231,12 @@ The Gentoo portage database consists of a large number of text files, at least o
 
 Using the \verb|cvs| command one can download the entire database as it was at a certain point in history. For example the following command would download the database, as it was on 1 December 2003:
 
-\begin{verbatim}
+\begin{center}
+\begin{BVerbatim}
 cvs -d :pserver:anonymous@anoncvs.gentoo.org\
   /var/cvsroot co -D 12/01/2003 gentoo-x86
-\end{verbatim}
+\end{BVerbatim}
+\end{center}
 
 Using a small utility written for the task, this command was repeatedly invoked to download all the databases from 1 January 2000 until mid 2012, with increments of one month. The \verb|.ebuild|, \verb|.eclass| and \verb|.eblit| files are stored. Other files are ignored, to save space since they contain no relevant information. This whole downloading processes took about a week and a half and the resulting database consists of three million files occupying thirteen gigabytes of space. There are also files specifying packages renames, but since these only get appended to and never deleted they where taken from the latest version of the database.
 
@@ -254,7 +257,7 @@ Now the data is in 154 snapshots of the package database in a simplified text ba
 
 \begin{figure}[t]
 \small\centering
-\begin{alltt}
+\begin{BVerbatim}
 >=media-libs/taglib-1.6.1[asf,mp4]
 >=media-libs/taglib-extras-1.0.1
 player? (
@@ -266,10 +269,8 @@ player? (
     sys-libs/zlib
     x11-libs/qt-script
     >=x11-libs/qtscriptgenerator-0.1.0
-\end{alltt}
-\vspace{-1em}
+\end{BVerbatim}
 \caption{Fragment of the runtime dependencies of the Amarok music player.}\label{fig:amarokruntime}
-\vspace{-2em}
 \end{figure}
 
 By design the database can work with complicated dependency relations, such as ``package \verb|amarok| requires package \verb|phonon-kde|, minimum version \verb|4.3|, but only when feature \verb|player| is required''. This is would be coded as \verb|player?| \verb|(| \verb|>=kde-base/phonon-kde-4.3| \verb|)|. An example of the run time dependencies for the Amarok music player is given in figure~\ref{fig:amarokruntime}. The figure includes more complex rules such as ``either package X or package Y is required'', `` package X is required to contain feature Y'', etcetera.
@@ -316,6 +317,7 @@ Format & Tar+XZ compressed GML \\
 Size & 2 MB \\
 \bottomrule
 \end{tabular}
+\vspace{-1em}
 \end{wraptable}
 
 
@@ -325,16 +327,19 @@ Using all the observations and choices made above, a tool was developed to extra
 \subsection{Final Remarks}
 
 The dataset collected is available at
-\\\url{http://datahub.io/dataset/gentoo-dependency-graph}\\
+\begin{center}
+\href{http://datahub.io/dataset/gentoo-dependency-graph}{\texttt{http://datahub.io/dataset/gentoo-dependency-graph}}
+\end{center}
 as compressed GML graphs for every snapshot. Raw data is available at
-\\\texttt{http://www.utwente.nl/mb/iebis/staff/amrit/}\\\texttt{timeline.squashfs}\\
+\begin{center}
+\url{http://www.utwente.nl/mb/iebis/staff/amrit/timeline.squashfs}\\
+\end{center}
 as a SquashFS compressed filesystem. The SquashFS format allows one to mount the compressed data as a read-only disk drive and operate directly on the dataset. It contains the pre-processed ebuild files and the file \verb|graphs.bip| that contains all of the graphs in a custom format specialized for quick processing of large graphs over time. A C++ toolkit to work with the \verb|graphs.bip| file is available at \url{https://github.com/Recmo/depgraph}.
 
 In a separate paper \citep{rem142} we analyzed the changes in the dependency graph over time. In particular the growth of the number of dependers on a given package is explained using the Bass model of innovation diffusion.
 
 
 \section{Exploration of the Dataset}
-
 
 \begin{figure}
 \small\centering
@@ -358,8 +363,6 @@ One of the first thing attempted after generating the dataset was to visualize t
 
 Since it was impossible to get a visual overview of the entire dependency graph, its structure was plotted using histograms. Figure~\ref{fig:dephisto-out} is a histogram of the number of dependencies per package. A log-log scale was required to make the plot insightful, this reflects the fact that there are many packages with only zero, one or a few dependencies and a few packages with a lot of dependencies. Statistically this means the distribution of the number of dependencies has a fat tail. Likewise, the number of dependers for each package is plotted in figure~\ref{fig:dephisto-in}. This can be interpreted as the distribution of the number of adopters of a given technology. Again, there is a fat tail, even fatter than the one from the number of dependencies. The approximate linearity of the histogram suggest a power-law like distribution of the number of adopters for a given technology. \citet{zheng08} suggest that the structure of package dependency networks is not comparable to known models of social networks and have developed their own model to explain the graph structure.
 
-Since it was impossible to get a visual overview of the entire dependency graph, its structure was plotted using double logarithmic histograms. It was found that there there are many packages with only zero, one or a few dependencies and a few packages with a lot of dependencies. Statistically this means the distribution of the number of dependencies has a fat tail. Likewise, the number of dependers for each package was plotted, this can be interpreted as the distribution of the number of adopters of a given technology. Again, there was a fat tail, even fatter than the one from the number of dependencies. The histogram was approximately linear in the double logarithmic scale, suggesting a power-law like distribution of the number of adopters for a given technology. \citet{zheng08} suggest that the structure of package dependency networks is not comparable to known models of social networks and have developed their own model to explain the graph structure.
-
 \subsection{The KDE Subgraph}
 
 The entire graph might be difficult to visualize, but a small part should be easier. The problem with choosing a small part is that the part must have a meaningful boundary, a random selection will likely have few relations and miss some key packages. It was therefore decided to only pick the packages that belong to the KDE desktop environment. The primary reason is that the author is familiar with this set of packages and knows its structure in some detail. A secondary reason is that the packages are developed by a tightly connected community where component reuse among the projects is stimulated by creating libraries. The selection was implemented by considering only packages in the category \verb|kde-base| from the Gentoo Portage database.
@@ -380,9 +383,22 @@ Scattered throughout the figure are yellow dots containing packages that are onl
 
 It is remarkable how only a few dependency relations provide sufficient clues for the clustering algorithm to automatically find related areas of technology. Similar but faster clustering techniques where used on the whole snapshot with similar results. Related packages for certain programming languages (Perl, Php, Java, Python, Ruby) would cluster and packages related to either KDE or GNOME would cluster, among many more. Unfortunately the analysis software was struggling with the size of the dataset and the full set was not investigated further.
 
-\section{Results}
+\section{Results and Discussion}
+
+% \begin{wrapfigure}{r}{.5\linewidth}
+% \small\centering
+% \label{fig:BassFits}
+% \subfigure[\texttt{libnotify}: $p=0.05$, $q=0.72$]{\includegraphics[width=0.45\textwidth]{BassFit-libnotify.pdf}}
+% \subfigure[\texttt{libtheora}: $p=0.11$, $q=0.63$]{\includegraphics[width=0.45\textwidth]{BassFit-libtheora.pdf}}
+% \subfigure[\texttt{taglib}: $p=0.22$, $q=0.04$]{\includegraphics[width=0.45\textwidth]{BassFit-taglib.pdf}}
+% \subfigure[\texttt{udev}: $p=0.01$, $q=0.50$]{\includegraphics[width=0.45\textwidth]{BassFit-udev.pdf}}
+% \subfigure[\texttt{cairo}: $p=0.005$, $q=0.35$]{\includegraphics[width=0.45\textwidth]{BassFit-cairo.pdf}}
+% \caption{The Bass curve fitted on a number of packages}
+% \end{wrapfigure}
 
 From the entire list of packages, a few well-known (at least according to the author) packages where selected. The selection criteria was that the package must not have existed before (around) 2004, because the Gentoo Portage database was still too immature then, and the package must have gained a considerable number of dependers since its introduction. In \ref{tbl:results}, we list some selected packages along with their parameters. In all cases the adjusted coefficient of determination $\overline{R}^2$ was more than $99\%$.
+
+
 
 \begin{table}
 \small\centering
@@ -402,15 +418,15 @@ Package & \multicolumn{2}{c}{$p$} & \multicolumn{2}{c}{$q$} & \multicolumn{2}{c}
 \end{tabular}
 \end{table}
 
-\begin{figure}
-\small\centering
-\includegraphics[width=\linewidth]{BassFit-git2.pdf}
-\vspace{-2em}
-\caption{The imitation driven adoption of \texttt{git}.}\label{fig:git}
-\vspace{-1.5em}
-\end{figure}
 
 \subsection{Imitator Driven Growth}
+
+\begin{wrapfigure}{r}{0.5\textwidth}
+\small\centering
+\includegraphics[width=\linewidth]{BassFit-git2.pdf}
+\caption{The imitation driven adoption of \texttt{git}.}\label{fig:git}
+\vspace{-1em}
+\end{wrapfigure}
 
 The first package we consider is \verb|git|, a modern revision control system that shows an imitator driven adoption. It's growth can be seen in \ref{fig:git}, the corresponding statistics are in \ref{tbl:results}. The package first appeared just before 2005, it had around ten packages depending on it in 2006, twenty in 2008 and is currently used by almost three hundred packages. According to the Bass model, it will continue to grow to approximately 750 users. The innovator inflow is only $0.2\%$ of the potential market per year, so one would expect $0.002\cdot (750 - 300) = 1$ user to adopt \verb|git| out of sheer innovation. Taking the analogy with persons, if someone from the $450$ current non-users where to meet a random person from the entire $750$ market, there is a $\frac{300}{750}= 40\%$ chance of meeting a user which can convince him/her to start using \verb|git|. The chance of this happening is the imitator inflow $q = 0.73$. Therefore, the total number of users \verb|git| can expect to gain from imitation this year is $450\cdot 40\%\cdot 0.73 = 131$. Very much imitator driven!
 
@@ -422,15 +438,16 @@ The relative slowness of \verb|git|'s growth and its dependence on imitator can 
 
 \verb|cairo| is a graphics library. It provides facilities for drawing lines, circles, text and other graphics primitives and is used by user graphics-heavy projects such as user interface libraries. Much like \verb|udev| it is an architectural change at a low level, this might explain its similar growth pattern.
 
+
 \subsection{Innovator Driven Growth}
 
-\begin{figure}
+\begin{wrapfigure}{r}{0.5\textwidth}
+\vspace{-2em}
 \small\centering
 \includegraphics[width=\linewidth]{BassFit-libmad2.pdf}
-\vspace{-2em}
 \caption{The innovation driven adoption of \texttt{libmad}.}\label{fig:libmad}
 \vspace{-1em}
-\end{figure}
+\end{wrapfigure}
 
 A typical example of innovator driven growth is given by \verb|libmad|. The model is fitted resulting in \ref{fig:libmad}. Again, the data is neatly explained by a Bass diffusion process, in particular the rapid steep growth and the stable user base afterwards. The name is an acronym for ``library for MPEG Audio Decoding'' and the package provides a high quality mp3 decoder for use in multimedia applications. This might also explain the rapid growth of its adoption: multimedia applications can benefit a lot from good quality mp3 support.
 
@@ -442,10 +459,8 @@ A typical example of innovator driven growth is given by \verb|libmad|. The mode
 
 \begin{figure}
 \small\centering
-\includegraphics[width=\linewidth]{BassFit-xulrunner-22.pdf}
-\vspace{-2em}
-\caption{The rise and decline of \texttt{xulrunner}.}\label{fig:xulrunner}
-\vspace{-1em}
+\includegraphics[width=0.6\linewidth]{BassFit-xulrunner-22.pdf}
+\caption{The rise and decline of \texttt{xulrunner}. The model is fitted to the data up to 2011 (black dots).}\label{fig:xulrunner}
 \end{figure}
 
 The previous examples are all about projects that start and undergo a growth phase that can be explained by a Bass diffusion process. So far, the Bass diffusion model has appeared to give a very accurate explanation of the adoption of an open source software library.
@@ -457,20 +472,6 @@ A real product life-cycle will also include a ``decline stage'' where the produc
 The package \verb|xulrunner| in the dataset is a nice example of a short but complete life cycle, see \ref{fig:xulrunner}. When the Bass model is applied naively and a least mean squares best-fit is made, the result is a poor fit. If one looks at the dependency growth of the package, the cause is clear: the package becomes obsolete, which the Bass model as presented in section \ref{eq:bass} does not represent. The decline of the package from approximately 2011 onwards can be seen as blue dots in the figure.
 
 Excluding the blue dots from the data results in the Bass model fit from figure \ref{fig:xulrunner}. The fitness increases to $\overline{R}^2 =99.54\%$ and the parameters have tighter and reasonable confidence intervals. This is strong evidence that the initial adoption of the package is a Bass diffusion process. To explain the last part, the model should be extended with an obsolescence term. 
-
-
-\subsection{Moooore}
-
-\begin{figure}
-\small\centering
-\caption[Dependee growth after package introduction]{The Bass curve fitted on a number of packages}
-\label{fig:BassFits}
-\subfigure[\texttt{libnotify}: $p=0.05$, $q=0.72$]{\includegraphics[width=0.45\textwidth]{BassFit-libnotify.pdf}}
-\subfigure[\texttt{libtheora}: $p=0.11$, $q=0.63$]{\includegraphics[width=0.45\textwidth]{BassFit-libtheora.pdf}}
-\subfigure[\texttt{taglib}: $p=0.22$, $q=0.04$]{\includegraphics[width=0.45\textwidth]{BassFit-taglib.pdf}}
-\subfigure[\texttt{udev}: $p=0.01$, $q=0.50$]{\includegraphics[width=0.45\textwidth]{BassFit-udev.pdf}}
-\subfigure[\texttt{cairo}: $p=0.005$, $q=0.35$]{\includegraphics[width=0.45\textwidth]{BassFit-cairo.pdf}}
-\end{figure}
 
 
 \subsection{Hypothesis testing}
@@ -643,6 +644,10 @@ Package & \multicolumn{2}{c}{$p$} & \multicolumn{2}{c}{$q$} & \multicolumn{2}{c}
 \end{tabular}
 \end{table}
 
+% TODO: Write something about discretization noise
+
+% TODO: 
+
 
 The package \texttt{dev-libs/libunique} does not have a good fit, but looking at the graph, \raisebox{-.15em}{\includegraphics[height=.8em,trim=7em 0 0 0,clip=true]{sparkline-218-dev-libs-libunique.pdf}}, it goes down at the end. This is demonstraded even more clearly in \texttt{net-libs/xulrunner}, \raisebox{-.15em}{\includegraphics[height=.8em,trim=3em 0 0 0,clip=true]{sparkline-140-net-libs-xulrunner.pdf}}, which declines almost completely.
 
@@ -659,7 +664,9 @@ The package dependency graph contains empirical data to test extensions of the B
 
 The scale and complexity of the dependency graphs and open source innovation requires some care. Three notable issues became apparent in this study: First, In the open source community there is a lot of forking. It is not always clear whether a forked project constitutes the continuation of the original project or a separate new project. A more thorough study on the nature of forking could provide the insights to resolve this. Second, due to the public nature of open source development many immature or abandoned projects are visible in the larger datasets. This is good from a scientific perspective: it allows one to research projects from their early beginning and look at projects that failed to grow or became obsolete. But it clouds the `big picture' with many projects that do not significantly contribute to the overall innovation. In large datasets one would have to devise a relevance metric to select the relevant metrics. Such metrics could be the number of developers, the number users or the number of dependees. Third, the sheer scale of the available OSS databases provide challenges for analysis. Specialist tooling is required to transform the raw data into more manageable formats.
 
-\section{Implications to Practice and Research}
+\subsection{Limitations}
+
+\subsection{Implications to Research and Practice}
 
 Type four theory: Explains and predicts.
 

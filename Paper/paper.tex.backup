@@ -10,6 +10,7 @@
 \usepackage{microtype} % Finetunes spacing, load after fonts
 \usepackage{siunitx}
 \usepackage{alltt}
+\usepackage{fancyvrb}
 \usepackage{wrapfig}
 \usepackage[colorlinks=false, pdfborder={0 0 0}]{hyperref} % Should be loaded last
 \usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
@@ -230,10 +231,12 @@ The Gentoo portage database consists of a large number of text files, at least o
 
 Using the \verb|cvs| command one can download the entire database as it was at a certain point in history. For example the following command would download the database, as it was on 1 December 2003:
 
-\begin{verbatim}
+\begin{center}
+\begin{BVerbatim}
 cvs -d :pserver:anonymous@anoncvs.gentoo.org\
   /var/cvsroot co -D 12/01/2003 gentoo-x86
-\end{verbatim}
+\end{BVerbatim}
+\end{center}
 
 Using a small utility written for the task, this command was repeatedly invoked to download all the databases from 1 January 2000 until mid 2012, with increments of one month. The \verb|.ebuild|, \verb|.eclass| and \verb|.eblit| files are stored. Other files are ignored, to save space since they contain no relevant information. This whole downloading processes took about a week and a half and the resulting database consists of three million files occupying thirteen gigabytes of space. There are also files specifying packages renames, but since these only get appended to and never deleted they where taken from the latest version of the database.
 
@@ -254,7 +257,7 @@ Now the data is in 154 snapshots of the package database in a simplified text ba
 
 \begin{figure}[t]
 \small\centering
-\begin{alltt}
+\begin{BVerbatim}
 >=media-libs/taglib-1.6.1[asf,mp4]
 >=media-libs/taglib-extras-1.0.1
 player? (
@@ -266,10 +269,8 @@ player? (
     sys-libs/zlib
     x11-libs/qt-script
     >=x11-libs/qtscriptgenerator-0.1.0
-\end{alltt}
-\vspace{-1em}
+\end{BVerbatim}
 \caption{Fragment of the runtime dependencies of the Amarok music player.}\label{fig:amarokruntime}
-\vspace{-2em}
 \end{figure}
 
 By design the database can work with complicated dependency relations, such as ``package \verb|amarok| requires package \verb|phonon-kde|, minimum version \verb|4.3|, but only when feature \verb|player| is required''. This is would be coded as \verb|player?| \verb|(| \verb|>=kde-base/phonon-kde-4.3| \verb|)|. An example of the run time dependencies for the Amarok music player is given in figure~\ref{fig:amarokruntime}. The figure includes more complex rules such as ``either package X or package Y is required'', `` package X is required to contain feature Y'', etcetera.
@@ -316,6 +317,7 @@ Format & Tar+XZ compressed GML \\
 Size & 2 MB \\
 \bottomrule
 \end{tabular}
+\vspace{-1em}
 \end{wraptable}
 
 
@@ -325,16 +327,19 @@ Using all the observations and choices made above, a tool was developed to extra
 \subsection{Final Remarks}
 
 The dataset collected is available at
-\\\url{http://datahub.io/dataset/gentoo-dependency-graph}\\
+\begin{center}
+\href{http://datahub.io/dataset/gentoo-dependency-graph}{\texttt{http://datahub.io/dataset/gentoo-dependency-graph}}
+\end{center}
 as compressed GML graphs for every snapshot. Raw data is available at
-\\\texttt{http://www.utwente.nl/mb/iebis/staff/amrit/}\\\texttt{timeline.squashfs}\\
+\begin{center}
+\url{http://www.utwente.nl/mb/iebis/staff/amrit/timeline.squashfs}\\
+\end{center}
 as a SquashFS compressed filesystem. The SquashFS format allows one to mount the compressed data as a read-only disk drive and operate directly on the dataset. It contains the pre-processed ebuild files and the file \verb|graphs.bip| that contains all of the graphs in a custom format specialized for quick processing of large graphs over time. A C++ toolkit to work with the \verb|graphs.bip| file is available at \url{https://github.com/Recmo/depgraph}.
 
 In a separate paper \citep{rem142} we analyzed the changes in the dependency graph over time. In particular the growth of the number of dependers on a given package is explained using the Bass model of innovation diffusion.
 
 
 \section{Exploration of the Dataset}
-
 
 \begin{figure}
 \small\centering
@@ -357,8 +362,6 @@ One of the first thing attempted after generating the dataset was to visualize t
 \end{figure}
 
 Since it was impossible to get a visual overview of the entire dependency graph, its structure was plotted using histograms. Figure~\ref{fig:dephisto-out} is a histogram of the number of dependencies per package. A log-log scale was required to make the plot insightful, this reflects the fact that there are many packages with only zero, one or a few dependencies and a few packages with a lot of dependencies. Statistically this means the distribution of the number of dependencies has a fat tail. Likewise, the number of dependers for each package is plotted in figure~\ref{fig:dephisto-in}. This can be interpreted as the distribution of the number of adopters of a given technology. Again, there is a fat tail, even fatter than the one from the number of dependencies. The approximate linearity of the histogram suggest a power-law like distribution of the number of adopters for a given technology. \citet{zheng08} suggest that the structure of package dependency networks is not comparable to known models of social networks and have developed their own model to explain the graph structure.
-
-Since it was impossible to get a visual overview of the entire dependency graph, its structure was plotted using double logarithmic histograms. It was found that there there are many packages with only zero, one or a few dependencies and a few packages with a lot of dependencies. Statistically this means the distribution of the number of dependencies has a fat tail. Likewise, the number of dependers for each package was plotted, this can be interpreted as the distribution of the number of adopters of a given technology. Again, there was a fat tail, even fatter than the one from the number of dependencies. The histogram was approximately linear in the double logarithmic scale, suggesting a power-law like distribution of the number of adopters for a given technology. \citet{zheng08} suggest that the structure of package dependency networks is not comparable to known models of social networks and have developed their own model to explain the graph structure.
 
 \subsection{The KDE Subgraph}
 
@@ -404,10 +407,8 @@ Package & \multicolumn{2}{c}{$p$} & \multicolumn{2}{c}{$q$} & \multicolumn{2}{c}
 
 \begin{figure}
 \small\centering
-\includegraphics[width=\linewidth]{BassFit-git2.pdf}
-\vspace{-2em}
+\includegraphics[width=.5\linewidth]{BassFit-git2.pdf}
 \caption{The imitation driven adoption of \texttt{git}.}\label{fig:git}
-\vspace{-1.5em}
 \end{figure}
 
 \subsection{Imitator Driven Growth}
@@ -426,10 +427,8 @@ The relative slowness of \verb|git|'s growth and its dependence on imitator can 
 
 \begin{figure}
 \small\centering
-\includegraphics[width=\linewidth]{BassFit-libmad2.pdf}
-\vspace{-2em}
+\includegraphics[width=.5\linewidth]{BassFit-libmad2.pdf}
 \caption{The innovation driven adoption of \texttt{libmad}.}\label{fig:libmad}
-\vspace{-1em}
 \end{figure}
 
 A typical example of innovator driven growth is given by \verb|libmad|. The model is fitted resulting in \ref{fig:libmad}. Again, the data is neatly explained by a Bass diffusion process, in particular the rapid steep growth and the stable user base afterwards. The name is an acronym for ``library for MPEG Audio Decoding'' and the package provides a high quality mp3 decoder for use in multimedia applications. This might also explain the rapid growth of its adoption: multimedia applications can benefit a lot from good quality mp3 support.
@@ -463,13 +462,13 @@ Excluding the blue dots from the data results in the Bass model fit from figure 
 
 \begin{figure}
 \small\centering
-\caption[Dependee growth after package introduction]{The Bass curve fitted on a number of packages}
 \label{fig:BassFits}
 \subfigure[\texttt{libnotify}: $p=0.05$, $q=0.72$]{\includegraphics[width=0.45\textwidth]{BassFit-libnotify.pdf}}
 \subfigure[\texttt{libtheora}: $p=0.11$, $q=0.63$]{\includegraphics[width=0.45\textwidth]{BassFit-libtheora.pdf}}
 \subfigure[\texttt{taglib}: $p=0.22$, $q=0.04$]{\includegraphics[width=0.45\textwidth]{BassFit-taglib.pdf}}
 \subfigure[\texttt{udev}: $p=0.01$, $q=0.50$]{\includegraphics[width=0.45\textwidth]{BassFit-udev.pdf}}
 \subfigure[\texttt{cairo}: $p=0.005$, $q=0.35$]{\includegraphics[width=0.45\textwidth]{BassFit-cairo.pdf}}
+\caption{The Bass curve fitted on a number of packages}
 \end{figure}
 
 
@@ -583,6 +582,9 @@ Growth & Package & Description \\
 % 206: 8035/4,    37, 0.201, 0.961
 % 143: 24083/12, 115, 0.041, 0.341
 
+% 34-dev-dotnet-gconf-sharp:
+
+
 No packages where rejected on the 'E' ground, but many of these are covered by the 'C' reason. No extensive check was done on co-occurence of reasons.
 
 
@@ -625,21 +627,24 @@ The growth curves with large discontinuities are rejected. The hypotheses concer
 \toprule
 Package & \multicolumn{2}{c}{$p$} & \multicolumn{2}{c}{$q$} & \multicolumn{2}{c}{$M$} & $\overline{R}^2$\\
 \midrule
-\texttt{dev-dotnet/gconf-sharp}   & 0.00 & 0.01    & 0.73 & 0.13   & 746 & 394 & 99.27\%\\
-\texttt{dev-haskell/cabal}        & 0.05 & 0.08    & 0.72 & 0.30   & 103 &   9 & 99.23\%\\
-\texttt{dev-libs/libunique}       & 0.01 & 0.01    & 0.50 & 0.12   & 200 &  65 & 99.05\%\\
-\texttt{dev-python/lxml}          & 0.01 & 0.01    & 0.43 & 0.09   & 249 &  44 & 99.73\%\\
-\texttt{dev-python/simplejson}    & 0.18 & 0.14    & 1.13 & 0.3    &  55 &   1 & 99.68\%\\
-\texttt{dev-vcs/git}              & 0.00 & 0.01    & 0.73 & 0.13   & 746 & 394 & 99.27\%\\
-\texttt{dev-vcs/mercurial}        & 0.22 & 0.03    & 0.04 & 0.06   &  62 &  12 & 99.40\%\\
-\texttt{gnome-base/gnome-keyring} & 0.22 & 0.03    & 0.04 & 0.06   &  62 &  12 & 99.40\%\\
-\texttt{media-libs/libcanberra}   & 0.22 & 0.03    & 0.04 & 0.06   &  62 &  12 & 99.40\%\\
-\texttt{x11-misc/xdg-utils}       & 0.22 & 0.03    & 0.04 & 0.06   &  62 &  12 & 99.40\%\\
+% 34, 65, 218, 77, 157, 240, 242, 17, 206, 143
+\texttt{dev-dotnet/gconf-sharp}   & 0.168 & 0.212 & 0.754 & 0.434 &  21 &   1 & 99.61\%\\
+\texttt{dev-haskell/cabal}        & 0.055 & 0.074 & 0.154 & 0.380 & 246 & 438 & 98.55\%\\
+\texttt{dev-libs/libunique}       & 0.047 & 0.099 & 0.136 & 0.402 & 287 & 732 & 98.58\%\\
+\texttt{dev-python/lxml}          & 0.007 & 0.009 & 0.488 & 0.217 &  53 &  53 & 98.82\%\\
+\texttt{dev-python/simplejson}    & 0.011 & 0.029 & 0.463 & 0.459 &  97 & 148 & 98.98\%\\
+\texttt{dev-vcs/git}              & 0.000 & 0.006 & 0.841 & 0.144 & 734 & 369 & 99.24\%\\
+\texttt{dev-vcs/mercurial}        & 0.001 & 0.005 & 0.517 & 0.259 & 174 & 481 & 98.24\%\\
+\texttt{gnome-base/gnome-keyring} & 0.026 & 0.036 & 0.833 & 0.133 &  42 &   2 & 99.66\%\\
+\texttt{media-libs/libcanberra}   & 0.055 & 0.117 & 1.436 & 0.439 &  37 &   3 & 99.68\%\\
+\texttt{x11-misc/xdg-utils}       & 0.050 & 0.043 & 0.257 & 0.242 & 115 & 127 & 99.56\%\\
 \bottomrule
 \end{tabular}
 \end{table}
 
+% TODO: Write something about discretization noise
 
+% TODO: 
 
 
 The package \texttt{dev-libs/libunique} does not have a good fit, but looking at the graph, \raisebox{-.15em}{\includegraphics[height=.8em,trim=7em 0 0 0,clip=true]{sparkline-218-dev-libs-libunique.pdf}}, it goes down at the end. This is demonstraded even more clearly in \texttt{net-libs/xulrunner}, \raisebox{-.15em}{\includegraphics[height=.8em,trim=3em 0 0 0,clip=true]{sparkline-140-net-libs-xulrunner.pdf}}, which declines almost completely.
