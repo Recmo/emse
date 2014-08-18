@@ -1,12 +1,22 @@
-\begin{thebibliography}{12}
+\begin{thebibliography}{21}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem[rem()]{rem14}
-\emph{{The Gentoo Portage package dependency graph}}.
+\bibitem[Aksulu and Wade(2010)]{aksulu10}
+Altay Aksulu and Michael Wade.
+\newblock A comprehensive review and synthesis of open source research.
+\newblock \emph{Journal of the Association for Information Systems},
+  11\penalty0 (11):\penalty0 576--656, 2010.
+
+\bibitem[Amrit and van Hillegersberg(2010)]{amrit10a}
+Chintan Amrit and Jos van Hillegersberg.
+\newblock Exploring the impact of socio-technical core-periphery structures in
+  open source software development.
+\newblock \emph{Journal of Information Technology}, 25\penalty0 (2):\penalty0
+  216--229, 2010.
 
 \bibitem[{Bass}(1969)]{bass69}
 Frank~M. {Bass}.
@@ -18,6 +28,14 @@ Frank~M. {Bass}.
 Bass's Basement Research~Institute ({BBRI}).
 \newblock {The Bass Model Homepage}, 2010.
 \newblock Available at \url{http://www.frankmbass.org/BassModel/}.
+
+\bibitem[Bloemen et~al.(2014)Bloemen, Amrit, Kuhlmann, and
+  Ord{\'o}{\~n}ez-Matamoros]{bloemen14b}
+Remco Bloemen, Chintan Amrit, Stefan Kuhlmann, and Gonzalo
+  Ord{\'o}{\~n}ez-Matamoros.
+\newblock Gentoo package dependencies over time.
+\newblock In \emph{Proceedings of the 11th Working Conference on Mining
+  Software Repositories}, pages 404--407. ACM, 2014.
 
 \bibitem[Chen(2006)]{chen06}
 Si~Chen.
@@ -34,6 +52,18 @@ Kevin Crowston, Kangning Wei, James Howison, and Andrea Wiggins.
 \newblock \doi{10.1145/2089125.2089127}.
 \newblock URL \url{http://doi.acm.org/10.1145/2089125.2089127}.
 
+\bibitem[Daniel et~al.(2013)Daniel, Agarwal, and Stewart]{daniel13}
+Sherae Daniel, Ritu Agarwal, and Katherine~J Stewart.
+\newblock The effects of diversity in global, distributed collectives: A study
+  of open source project success.
+\newblock \emph{Information Systems Research}, 24\penalty0 (2):\penalty0
+  312--333, 2013.
+
+\bibitem[Ebert(2007)]{ebert07}
+Christof Ebert.
+\newblock Open source drives innovation.
+\newblock \emph{Software, IEEE}, 24\penalty0 (3):\penalty0 105--109, 2007.
+
 \bibitem[Escanciano(2006)]{carlos06}
 J.~Carlos Escanciano.
 \newblock {Goodness-of-Fit Tests for Linear and Nonlinear Time Series Models}.
@@ -42,6 +72,12 @@ J.~Carlos Escanciano.
 \newblock \doi{10.1198/016214505000001050}.
 \newblock URL
   \url{http://www.tandfonline.com/doi/abs/10.1198/016214505000001050}.
+
+\bibitem[Fichman and Kemerer(1993)]{fichman93}
+Robert~G Fichman and Chris~F Kemerer.
+\newblock Adoption of software engineering process innovations: The case of
+  object orientation.
+\newblock \emph{Sloan Management Review}, 1993.
 
 \bibitem[Haefliger et~al.(2008)Haefliger, von Krogh, and Spaeth]{haefliger08}
 Stefan Haefliger, Georg von Krogh, and Sebastian Spaeth.
@@ -56,12 +92,37 @@ Stefan Haefliger, Georg von Krogh, and Sebastian Spaeth.
   International Conference on System Sciences.
 \newblock URL \url{http://scholarworks.sjsu.edu/org_mgmt_pub/1}.
 
+\bibitem[MacCormack et~al.(2006)MacCormack, Rusnak, and Baldwin]{maccormack06}
+Alan MacCormack, John Rusnak, and Carliss~Y Baldwin.
+\newblock Exploring the structure of complex software designs: An empirical
+  study of open source and proprietary code.
+\newblock \emph{Management Science}, 52\penalty0 (7):\penalty0 1015--1030,
+  2006.
+
 \bibitem[{Narayanan}(2001)]{narayanan01}
 Vadake~K. {Narayanan}.
 \newblock \emph{{Managing Technology and Innovation for Competitive
   Advantage}}.
 \newblock Prentice Hall, Englewood Cliffs, New Jersey, 2001.
 \newblock ISBN 9780130305060.
+
+\bibitem[Piggot and Amrit(2013)]{piggot13}
+James Piggot and Chintan Amrit.
+\newblock How healthy is my project? open source project attributes as
+  indicators of success.
+\newblock In \emph{Open Source Software: Quality Verification}, pages 30--44.
+  Springer, 2013.
+
+\bibitem[Rogers(2010)]{rogers10}
+Everett~M Rogers.
+\newblock \emph{Diffusion of innovations}.
+\newblock Simon and Schuster, 2010.
+
+\bibitem[Szyperski and Spinellis(2004)]{szyperski04}
+Clemens Szyperski and Diomidis Spinellis.
+\newblock Guest editors' introduction: How is open source affecting software
+  development?
+\newblock \emph{IEEE SOFTWARE}, 21\penalty0 (1):\penalty0 0028--33, 2004.
 
 \bibitem[{Vijay {Mahajan}}(1995)]{mahajan95}
 Eitan {Muller} Frank M.~{Bass} {Vijay {Mahajan}}.
