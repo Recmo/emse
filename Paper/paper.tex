@@ -2,7 +2,6 @@
 %\documentclass[onecolumn,draft]{svjour3}
 %\documentclass[onecolumn,final]{svjour3}
 \documentclass[smallextended,final]{svjour3}
-
 \usepackage{amsmath}
 \usepackage[round]{natbib}
 \usepackage{booktabs}
@@ -25,8 +24,9 @@
 
 \begin{document}
 
-\title{Diffusion of Innovation in the Gentoo Portage Ecosystem}
-\subtitle{Do we need a subtitle?} 
+
+\title{Diffusion of Innovation in the Open Source Software Ecosystem}
+\subtitle{An Empirical study of the Gentoo Package Database} 
 \dedication{}
 \author{Remco Bloemen \and Chintan Amrit}
 \institute{University of Twente}
@@ -45,7 +45,7 @@ Open source distributions such as Gentoo need to accurately track dependency rel
 
 Open source software has had a large impact on various aspects of software development and has been the source of  innovations in software technology, development process and even in software development business models \citep{ebert07}. Hence identifying innovative software projects as well as analysing their adoption is essential to arrive at an understanding of the diffusion of innovation of Open source projects. However, literature on adoption of open source projects is at a preliminary stage, largely focussed on adoption of popular open source projects by organisations and end users \citep{aksulu10}.There is especially a dearth of research regarding the adoption of open source libraries (or even subsystems \citep{maccormack06}) that are the building blocks of large software projects \citep{szyperski04}. There is also a corresponding dearth of knowledge on the methods one can use to test the extent of adoption of software libraries over a period of time. 
 
-In this paper we not only analyse the adoption of open source libraries by other projects, but also use a method to test the diffusion of innovation of a software project - or the lifecycle of a project's adoption. Our method is borrowed from the field of marketing research \citep{bass69}. In particular, we study  software innovation of the libraries in the Gentoo Portage  ecosystem from an adoption perspective. We first download the Gentoo Portage database for a time line of one month over a period of around 13 years (from 1 January to around mid 2012). We then calculate the dependencies among the libraries in each version of the database. Then, we calculate the change in the dependency graph of some well known libraries and check if this adoption of the library fits the Bass Diffusion model \citep{bass69}. We then test the fit of the adoption of 10 randomly selected libraries (we discard and replace those libraries whose adoption trends contain a lot of noise due to various reasons) to the Bass Diffusion Model. In all cases we find that the Bass Diffusion model explains the adoption of the libraries - with an $\overline{R}^2 > 98\%$. This finding shows that the adoption of open source software libraries (in the Gentoo Portage database) does not differ from the adoption of other kinds of innovations as predicted by the theory of adoption of innovation, and in particular the Bass Diffusion model. This finding, if found generalisable to most large open source libraries, can help in predicting their adoption over their lifetime. This can hence provide guidance to package managers and users of open source libraries.
+In this paper we not only analyse the adoption of open source libraries by other projects, but also use a method to test the diffusion of innovation of a software project - or the lifecycle of a project's adoption. Our method is borrowed from the field of marketing research \citep{bass69}. In particular, we study  software innovation of the libraries in the Gentoo Portage  ecosystem from an adoption perspective. We first download the Gentoo Portage database for a time line of one month over a period of around 13 years (from 1 January to around mid 2012). We then calculate the dependencies among the libraries in each version of the database. Then, we calculate the change in the dependency graph of some well known libraries and check if this adoption of the library fits the Bass Diffusion model \citep{bass69}. Our central hypothesis is that  \emph{the growth in the number of open source software dependees of a project (its adoption) is a Bass innovation diffusion process.} We then test the fit of the adoption of 10 randomly selected libraries (we discard and replace those libraries whose adoption trends contain a lot of noise due to various reasons) to the Bass Diffusion Model. In all cases we find that the Bass Diffusion model explains the adoption of the libraries - with an $\overline{R}^2 > 98\%$. This finding shows that the adoption of open source software libraries (in the Gentoo Portage database) does not differ from the adoption of other kinds of innovations as predicted by the theory of adoption of innovation, and in particular the Bass Diffusion model. This finding, if found generalisable to most large open source libraries, can help in predicting their adoption over their lifetime. This can hence provide guidance to package managers and users of open source libraries.
 
 % (Adoption reflects innovation 'better' than changes within packages. - Still cannot find a relevant reference!)
 
@@ -60,7 +60,7 @@ In the next section (section 2)  we describe the background literature of the pa
 \subsection{ Open Source Software Ecosystems}
 No software project stands entirely on its own. Software is usually developed by taking one or more existing libraries of components and combining those components in ways to create new products. Take for example a simple chat application. The chat application uses a different library for user interface development that provides components such as a window a text entry field and a button (that is labeled "send message" by the chat application). This user interface library in turn uses a graphics library to draw the lines, rectangles and text necessary for the fields and buttons. The graphics library uses a library to read font files and uses the fonts to turn text into pictures that can be displayed on the screen. The graphics library then sends the contents of the window to the window manager, which in turn uses a graphics card driver to instruct the hardware, and so on.  This collection of software projects that interact under the umbrella of a common software platform is variously been called as a software "ecosystem" \citep{manikas13}. In this paper we adopt Lungu's short and elegant description of an ecosystem as "\textit{a collection of software projects which are developed and co-evolve in the same environment}" \citep{lungu10}.
 
-The research on software ecosystems has primarily focussed on their business within a shared market or the relationships among the different businesses and hence deals with web and mobile platforms \citep{german13}.  Research on open source software ecosystems has focussed on the debian linux distribution \citep{gonzalez09, german07}, the linux kernel \citep{godfrey00}, the eclipse platform \citep{wermelinger08} and recently GNU R \citep{german13}. They analyse the evolution of the ecosystems as growth in terms of number of packages and the dependencies among the packages and not in terms of adoption of innovation as we do in this paper.
+The research on software ecosystems has primarily focussed on their business within a shared market or the relationships among the different businesses and hence deals with web and mobile platforms \citep{german13}.  Research on open source software ecosystems has focussed on the Debian Linux distribution \citep{gonzalez09, german07}, the Linux kernel \citep{godfrey00}, the eclipse platform \citep{wermelinger08} and recently GNU R \citep{german13}. They analyse the evolution of the ecosystems as growth in terms of number of packages and the dependencies among the packages and not in terms of adoption of innovation as we do in this paper.
 
 In \citet{crowston08} published a comprehensive overview of academical research on open source software development. Of the 184 articles they cite, the vast majority of articles are case studies or surveys, with 4\% of the articles describing the development of empirical instruments and/or measurements. Also, most articles look at the level of a particular group or project, with 4\% looking at the societal level of interacting projects. Crowston et al. (2008) find no articles that develop instruments or measurements on the level of OSS packages \citep{crowston08}, which we aim to do in this paper.
 
@@ -71,42 +71,14 @@ In \citet{crowston08} published a comprehensive overview of academical research 
 
 \citet{lungu10} present multiple methods to automatically recover dependencies between software projects in an ecosystem. They arrive at a representation of the ecosystem that they call \textit{Ecco} that contains sufficient data to extract the dependencies of the ecosystem \citep{lungu10}.
 
-\citet{german13} study the ecosystem of the GNU R project and determine the differences between the user-contributed packages and the core packages. They study the code characteristics, code evolution, dependency structures and the community surrounding the core and user-contributed packages. They find some significant significant differences in many of these aspects, and in particular they find that though user-contributed packages have been growing at a fast rate than the core packages, they remain stable in size over time \citep{german13}. Of particular interest to this paper, they examine the dependency structure of the R packages by analysing the DESCRIPTION file of each packages that describes the list of packages required by the particular package for proper installation. They then build an inter-dependency graph based on these package installation dependencies \citep{german13}. Their main findings related to this aspect is that there are consistently small number of dependencies for each package and that the peripheral packages have fewer dependencies \citep{german13}.
+\citet{german13} study the ecosystem of the GNU R project and determine the differences between the user-contributed packages and the core packages. They study the code characteristics, code evolution, dependency structures and the community surrounding the core and user-contributed packages. They find some significant significant differences in many of these aspects, and in particular they find that though user-contributed packages have been growing at a fast rate than the core packages, they remain stable in size over time \citep{german13}. Of particular interest to this paper, they examine the dependency structure of the R packages by analysing the \texttt{DESCRIPTION} file of each packages that describes the list of packages required by the particular package for proper installation. They then build an inter-dependency graph based on these package installation dependencies \citep{german13}. Their main findings related to this aspect is that there are consistently small number of dependencies for each package and that the peripheral packages have fewer dependencies \citep{german13}.
 
 In their 2008 article, \citet{zheng08} analyse the dependency graph of the Gentoo Portage package database as it was in February 2007. The global structure of the graph is analysed in graph theoretic terms of sparsity, clustering coefficient, degree distribution and degree growth rate. The authors conclude that the graph can not be explained well by existing models of network growth and they propose two new models instead. Our study differs in two ways: First, we analyse the changes to the dependency graph over time, whereas Zheng et al. look at a particular instance in 2007 \citep{zheng08}. Second, we analyse and model the development of a given software package in the dependency network, instead of the overall development of the network. It can be interesting to study how the Bass diffusion model for the development of individual nodes corresponds to Zheng et al. model for the development of the whole graph.
 
 
-Now that a data source is selected, it is time to extract the required information and process the data into a form that allows easy calculations. The major steps are collecting the raw data, parsing this into a simpler format and producing the final dependency graph from this simpler form. Some post-processing can then be done on the dependency graph. In the process, the dataset shrunk from thirteen gigabytes (taking more than a week to collect), to thirty megabytes that could be processed in four seconds.
-
-In the remainder of this article, the terms `project', `package' and `library' will be used as synonyms for a node in the dependency graph.
-
-European research project 2008—2011 aiming to ``solve the upgrade problem''.
-EDOS project
-
-http://www.mancoosi.org/papers/
-
-Boender 
-
-The Ultimate Debian Database: Consolidating bazaar metadata for Quality Assurance and data mining
-Full Text Sign-In or Purchase
-2 Author(s)
-Nussbaum, L. ; LORIA, Nancy-Univ., Nancy, France ; Zacchiroli, S.
-
-Mining Challenge 2010: FreeBSD, GNOME Desktop and Debian/Ubuntu
 
 
-Life and death of software packages: an evolutionary study of Debian
-Raymond Nguyen  University of Waterloo, Waterloo, Canada
-Ric Holt        University of Waterloo, Waterloo, Canada
 
-
-Research question:
-
-* The authors do not seem to be aware of the large body of research on dependencies between components. For instance, it is not clear why does one need to design a new text-based formal for inter-package dependencies while Common Upgradeability Description Format, CUDF [http://www.mancoosi.org/reports/tr3.pdf], has been proposed by Treinen and Zacchiroli more than five years ago. Numerous papers have analysed data in the CUDF format, and yearly MICS (Mancoosi International Solver Competition) have been organized in 2010, 2011 and 2012. Additional papers published as part of the Mancoosi project are available on the project site: http://www.mancoosi.org/ For more recent work on upgrade dependencies the authors might consult a paper by Schoenmakers et al. [WCRE 2013].
-
-Power law distributions:
-
-A. Clauset, C.R. Shalizi, and M.E.J. Newman, "Power-law distributions in empirical data" SIAM Review 51(4), 661-703 (2009).
 
 
 \subsection{Diffusion of Innovation and Adoption in Information Systems}
@@ -213,6 +185,11 @@ The solution assumes the innovation is introduced at time zero, to account for t
 
 \section{The Gentoo Portage Dataset}
 
+\emph{Why Gentoo?...}
+Now that a data source is selected, it is time to extract the required information and process the data into a form that allows easy calculations. The major steps are collecting the raw data, parsing this into a simpler format and producing the final dependency graph from this simpler form. Some post-processing can then be done on the dependency graph. In the process, the dataset shrunk from thirteen gigabytes (taking more than a week to collect), to thirty megabytes that could be processed in four seconds.
+
+In the remainder of this article, the terms `project', `package' and `library' will be used as synonyms for a node in the dependency graph.
+
 The empirical data used is the time evolution of the Gentoo Portage package dependency graph \citep{bloemen14b}. This dataset contains the full dependency graph for every month since the project was initiated in $2000$, the resulting graphs have a combined total of 1.3 million packages and 6.9 million dependency relations, with the largest graph having 15 thousand packages and 80 thousand dependency relations.
 
 More information about a packages can be found at
@@ -247,6 +224,8 @@ The first approach was to use Paludis and its C++ bindings to load a repository 
 The second attempt was to use a custom build metadata extraction program that also supports an older version of the database. This parser looks for text patterns resembling dependency specifications and implements only a minimal amount of the ebuild file format (basically only dependencies and the \verb|inherit| inclusion statement). This technique is very fast, processing the entire set in 70 minutes, but fails on the newer databases that use complex techniques such as macro's in the dependency specifications.
 
 The final method is a hybrid of the first two, using the Paludis' \verb|instruo| command to pre-process and expand all the macros to create simplified versions that can be parsed using the custom parser. The \verb|instruo| command was run on every version of the database downloaded. Where the command failed on a package (the older format ones) the original was kept. The total running time of this operation was around four days.
+
+
 
 \subsection{Producing the Dependency Graphs}
 
@@ -462,9 +441,9 @@ Excluding the blue dots from the data results in the Bass model fit from figure 
 
 \subsection{Hypothesis Testing}
 
-The above examples of Bass diffusion growth suggests the central hypotheses of this article: \emph{open source software dependencies are a Bass innovation diffusion process.} This hypotheses is tested using a methodic approach: a random selection of ten software packages is taken and their dependee growth is fitted to the Bass diffusion model.
+The above examples of Bass diffusion growth suggests the central hypotheses of this article: \emph{the growth in the number of open source software dependees of a project (its adoption) is a Bass innovation diffusion process.} This hypotheses is tested using a methodic approach: a random selection of ten software packages is taken and their dependee growth is fitted to the Bass diffusion model.
 
-The Gentoo portage database contains over twenty thousand packages, but only a fraction of these packages are suitable. About six thousand packages where introduced before 2004, where the growth of Gentoo itself may be confounded. Of the remaining packages, the vast majority do not have a number of other packages depedending on it, these would for example be applications (as opposed to libraries) or unpopular/niche libraries. These are filtered out by setting a lower bound for the maximum number of dependees a package has during its lifetime. Then there are infrastructural packages in Gentoo, that have no corresponding open source projects, but are used manage the pacakge database. In summary:
+The Gentoo portage database contains over twenty thousand packages, but only a fraction of these packages are suitable. About six thousand packages where introduced before 2004, where the growth of Gentoo itself may be confounded. Of the remaining packages, the vast majority do not have a number of other packages depending on it, these would for example be applications (as opposed to libraries) or unpopular/niche libraries. These are filtered out by setting a lower bound for the maximum number of dependees a package has during its lifetime. Then there are infrastructural packages in Gentoo, that have no corresponding open source projects, but are used manage the package database. In summary:
 
 \begin{enumerate}
 	\item Start with all the packages in the Gentoo portage database. (21\,380 packages)
@@ -473,24 +452,26 @@ The Gentoo portage database contains over twenty thousand packages, but only a f
 	\item Filter out packages labeled ``-virtual'', ``-virtuals'', ``-proto'' or ``-meta''. (259 remaining)
 \end{enumerate}
 
-After this initial automated filtering, packages are randomly selected and manually tested against further selection criteria. If a package is rejected a new one is randomly selected and the process is repeated untill ten packages have been found. The final criteria are:
+After this initial automated filtering, packages are randomly selected and manually tested against further selection criteria. If a package is rejected a new one is randomly selected and the process is repeated until ten packages have been found. The final criteria are:
 
 \begin{enumerate}
-	\item[A.] The dependeee growth does not contain strong discontinuities. It is very uncommon that many independent software project suddenly, within the time resolution of one month, decide to start or stop using a particular library. It is however common that maintainers of Gentoo Portage do reorganizations or mass additions/removals of packages that product such discontinuities. Since they do not reflect actual adoption they are noise and are filtered out.
+	\item[A.] The dependee growth does not contain strong discontinuities. It is very uncommon that many independent software project suddenly, within the time resolution of one month, decide to start or stop using a particular library. It is however common that maintainers of Gentoo Portage do re-organisations or mass additions/removals of packages that produce such discontinuities. Since they do not reflect actual adoption they are noise and are filtered out.
 	\item[B.] The package corresponds to an open source software project. Some of the packages represent closed source software projects or non-software projects. These are not part of the scope and are therefore excluded.
-	\item[C.] The package has not been forked of or factored out of another package. Some libraries where initially part of a different library that got refactored and split up in separate libraries and packages. Since projects may have been depedending on the initial library and simply switch over to the refactored one, this can not be considered adoption of the library. Such packages are therefore excluded.
+	\item[C.] The package has not been forked of or factored out of another package. Some libraries where initially part of a different library that got refactored and split up in separate libraries and packages. Since projects may have been depending on the initial library and simply switch over to the refactored one, this can not be considered adoption of the library. Such packages are therefore excluded.
 	\item[D.] The first included version should be close to a '1.0' release. The Bass diffusion hypotheses is about the entire growth of an open source software project, it is therefore necessary to have dependee growth data from close to the beginning of the project. Package that had an initial public release long before inclusion in Gentoo Portage are therefore excluded.
 \end{enumerate}
 
-These criteria are verified by consulting the information available through url \eqref{url:pkg}, in particular: the changelog of the ebuild file, any readme or changelog included in the earliest available version of the source code, the projects revision history and the projects homepage.
+These criteria are verified by consulting the information available through url \eqref{url:pkg}, in particular: the \texttt{changelog} of the \texttt{ebuild} file, any \texttt{readme} or \texttt{changelog} included in the earliest available version of the source code, the projects revision history and the projects homepage.
 
-The manutally rejected packages are listed in table \ref{tbl:rejected}. It should be noted that the selection criteria are chosen strictly to ensure that the main hypotheses is tested correctly, with independent open source software projects taken from their introduction and in their whole. When looking at the rejects, it does appear that some of them (\texttt{app-text/asciidoc} and many of the \texttt{x11-libs/} packages) still follow the Bass diffusion model.
+The manually rejected packages are listed in table \ref{tbl:rejected}. It should be noted that the selection criteria are chosen strictly to ensure that the main hypotheses is tested correctly, with independent open source software projects taken from their introduction and in their whole. When looking at the rejects, it does appear that some of them (\texttt{app-text/asciidoc} and many of the \texttt{x11-libs/} packages) still follow the Bass diffusion model.
 
-The \texttt{x11-libs/} libraries where disqualified because they are the result of a refactor. In 2004 the X ecosystem re-organized, resulting in a fork of the XFree86 codebase and a subsequent decission to split the project up in smaller libraries. The current version was maintained in minor releases in both a split and unsplit variety, but with the next major version the unsplit branch was dropped. The projects show a innovator driven rappid Bass diffusion. This can be explained as the adoption of the new split release by the pre-existing users of the unsplit version. The steepness can be explained by the dependers not wanting to be left behind. The innovation based drive can be explained by the relative safety and simplicity of upgrading to a new major version. A similar library-split refactor happened with the Qt library, with similar results.
+The \texttt{x11-libs/} libraries where disqualified because they are the result of a refactor. In 2004 the X ecosystem re-organised, resulting in a fork of the XFree86 codebase and a subsequent decision to split the project up in smaller libraries. The current version was maintained in minor releases in both a split and un-split variety, but with the next major version the un-split branch was dropped. The projects show a innovator driven rapid Bass diffusion. This can be explained as the adoption of the new split release by the pre-existing users of the un-split version. The steepness can be explained by the dependers not wanting to be left behind. The innovation based drive can be explained by the relative safety and simplicity of upgrading to a new major version. A similar library-split refactor happened with the Qt library, with similar results.
+
+After rejecting the packages above we arrive at the our final sample of 10 open source packages in table \ref{tbl:selected}.
 
 \begin{table}
 \small\centering
-\caption{Rejected packages}\label{tbl:rejected}
+\caption{The packages we rejected and the associated reasons for the rejection}\label{tbl:rejected}
 \begin{tabular}{llll}
 \toprule
 Growth & Package & \multicolumn{2}{l}{Reason for excluding}\\
@@ -531,7 +512,7 @@ Growth & Package & \multicolumn{2}{l}{Reason for excluding}\\
 
 \begin{table}
 \small\centering
-\caption{The ten randomly selected packages}\label{tbl:selected}
+\caption{The 10 packages matching the selection criteria }\label{tbl:selected}
 \begin{tabular}{rlp{20em}}
 \toprule
 Growth & Package & Description \\
@@ -604,7 +585,7 @@ Package & \multicolumn{2}{c}{$p$} & \multicolumn{2}{c}{$q$} & \multicolumn{2}{c}
 \end{tabular}
 \end{table}
 
-The packages \texttt{dev-dotnet/lxml} and \texttt{dev-cvs/mercurial} show a staircase-shapped deviation from the Bass diffusion model. This can be explained as discretization noise. The number of dependees is integer and can therefore only rise or fall in descrete steps, whereas the Bass model is continuous and smooth. This introduces additional variance which lowers the $\overline{R}^2$ metric. It also appears to happen in \texttt{dev-haskell/cabal}, but this is an illusion since the steps in the growth are not singular but in the order of tens of packages. The reasons for these steps are unknown and likely related to Gentoo internal matters. \texttt{dev-libs/libunique} does not fit the Bass diffusion model well, and it appears to be for the same reasons that have been presented earlier for \texttt{xulrunner}. Despite this, all packages show $\overline{R}^2$ values over $98\%$.
+The packages \texttt{dev-dotnet/lxml} and \texttt{dev-cvs/mercurial} show a staircase-shaped deviation from the Bass diffusion model. This can be explained as discretisation noise. The number of dependees is integer and can therefore only rise or fall in discrete steps, whereas the Bass model is continuous and smooth. This introduces additional variance which lowers the $\overline{R}^2$ metric. It also appears to happen in \texttt{dev-haskell/cabal}, but this is an illusion since the steps in the growth are not singular but in the order of tens of packages. The reasons for these steps are unknown and likely related to Gentoo internal matters. \texttt{dev-libs/libunique} does not fit the Bass diffusion model well, and it appears to be for the same reasons that have been presented earlier for \texttt{xulrunner}. Despite this, all packages show $\overline{R}^2$ values over $98\%$.
 
 \section{Conclusions and Future Work}
 
@@ -614,7 +595,7 @@ As can be seen in \ref{tbl:results}, the Bass parameters $p$ and $q$ are difficu
 
 Analysing the package dependency graph and its changes over time can provide new insights. Our exploratory study provides some evidence for insights such as how multimedia libraries are being adopted through an innovator driven process with low-level architectural changes happening slowly and through imitation. Further studies could test these hypotheses.
 
-The package dependency graph contains empirical data to test extensions of the Bass diffusion model - extended with discarders. The Bass model and the present analysis is formulated in terms of absolute number of users, but in most applications only sales figures are available. The amount of sales is the first derivative of the Bass model, hence the model is usually applied in its derivative form \citep{mahajan95}. As a consequence the model only considers adopters, but does not consider \emph{discarders}. In the \verb|xulrunner| example, we see the package being discarded from 2011 onwards, providing insights in the discarding mechanism. The next step would be to collect more examples of packages being discard, look at their patterns of demise and develop a model of discarding to supplement the Bass model of adoption. One model could for example be the inverse of a Bass curve, this makes sense when the market share of the original package is taken over by a new package. The unique feature of dependency graph analysis to give absolute user numbers facilitates this. Such an analysis can also help in predicting the behaviour of certain projects - hence forewarning the particular project stakeholders. As the extent of adoption of an open source project is an indication of how popular the project is and in-turn an indication of the health of the project as assessed by the open source community, we can typically supplement the existing analysis of open source project health \citep{daniel13,amrit10a,piggot13}.
+The package dependency graph contains empirical data to test extensions of the Bass diffusion model - extended with discarders. The Bass model and the present analysis is formulated in terms of absolute number of users, but in most applications only sales figures are available. The amount of sales is the first derivative of the Bass model, hence the model is usually applied in its derivative form \citep{mahajan95}. As a consequence the model only considers adopters, but does not consider \emph{discarders}. In the \texttt{xulrunner} example, we see the package being discarded from 2011 onwards, providing insights in the discarding mechanism. The next step would be to collect more examples of packages being discard, look at their patterns of demise and develop a model of discarding to supplement the Bass model of adoption. One model could for example be the inverse of a Bass curve, this makes sense when the market share of the original package is taken over by a new package. The unique feature of dependency graph analysis to give absolute user numbers facilitates this. Such an analysis can also help in predicting the behaviour of certain projects - hence forewarning the particular project stakeholders. As the extent of adoption of an open source project is an indication of how popular the project is and in-turn an indication of the health of the project as assessed by the open source community, we can typically supplement the existing analysis of open source project health \citep{daniel13,amrit10a,piggot13}.
 
 The scale and complexity of the dependency graphs and open source innovation requires some care. Three notable issues became apparent in this study: First, In the open source community there is a lot of forking. It is not always clear whether a forked project constitutes the continuation of the original project or a separate new project. A more thorough study on the nature of forking could provide the insights to resolve this. Second, due to the public nature of open source development many immature or abandoned projects are visible in the larger datasets. This is good from a scientific perspective: it allows one to research projects from their early beginning and look at projects that failed to grow or became obsolete. But it clouds the `big picture' with many projects that do not significantly contribute to the overall innovation. In large datasets one would have to devise a relevance metric to select the relevant metrics. Such metrics could be the number of developers, the number of users or the number of dependees. Third, the sheer scale of the available OSS databases provide challenges for analysis. Specialist tooling is required to transform the raw data into more manageable formats.
 
@@ -639,5 +620,6 @@ as compressed GML graphs for every snapshot. Raw data is available at
 \mbox{\url{http://www.utwente.nl/mb/iebis/staff/amrit/timeline.squashfs}}
 \end{align}
 as a SquashFS compressed filesystem. The SquashFS format allows one to mount the compressed data as a read-only disk drive and operate directly on the dataset. It contains the pre-processed ebuild files and the file \verb|graphs.bip| that contains all of the graphs in a custom format specialized for quick processing of large graphs over time. A C++ toolkit to work with the \verb|graphs.bip| file is available at \url{https://github.com/Recmo/depgraph}.
+
 
 \end{document}
