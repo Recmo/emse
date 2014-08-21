@@ -456,13 +456,13 @@ A Bass diffusion increases monotonically, and never declines. However, not all p
 
 A real product life-cycle will also include a ``decline stage'' where the product begins to become obsolete. The Bass innovation diffusion model does not account for this. In a deep sense it would not have to, once ideas spread they become part of our collective knowledge and will continue to be used by the new products being developed. But the Bass model was not developed for the spreading of ideas, it was developed in the context of marketing to model the adoption of products. Extending the Bass model to include obsolescence would be an interesting extension for future research.
 
-The package \verb|xulrunner| in the dataset is a nice example of a short but complete life cycle, see \ref{fig:xulrunner}. When the Bass model is applied naively and a least mean squares best-fit is made, the result is a poor fit. If one looks at the dependency growth of the package, the cause is clear: the package becomes obsolete, which the Bass model as presented in section \ref{eq:bass} does not represent. The decline of the package from approximately 2011 onwards can be seen as blue dots in the figure.
+The package \verb|xulrunner| in the dataset is a nice example of a short but complete life cycle, see \ref{fig:xulrunner}. When the Bass model is applied naively and a least mean squares best-fit is made, the result is a poor fit, with $\overline{R}^2 = 96.8\%$. If one looks at the dependency growth of the package, the cause is clear: the package becomes obsolete, which the Bass model as presented in section \ref{eq:bass} does not represent. The decline of the package from approximately 2011 onwards can be seen as blue dots in the figure.
 
-Excluding the blue dots from the data results in the Bass model fit from figure \ref{fig:xulrunner}. The fitness increases to $\overline{R}^2 =99.54\%$ and the parameters have tighter and reasonable confidence intervals. This is strong evidence that the initial adoption of the package is a Bass diffusion process. To explain the last part, the model should be extended with an obsolescence term. 
+Excluding the blue dots from the data results in the Bass model fit from figure \ref{fig:xulrunner}. The fitness increases to $\overline{R}^2 = 99.54\%$ and the parameters have tighter and reasonable confidence intervals. This is strong evidence that the initial adoption of the package is still a Bass diffusion process. To explain the last part, the model should be extended with an obsolescence term.
 
 \subsection{Hypothesis Testing}
 
-The above examples of Bass diffusion growth suggests the central hypotheses of this article: \emph{software dependencies are a Bass innovation diffusion process.} This hypotheses is tested using a methodic approach: a random selection of ten software packages is taken and their dependee growth is fitted to the Bass diffusion model.
+The above examples of Bass diffusion growth suggests the central hypotheses of this article: \emph{open source software dependencies are a Bass innovation diffusion process.} This hypotheses is tested using a methodic approach: a random selection of ten software packages is taken and their dependee growth is fitted to the Bass diffusion model.
 
 The Gentoo portage database contains over twenty thousand packages, but only a fraction of these packages are suitable. About six thousand packages where introduced before 2004, where the growth of Gentoo itself may be confounded. Of the remaining packages, the vast majority do not have a number of other packages depedending on it, these would for example be applications (as opposed to libraries) or unpopular/niche libraries. These are filtered out by setting a lower bound for the maximum number of dependees a package has during its lifetime. Then there are infrastructural packages in Gentoo, that have no corresponding open source projects, but are used manage the pacakge database. In summary:
 
@@ -484,18 +484,9 @@ After this initial automated filtering, packages are randomly selected and manua
 
 These criteria are verified by consulting the information available through url \eqref{url:pkg}, in particular: the changelog of the ebuild file, any readme or changelog included in the earliest available version of the source code, the projects revision history and the projects homepage.
 
-The manutally rejected packages are listed in table \ref{tbl:rejected}.
+The manutally rejected packages are listed in table \ref{tbl:rejected}. It should be noted that the selection criteria are chosen strictly to ensure that the main hypotheses is tested correctly, with independent open source software projects taken from their introduction and in their whole. When looking at the rejects, it does appear that some of them (\texttt{app-text/asciidoc} and many of the \texttt{x11-libs/} packages) still follow the Bass diffusion model.
 
-C: Xorg, KDE and Qt. Interesting. They actually show Bass diffusion. Refactor/version upgrade has some diffusion to it?
-
-
-XFree86 to XOrg. There are many packages (libFS, libSM, libICE, libWindowsWM, libX11, libXScrnsaver, etc..) that have been factored out of the X into separate libraries. All introduced in January 2006 and all having a version count starting at 1.0.0.
-
-“The modern X.Org Foundation came into being in 2004 when the body that oversaw X standards and published the official reference implementation joined forces with former XFree86 developers. X11R6.7.0, the first version of the X.Org Server, was forked from XFree86 4.4 RC2. The immediate reason for the fork was a disagreement with the new license for the final release version of XFree86 4.4, but several disagreements among the contributors surfaced prior to the split. Many of the previous XFree86 developers have joined the X.Org Server project.”
-
-“In 2005 a great effort was put in the modularization of the X.Org server source code,[18] resulting in a dual release by the end of the year. The X11R7.0.0 release added a new modular build system based on the GNU Autotools, while X11R6.9.0 release kept the old imake build system, both releases sharing the same codebase. Since then the X11R6.9 branch is maintained frozen and all the ongoing development is done to the modular (using GNU Autotools) branch. The new build system also brought the use of dlloader standard dynamic linker to load plugins and drivers, deprecating the old own method. As a consequence of the modularization, the X11 binaries were moving out of their own /usr/X11R6 subdirectory tree and into the global /usr tree on many Unix systems.”
-
-%NOTE: Some rejected packages would still be good fits for the Bass diffusion model.
+The \texttt{x11-libs/} libraries where disqualified because they are the result of a refactor. In 2004 the X ecosystem re-organized, resulting in a fork of the XFree86 codebase and a subsequent decission to split the project up in smaller libraries. The current version was maintained in minor releases in both a split and unsplit variety, but with the next major version the unsplit branch was dropped. The projects show a innovator driven rappid Bass diffusion. This can be explained as the adoption of the new split release by the pre-existing users of the unsplit version. The steepness can be explained by the dependers not wanting to be left behind. The innovation based drive can be explained by the relative safety and simplicity of upgrading to a new major version. A similar library-split refactor happened with the Qt library, with similar results.
 
 \begin{table}
 \small\centering
@@ -613,13 +604,7 @@ Package & \multicolumn{2}{c}{$p$} & \multicolumn{2}{c}{$q$} & \multicolumn{2}{c}
 \end{tabular}
 \end{table}
 
-
-Five packages are good fits with an $\overline{R}^2 > 99\%$. Of the remaining five, \texttt{dev-dotnet/lxml} and \texttt{dev-cvs/mercurial} can be explained by discretization noise. The number of dependees is integer and can therefore only rise or fall in descrete steps, this introduces additional variance. It also appears to happen in \texttt{dev-haskell/cabal}, but this is an illusion since the steps in the growth are in the order of tens of packages. The reasons for these steps are unknown and likely related to Gentoo internal matters. \texttt{dev-python/simplejson} is barely under the mark, and appears to have two distinct growth spurts. It is unknown wether these growth spurts are an artifact of the Gentoo Portage database, or if they represent two specific growth phases in the project. The first spurt coincides with the \texttt{2.0} release, but no such correlation can be found for the second spurt.
-
-\texttt{dev-libs/libunique} is the only one case that clearly does not fit the Bass diffusion model, and it appears to be for the same reasons that \texttt{xulrunner} does not fit.
-
-
-
+The packages \texttt{dev-dotnet/lxml} and \texttt{dev-cvs/mercurial} show a staircase-shapped deviation from the Bass diffusion model. This can be explained as discretization noise. The number of dependees is integer and can therefore only rise or fall in descrete steps, whereas the Bass model is continuous and smooth. This introduces additional variance which lowers the $\overline{R}^2$ metric. It also appears to happen in \texttt{dev-haskell/cabal}, but this is an illusion since the steps in the growth are not singular but in the order of tens of packages. The reasons for these steps are unknown and likely related to Gentoo internal matters. \texttt{dev-libs/libunique} does not fit the Bass diffusion model well, and it appears to be for the same reasons that have been presented earlier for \texttt{xulrunner}. Despite this, all packages show $\overline{R}^2$ values over $98\%$.
 
 \section{Conclusions and Future Work}
 
@@ -654,6 +639,5 @@ as compressed GML graphs for every snapshot. Raw data is available at
 \mbox{\url{http://www.utwente.nl/mb/iebis/staff/amrit/timeline.squashfs}}
 \end{align}
 as a SquashFS compressed filesystem. The SquashFS format allows one to mount the compressed data as a read-only disk drive and operate directly on the dataset. It contains the pre-processed ebuild files and the file \verb|graphs.bip| that contains all of the graphs in a custom format specialized for quick processing of large graphs over time. A C++ toolkit to work with the \verb|graphs.bip| file is available at \url{https://github.com/Recmo/depgraph}.
-
 
 \end{document}
