@@ -1,54 +1,46 @@
-This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
+This is BibTeX, Version 0.99d (TeX Live 2013)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: paper.aux
 The style file: plainnat.bst
 Database file #1: paper.bib
-Repeated entry---line 36 of file paper.bib
- : @article{rem14
- :               ,
-I'm skipping whatever remains of this entry
-Warning--to sort, need editor, organization, or key in rem14
-Warning--empty year in rem14
-Warning--empty year in rem14
-You've used 12 entries,
+You've used 28 entries,
             2773 wiz_defined-function locations,
-            679 strings with 7054 characters,
-and the built_in function-call counts, 4763 in all, are:
-= -- 453
-> -- 178
-< -- 7
-+ -- 66
-- -- 54
-* -- 375
-:= -- 719
-add.period$ -- 45
-call.type$ -- 12
-change.case$ -- 52
-chr.to.int$ -- 12
-cite$ -- 28
-duplicate$ -- 241
-empty$ -- 450
-format.name$ -- 64
-if$ -- 1001
+            775 strings with 9933 characters,
+and the built_in function-call counts, 13362 in all, are:
+= -- 1282
+> -- 603
+< -- 24
++ -- 208
+- -- 180
+* -- 1031
+:= -- 1972
+add.period$ -- 102
+call.type$ -- 28
+change.case$ -- 142
+chr.to.int$ -- 28
+cite$ -- 56
+duplicate$ -- 648
+empty$ -- 1174
+format.name$ -- 223
+if$ -- 2882
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 10
-newline$ -- 76
-num.names$ -- 40
-pop$ -- 114
+missing$ -- 28
+newline$ -- 158
+num.names$ -- 108
+pop$ -- 292
 preamble$ -- 1
-purify$ -- 43
+purify$ -- 117
 quote$ -- 0
-skip$ -- 154
+skip$ -- 481
 stack$ -- 0
-substring$ -- 205
-swap$ -- 15
-text.length$ -- 0
+substring$ -- 664
+swap$ -- 98
+text.length$ -- 7
 text.prefix$ -- 1
 top$ -- 0
-type$ -- 123
-warning$ -- 3
-while$ -- 44
+type$ -- 296
+warning$ -- 0
+while$ -- 132
 width$ -- 0
-write$ -- 175
-(There was 1 error message)
+write$ -- 394
