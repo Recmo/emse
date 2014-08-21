@@ -1,4 +1,4 @@
-\begin{thebibliography}{21}
+\begin{thebibliography}{28}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -79,6 +79,34 @@ Robert~G Fichman and Chris~F Kemerer.
   object orientation.
 \newblock \emph{Sloan Management Review}, 1993.
 
+\bibitem[German et~al.(2007)German, Gonzalez-Barahona, and Robles]{german07}
+Daniel~M German, Jesus~M Gonzalez-Barahona, and Gregorio Robles.
+\newblock A model to understand the building and running inter-dependencies of
+  software.
+\newblock In \emph{Reverse Engineering, 2007. WCRE 2007. 14th Working
+  Conference on}, pages 140--149. IEEE, 2007.
+
+\bibitem[German et~al.(2013)German, Adams, and Hassan]{german13}
+Daniel~M German, Bram Adams, and Ahmed~E Hassan.
+\newblock The evolution of the r software ecosystem.
+\newblock In \emph{Software Maintenance and Reengineering (CSMR), 2013 17th
+  European Conference on}, pages 243--252. IEEE, 2013.
+
+\bibitem[Godfrey and Tu(2000)]{godfrey00}
+Michael~W Godfrey and Qiang Tu.
+\newblock Evolution in open source software: A case study.
+\newblock In \emph{Software Maintenance, 2000. Proceedings. International
+  Conference on}, pages 131--142. IEEE, 2000.
+
+\bibitem[Gonzalez-Barahona et~al.(2009)Gonzalez-Barahona, Robles, Michlmayr,
+  Amor, and German]{gonzalez09}
+Jesus~M Gonzalez-Barahona, Gregorio Robles, Martin Michlmayr, Juan~Jos{\'e}
+  Amor, and Daniel~M German.
+\newblock Macro-level software evolution: a case study of a large software
+  compilation.
+\newblock \emph{Empirical Software Engineering}, 14\penalty0 (3):\penalty0
+  262--285, 2009.
+
 \bibitem[Haefliger et~al.(2008)Haefliger, von Krogh, and Spaeth]{haefliger08}
 Stefan Haefliger, Georg von Krogh, and Sebastian Spaeth.
 \newblock {Code Reuse in Open Source Software}.
@@ -92,12 +120,24 @@ Stefan Haefliger, Georg von Krogh, and Sebastian Spaeth.
   International Conference on System Sciences.
 \newblock URL \url{http://scholarworks.sjsu.edu/org_mgmt_pub/1}.
 
+\bibitem[Lungu et~al.(2010)Lungu, Robbes, and Lanza]{lungu10}
+Mircea Lungu, Romain Robbes, and Michele Lanza.
+\newblock Recovering inter-project dependencies in software ecosystems.
+\newblock In \emph{Proceedings of the IEEE/ACM international conference on
+  Automated software engineering}, pages 309--312. ACM, 2010.
+
 \bibitem[MacCormack et~al.(2006)MacCormack, Rusnak, and Baldwin]{maccormack06}
 Alan MacCormack, John Rusnak, and Carliss~Y Baldwin.
 \newblock Exploring the structure of complex software designs: An empirical
   study of open source and proprietary code.
 \newblock \emph{Management Science}, 52\penalty0 (7):\penalty0 1015--1030,
   2006.
+
+\bibitem[Manikas and Hansen(2013)]{manikas13}
+Konstantinos Manikas and Klaus~Marius Hansen.
+\newblock Software ecosystems--a systematic literature review.
+\newblock \emph{Journal of Systems and Software}, 86\penalty0 (5):\penalty0
+  1294--1306, 2013.
 
 \bibitem[{Narayanan}(2001)]{narayanan01}
 Vadake~K. {Narayanan}.
@@ -136,6 +176,12 @@ Eitan {Muller} Rajendra K.~{Srivastava} {Vijay {Mahajan}}.
   Models}.
 \newblock \emph{Journal of Marketing Research}, 27:\penalty0 37--50, February
   1990.
+
+\bibitem[Wermelinger and Yu(2008)]{wermelinger08}
+Michel Wermelinger and Yijun Yu.
+\newblock Analyzing the evolution of eclipse plugins.
+\newblock In \emph{Proceedings of the 2008 international working conference on
+  Mining software repositories}, pages 133--136. ACM, 2008.
 
 \bibitem[Zheng et~al.(2008)Zheng, Zeng, Li, and Wang]{zheng08}
 Xiaolong Zheng, Daniel Zeng, Huiqian Li, and Feiyue Wang.
