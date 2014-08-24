@@ -15,12 +15,17 @@
 \usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
 \usepackage{subfigure}
 \usepackage{cite}
+\usepackage{verbatim}
+\usepackage{tabulary}
+\usepackage{amsmath}
+\usepackage{mdwlist}
+
 \newcommand{\nd}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
 \newcommand{\e}{\mathrm{e}}
 \newcommand{\tn}{\newline}
 
 \smartqed
-
+\newbox\sfloat
 
 \begin{document}
 
@@ -58,7 +63,7 @@ In the next section (section 2)  we describe the background literature of the pa
 
 
 \subsection{ Open Source Software Ecosystems}
-No software project stands entirely on its own. Software is usually developed by taking one or more existing libraries of components and combining those components in ways to create new products. Take for example a simple chat application. The chat application uses a different library for user interface development that provides components such as a window a text entry field and a button (that is labeled "send message" by the chat application). This user interface library in turn uses a graphics library to draw the lines, rectangles and text necessary for the fields and buttons. The graphics library uses a library to read font files and uses the fonts to turn text into pictures that can be displayed on the screen. The graphics library then sends the contents of the window to the window manager, which in turn uses a graphics card driver to instruct the hardware, and so on.  This collection of software projects that interact under the umbrella of a common software platform is variously been called as a software "ecosystem" \citep{manikas13}. In this paper we adopt Lungu's short and elegant description of an ecosystem as "\textit{a collection of software projects which are developed and co-evolve in the same environment}" \citep{lungu10}.
+No software project stands entirely on its own. Software is usually developed by taking one or more existing libraries of components and combining those components in ways to create new products. Take for example a simple chat application. The chat application uses a different library for user interface development that provides components such as a window a text entry field and a button (that is labeled "send message" by the chat application). This user interface library in turn uses a graphics library to draw the lines, rectangles and text necessary for the fields and buttons. The graphics library uses a library to read font files and uses the fonts to turn text into pictures that can be displayed on the screen. The graphics library then sends the contents of the window to the window manager, which in turn uses a graphics card driver to instruct the hardware, and so on.  Such a collection of software projects that interact under the umbrella of a common software platform has been variously known as a software "ecosystem" \citep{manikas13}. 
 
 The research on software ecosystems has primarily focussed on their business within a shared market or the relationships among the different businesses and hence deals with web and mobile platforms \citep{german13}.  Research on open source software ecosystems has focussed on the Debian Linux distribution \citep{gonzalez09, german07}, the Linux kernel \citep{godfrey00}, the eclipse platform \citep{wermelinger08} and recently GNU R \citep{german13}. These articles analyse the evolution of the ecosystems as growth in terms of number of packages and the dependencies among the packages and not in terms of adoption of innovation as we do in this paper.
 
@@ -73,7 +78,7 @@ In \citet{crowston08} published a comprehensive overview of academical research 
 
 \citet{german13} study the ecosystem of the GNU R project and determine the differences between the user-contributed packages and the core packages. They study the code characteristics, code evolution, dependency structures and the community surrounding the core and user-contributed packages. They find some significant significant differences in many of these aspects, and in particular they find that though user-contributed packages have been growing at a fast rate than the core packages, they remain stable in size over time \citep{german13}. Of particular interest to this paper, they examine the dependency structure of the R packages by analysing the \texttt{DESCRIPTION} file of each packages that describes the list of packages required by the particular package for proper installation. They then build an inter-dependency graph based on these package installation dependencies \citep{german13}. Their main findings related to this aspect is that there are consistently small number of dependencies for each package and that the peripheral packages have fewer dependencies \citep{german13}.
 
-In their 2008 article, \citet{zheng08} analyse the dependency graph of the Gentoo Portage package database as it was in February 2007. The global structure of the graph is analysed in graph theoretic terms of sparsity, clustering coefficient, degree distribution and degree growth rate. The authors conclude that the graph can not be explained well by existing models of network growth and they propose two new models instead. Our study differs in two ways: First, we analyse the changes to the dependency graph over time, whereas Zheng et al. look at a particular instance in 2007 \citep{zheng08}. Second, we analyse and model the development of a given software package in the dependency network, instead of the overall development of the network. It can be interesting to study how the Bass diffusion model for the development of individual nodes corresponds to Zheng et al. model for the development of the whole graph.
+In their 2008 article, \citet{zheng08} analyse the dependency graph of the Gentoo Portage package database as it was in February 2007. The global structure of the graph is analysed in graph theoretic terms of sparsity, clustering coefficient, degree distribution and degree growth rate. The authors conclude that the graph can not be explained well by existing models of network growth and they propose two new models instead. Our study differs in two ways: First, we analyse the changes to the dependency graph over time, whereas Zheng et al. look at a particular instance in 2007 \citep{zheng08}. Second, we analyse and model the development of a given software package in the dependency network, instead of the overall development of the network. It can be interesting to study how the Bass diffusion model \citep{bass69} (described in detail below) for the development of individual nodes corresponds to Zheng et al. model for the development of the whole graph.
 
 
 
@@ -87,20 +92,20 @@ Innovation and adoption of technology in general has been studied by various res
 
 \emph{Diffusion} is the process of market uptake of an innovation, the users of a particular innovation are called \emph{adopters} \citep{narayanan01}. Taking the open source projects as a 'market', these concepts can be applied to libraries and dependencies. For example, consider the projects with a graphical user interface (GUI). These have a demand for a GUI toolkit, and there are several competing implementations available (\verb|Qt|, \verb|GTK|, \verb|Wx|, etc.). The introduction and uptake of a new GUI toolkit is a process of innovation diffusion and the projects that use a particular toolkit can be considered adopters of that toolkit. When talking about software projects such a relation is often called a \emph{dependency}.
 
-In the next section we describe the Bass \citep{bass69}  diffusion model, followed by the results of our analysis of fitting the Bass diffusion model on the Gentoo portage package dependency graph. 
+In the next section we describe the Bass \citep{bass69}  diffusion model, followed by the results of our analysis of fitting the Bass diffusion model onto the change in the adoption of the packages belonging to the Gentoo portage database. 
 
 
 \subsection{The Bass diffusion model}\label{sect:Bass}
 
-Once an innovation is released to the public a process starts where an increasing portion of the market decides to use the innovation. In the theory of innovation dynamics this process is called diffusion and the users are called adopters. \citep[see][chapter 4]{narayanan01}
+Once an innovation is released to the public a process starts where an increasing portion of the market decides to use the innovation. In the theory of innovation dynamics this process is called diffusion and the users are called adopters \citep[see][chapter 4]{narayanan01}.
 
-To model the process of innovation diffusion \citet{bass69} introduces two processes that propagate an innovation. The first processes is involves individuals that decide to use an innovation based on their perception of its merits, without looking at the experiences of others. The second process involves the word-of-mouth effect or the bandwagon effect, individuals adopt the innovation solely because they hear of the experiences of previous adopters. Of course in reality, everyone will be somewhere in between these two extreme types, but for the sake of modelling it suffices to consider the relative abundance of both types.
+To model the process of innovation diffusion \citet{bass69} introduced two processes that propagate an innovation. The first processes involves individuals that decide to use an innovation based on their perception of its merits, without looking at the experiences of others. The second process involves the word-of-mouth effect or the bandwagon effect, where individuals adopt the innovation solely because they hear of the experiences of previous adopters. Of course in reality everyone will be somewhere in between these two extreme types, but for the sake of modelling it suffices to consider the relative abundance of both types.
 
-It should be noted that \citet{bass69} and all later authors, use confusing terms to describe the two types of adopters. The first type are called "innovators", not to be confused with those actually inventing the innovation and the second type are called "imitators", not to be confused with those developing imitating offerings. If one remembers that the model concerns the demand side of the market and not the supply side than it will all be clear.
+It should be noted that \citet{bass69} and many of the later authors, use confusing terms to describe the two types of adopters. The first type are called "innovators", not to be confused with those actually inventing the innovation and the second type are called "imitators", not to be confused with those developing imitating offerings. The terms seem more intuitive if one remembers that the model concerns the demand side of the market and not the supply side.
 
-To model the diffusion process, let $M$ be the total market size for the innovation and $A$ the current number of adopters, such that $0 \ge A \ge M$. The two adoption processes can then be described as follows: \citep[see also][]{bass10,mahajan90}
+We now proceed to describe the mathematical model used by \citet{bass69}. To model the diffusion process, let $M$ be the total market size for the innovation and $A$ the current number of adopters, such that $0 \ge A \ge M$. The two adoption processes can then be described as follows: \citep[see also][]{bass10,mahajan90}
 
-\emph{Innovators}: Some individuals in the market that do not yet use the innovation, might decide to adopt the innovation. The rate at which this happens is $p$, the coefficient of innovation. The number of user that do not use the innovation is $M-A$, so the inflow of adopters is $p(M-A)$.
+\emph{Innovators}: Some individuals in the market who do not yet use the innovation, might decide to adopt the innovation. The rate at which this happens is $p$, the coefficient of innovation. The number of users that do not use the innovation is $M-A$, so the inflow of adopters is $p(M-A)$.
 
 \emph{Imitators}: The people who use the innovation can express their fondness to people who do not yet use the innovation, which can influence them to adopt the innovation. The rate at which this happens is $q$, the rate of imitation. The number of users that do not use the innovation is again $M-A$, the chance of meeting someone that does use the innovation is proportional to $\frac{A}{M}$ so the inflow of imitators can be modelled as $q\frac{A}{M}(M-A)$.
 
@@ -116,7 +121,7 @@ Often one is not concerned with the market size $M$ and only interested in the f
 \nd{F}{t} &= \left(p + q F\right)(1 - F)
 \end{align}
 
-\citet{bass69} solves this ordinary differential equation, which results in the following function for $F$:
+\citet{bass69} solves this ordinary differential equation, and arrives at the following function for $F$:
 
 \begin{align}\label{eq:bass-direct}
 F(t) &= \frac{1 - \e^{-(p+q)t}}{1+\frac{q}{p}\e^{-(p+q)t}}
@@ -129,17 +134,17 @@ F(t) &= \frac{1 - \e^{-(p+q)t}}{1+\frac{q}{p}\e^{-(p+q)t}}
 \label{fig:bass}
 \end{wrapfigure}
 
-In figure~\ref{fig:bass} two Bass diffusions are plotted using equation \eqref{eq:bass-direct}, one representing an innovation diffusion with many innovators and few imitators and one representing a diffusion with many imitators and few innovators. When there are more imitators it takes a while for the innovation to take of since the majority of the potential users are waiting for someone else to try it first.
+In figure~\ref{fig:bass} two Bass diffusions are plotted using equation \eqref{eq:bass-direct}, one representing an innovation diffusion with many innovators and a few imitators and one representing a diffusion with many imitators and a few innovators. When there are more imitators it takes a while for the innovation to be adopted since the majority of the potential users are waiting for someone else to try it first.
 
-To fit the model of equation~\eqref{eq:bass-direct} to empirical data two additions are necessary. First the market size has to be re-introduced, this is done by taking $A(t) = M F(t)$. The market size, $M$, in this equation represents the total number of potential adopters for this specific product, not the total number of adopters for a category of products. Since it is not possible to know in advance who will eventually be using an innovation it is difficult to determine $M$ in advance. Furthermore, the Bass model assumes the market size to be constant and competition free, which is unlikely in practise. Therefore the quantity has to be fitted to the data, statistical goodness-of-fit measures can then be used to determine the validity of the assumptions. The second addition is the time at which the innovation is introduced. Until now the assumption was that the introduction was at $t=0$, in arbitrary units. For empirical data fitting it is necessary to be able to specify an arbitrary introduction time. This can be achieved by introducing the introduction time $t_0$ in the equation as $A(t) = M F(t - t_0)$. Again, this variable can be fitted if it can not be determined in advance.
+To fit the model of equation~\eqref{eq:bass-direct} to empirical data two additions are necessary. First the market size has to be re-introduced, this is done by taking $A(t) = M F(t)$. The market size, $M$, in this equation represents the total number of potential adopters for this specific product, not the total number of adopters for a category of products. Since it is not possible to know in advance who will eventually be using an innovation, it is difficult to determine $M$ in advance. Furthermore, the Bass model assumes the market size to be constant and competition free, which is unlikely in practice. Therefore the quantity has to be fitted to the data. Statistical goodness-of-fit measures can then be used to determine the validity of the assumptions. The second addition to the basic model is the time at which the innovation is introduced. Until now the assumption was that the introduction was at $t=0$, in arbitrary units. For empirical data fitting it is necessary to be able to specify an arbitrary introduction time. This can be achieved by introducing the introduction time $t_0$ in the equation as $A(t) = M F(t - t_0)$. Again, this variable can be fitted if it can not be determined in advance.
 
 \begin{align} \label{eq:bass-model}
 	A(t) &= M \frac{1 - \e^{-(p+q)(t-t_0)}}{1 + \frac{q}{p}\e^{-(p+q)(t-t_0)}}
 \end{align}
 
-Equation~\eqref{eq:bass-model} incorporates the two additions and can be readily applied to empirical data. In \citep{mahajan95} and many other empirical studies this happens in the differential form, since only absolute sales figures are available and not absolute user figures. The dependency graph method presented later allows one to obtain absolute usage number, so the differential form is not further used. 
+Equation~\eqref{eq:bass-model} incorporates the two additions and can be readily applied to empirical data. In \citep{mahajan95} and many other empirical studies this happens in the differential form, since generally only absolute sales data are available and not absolute user data. The dependency graph method presented later allows one to obtain absolute usage number, so the differential form is not further used. 
 
-The interpretation of the variables and parameters and their dimensions is presented in table~\ref{tbl:bass-model}. When applying the formula one should note that it is non-linear, so ordinary linear regression can not be used. Instead one can use non-linear least squares regression, but note the correct number of the degrees of freedom. This can be done using existing mathematical/statistical packages. In this paper we used the \verb|NonlinearModelFit| procedure in Mathematica. 
+The interpretation of the variables and parameters and their dimensions is presented in table~\ref{tbl:bass-model}. When applying the formula, one should note that it is non-linear, so ordinary linear regression can not be used. Instead one can use non-linear least squares regression, while noting the correct number of the degrees of freedom. This can be done using existing mathematical/statistical packages. In this paper we used the \verb|NonlinearModelFit| procedure in Mathematica. 
 
 \begin{table}
 \centering\small
@@ -160,7 +165,10 @@ $q$   & time$^{-1}$ & rate of adopter imitation \\
 \end{tabular}
 \end{table}
 
-To model the process of innovation diffusion, Bass \citep{bass69} introduces two processes that propagate an innovation. The first processes involves individuals that decide to use an innovation based on their perception of its merits. The second process involves the word-of-mouth effect or the bandwagon effect: individuals adopt the innovation because they hear of the experiences of previous adopters. In reality however, everyone will be somewhere in between these two extreme types, but for the sake of modelling it suffices to consider the relative contribution of both types. It should be noted that for historical reasons \citet{bass69} and all later authors use the following terms; the first type are called "innovators", not to be confused with those actually inventing the innovation and the second type are called "imitators", not to be confused with those developing imitating offerings. Taking $M$ to stand for the total market size and $A$ to stand for the total number of adopters the Bass diffusion can be modelled with two simultaneous processes:
+%Repetition of the earlier text follows:
+\begin{comment}
+
+ To model the process of innovation diffusion, \citet{bass69} introduces two processes that propagate an innovation. The first processes involves individuals that decide to use an innovation based on their perception of its merits. The second process involves the word-of-mouth effect or the bandwagon effect - individuals adopt the innovation because they hear of the experiences of previous adopters. In reality however, people lie somewhere in between these two extreme types. For the sake of modelling, it suffices to consider the relative contribution of both types. It should be noted that for historical reasons \citet{bass69} and all later authors use the following terms; the first type are called "innovators", not to be confused with those actually inventing the innovation and the second type are called "imitators", not to be confused with those developing imitating offerings. Taking $M$ to stand for the total market size and $A$ to stand for the total number of adopters the Bass diffusion can be modelled with two simultaneous processes:
 
 \emph{Innovators}: Market participants not using use the innovation yet might decide to adopt the innovation. The rate at which this happens is $p$, the coefficient of innovation. The number of user that do not use the innovation is $M-A$, so the inflow of adopters is $p(M-A)$.
 
@@ -180,11 +188,26 @@ This first order homogeneous ordinary differential equation can be solved for $A
 
 The solution assumes the innovation is introduced at time zero, to account for this the substitution $t \rightarrow t - t_0$ is made. This results in four parameters, $t_0$, $M$, $p$ and $q$ that can be fit to the empirical data.
 
+\end{comment}
+%End repetition
 
 \section{The Gentoo Portage Dataset}
+%Why Gentoo?
+To apply the techniques described above, we need accurate project dependency information over time. There are four qualities a dataset should have to produce good and relevant innovation information that can arguably be generalised to the open source community as a whole, these are:
 
-\emph{Why Gentoo?...}
+\begin{itemize}
 
+\item Reliable list of projects - A good dataset should contain as many projects as it can (completeness) with as much heterogeneity as it can. Or, put differently, with as little bias as it can (neutrality).
+
+\item Presence of correct inter project dependencies - A good dataset needs to be monitored to make sure there are no important project dependencies that are missing as well as no extraneous dependencies present.
+
+\item Chronology of the data - The dataset should not only contain a list of projects and dependencies, but also track how this changes over time. Here we are interested in the resolution and timeliness of the dataset. Resolution refers to the minimal discernible unit of time in the dataset. If the dataset is produced by taking monthly snapshots of the projects and their relations, then the resolution would be one month. Timeliness refers to the responsiveness of the data gathering method to changes. When a project or dependency gets added or removed, will this be apparent in the next snapshot? Or will it take a while for the information to trickle through.
+
+\item Availability - From a practical point of view it is advantageous if the dataset is easily available and codified.  By easily available, we mean that the dataset can be obtain by reasonable means, for example by downloading from one location. By codified, we mean that the data is written in a manner that allows automated processing
+
+\end{itemize}
+
+We found the Gentoo Portage data source to satisfy all these conditions, especially with regard to the minting the project dependencies and the frequent release cycles (also see Appendix B).
 Now that a data source is selected, it is time to extract the required information and process the data into a form that allows easy calculations. The major steps are collecting the raw data, parsing this into a simpler format and producing the final dependency graph from this simpler form. Some post-processing can then be done on the dependency graph. In the process, the dataset shrunk from thirteen gigabytes (taking more than a week to collect), to thirty megabytes that could be processed in four seconds.
 
 In the remainder of this article, the terms `project', `package' and `library' will be used as synonyms for a node in the dependency graph.
@@ -615,5 +638,48 @@ as compressed GML graphs for every snapshot. Raw data is available at
 \end{align}
 as a SquashFS compressed filesystem. The SquashFS format allows one to mount the compressed data as a read-only disk drive and operate directly on the dataset. It contains the pre-processed ebuild files and the file \verb|graphs.bip| that contains all of the graphs in a custom format specialized for quick processing of large graphs over time. A C++ toolkit to work with the \verb|graphs.bip| file is available at \url{https://github.com/Recmo/depgraph}.
 
+\section{Selecting the right dataset}
+
+\begin{table}[h]\centering\small
+\caption{Major FOSS distributions and their package databases.}
+\label{tbl:pkgmngrs}
+\sbox\sfloat{\begin{tabular}{llllrl}
+\toprule
+& Initial release & package manager & source/binary & packages & release cycle \\
+\midrule
+Ubuntu           & 20-10-2004 & dpkg     & binary & 34,580 & $\frac12$ year \\
+Fedora/Red Hat   & 13-04-1995 & rpm      & binary &  7,334 & $\frac12$ year \\
+(open)SUSE       & 01-03-1994 & rpm      & binary &  6,011 & $1$ year \\
+Debian           & 17-06-1996 & dpkg     & binary & 40,163 & $2$ year \\
+Mandriva         & 23-06-1998 & rpm      & binary &  5,779 & $\frac12$ year \\
+Mint             & 27-08-2006 & dpkg     & binary & 30,000 & $\frac12$ year \\
+PCLinuxOS        & 01-10-2003 & rpm      & binary & - & $\frac12$ year \\
+Slackware        & 16-07-1993 & pkgtools & binary & 10,590 & $1$ year \\
+Gentoo           & 31-03-2002 & portage  & source$^a$ & 14,018 & rolling \\
+CentOS           & 14-05-2004 & rpm      & binary &  2,599 & $\frac12$ year \\
+FreeBSD          & 01-11-1993 & ports    & source & 22,020 & $\frac12$ year \\
+\bottomrule
+\end{tabular}}\usebox\sfloat
+\\
+\footnotesize
+\begin{tabulary}{\wd\sfloat}{r@{\,}>{\raggedright\arraybackslash}L}
+$^a$ & About 100 packages are also provided in binary form.\\
+\multicolumn{2}{>{\raggedright\arraybackslash}p{\wd\sfloat}}{
+Source: Based on Distrowatch, data from Wikipedia and respective distribution websites.
+}\\
+\end{tabulary}
+\end{table}
+
+Table~\ref{tbl:pkgmngrs} lists the popular Linux distributions. For each distribution a number of details is given in the columns. The date of its first published version is given. The `package manager' refers to the system used to install and maintain software in a running system. This is relevant for this paper since the package manager must know what packages depend on what other packages so that it installs all the prerequisites. The `source/binary' column specifies whether the packages are installed by compiling the source code or if the distribution provides pre-compiled binaries. The later case is more popular since compiling software is very slow and error prone compared to simply copying pre-compiled files. The last columns list the number of packages in the package database at the time of writing and the average duration between new versions of the package database. Gentoo is unique in that it does not periodically release a new version of the package database, but updates its database as new versions of packages become available.
+
+Reflecting on the qualities of a dataset the numbers of packages do not seem too impressive at first sight. But unlike the previous datasets there are few insignificant packages, no distribution would like to spend time supporting a package that is unfinished or abandoned by its original developers. On the other hand, their user base requires them to include all the popular projects. Given that the most relevant packages are included, the fact that the list does not include `noise' in the form of insignificant projects could be considered a bonus.
+
+Still, there can be a bias in the selection of packages. Ubuntu, for example, has a specific target audience of novice Linux users and provides them with a Gnome based desktop environment. This means there is less pressure incentive for Ubuntu to include other desktop environments and advanced server software in their package database. Despite this, Ubuntu's database still includes a few other desktop environments and various advanced packages. Broad support appears more important than the burden of supporting many components. In general, the distributions have a user base that is very broad, some distributions are used from large server farms to mobile device and provides software packages for users that range from children to professionals in various fields.
+
+A distinctive advantage of distribution package databases is that they contain very good dependency information. As mentioned earlier the package database needs to contain correct dependency for correct operation of the system and since the package manager operates automatically this information needs to be fully codified. With relative ease one can extract the entire dependency graph from the package database. This greatly facilitates gathering a dataset.
+
+Source distributions will necessarily contain more a more complete dependency graph than binary distributions. Both kinds of package databases need to list all the dependencies required to \emph{use} a particular package, but source base distribution need to include all de packages required to \emph{compile} and \emph{use} the project.
+
+The Gentoo portage database and the FreeBSD ports databases are ideal candidates. Both have all the good qualities of a source based package database. FreeBSD's has the advantage that it has a long history and more packages, Gentoo's has the advantage that it has better time resolution. Since the first author is very familiar with Gentoo's database, this one is chosen.
 
 \end{document}
