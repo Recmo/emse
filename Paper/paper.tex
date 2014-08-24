@@ -208,7 +208,7 @@ To apply the techniques described above, we need accurate project dependency inf
 \end{itemize}
 
 We found the Gentoo Portage data source to satisfy all these conditions, especially with regard to the minting the project dependencies and the frequent release cycles (also see Appendix B).
-Now that a data source is selected, it is time to extract the required information and process the data into a form that allows easy calculations. The major steps are collecting the raw data, parsing this into a simpler format and producing the final dependency graph from this simpler form. Some post-processing can then be done on the dependency graph. In the process, the dataset shrunk from thirteen gigabytes (taking more than a week to collect), to thirty megabytes that could be processed in four seconds.
+Now that a data source is selected, we extract the required information and process the data into a form that allows easy calculations. The major steps are collecting the raw data, parsing this into a simpler format and producing the final dependency graph from this simpler form. Some post-processing can then be done on the dependency graph. In the process, the dataset we find that the dataset shrunk from thirteen gigabytes (taking more than a week to collect), to thirty megabytes that could be processed in four seconds.
 
 In the remainder of this article, the terms `project', `package' and `library' will be used as synonyms for a node in the dependency graph.
 
@@ -234,20 +234,18 @@ Using the \verb|cvs| command one can download the entire database as it was at a
 \label{cmd:cvs}
 \end{align}
 
-Using a small utility written for the task, this command was repeatedly invoked to download all the databases from 1 January 2000 until mid 2012, with increments of one month. The \verb|.ebuild|, \verb|.eclass| and \verb|.eblit| files are stored. Other files are ignored, to save space since they contain no relevant information. This whole downloading processes took about a week and a half and the resulting database consists of three million files occupying thirteen gigabytes of space. There are also files specifying packages renames, but since these only get appended to and never deleted they where taken from the latest version of the database.
+Using a small utility written for the task, this command was repeatedly invoked to download all the databases from 1 January 2000 until mid 2012, with increments of one month. The \verb|.ebuild|, \verb|.eclass| and \verb|.eblit| files are stored. Other files were ignored, to save space since they contain no relevant information. This whole downloading processes took about a week and a half and the resulting database consisted of three million files occupying thirteen gigabytes of space. There were also files specifying packages renames, but since these only get appended to and never deleted, they were taken from the latest version of the database.
 
 \subsection{Parsing}
 
-The files are written in a text based computer language called `ebuild' which is based on the Bash shell script language. Being a scripting language, the files can refer to other files and include complicated code to calculate dependencies on demand. This eases the task of the script developer, since he can automate many processes, but it complicates the task of extracting data. Several approaches where tried to extract the data in the industrial quantities the analysis requires.
+The files are written in a text based computer language called `ebuild' which is based on the Bash shell script language. Being a scripting language, the files can refer to other files and include complicated code to calculate dependencies on demand. This eases the task of the script developer, since he can automate many processes, but it complicates the task of extracting data. We tried several approaches to extract the data in the industrial quantities the analysis requires.
 
-The first approach was to use Paludis and its C++ bindings to load a repository and extract metadata. Paludis is a tool designed to process ebuild files, we then query its database interface to gather all the dependency information from all the packages. This approach takes a lot of time, it requires around a half an hour per database version, but it fails on some of the older databases because the format of the database changed over time.
+The first approach was to use Paludis and its C++ bindings to load a repository and extract metadata. Paludis is a tool designed to process ebuild files, we then query its database interface to gather all the dependency information from all the packages. This approach takes a lot of time, it requires around a half an hour per database version, but it failed on some of the older databases because the format of the database changed over time.
 
 % Eclasses
-The second attempt was to use a custom build metadata extraction program that also supports an older version of the database. This parser looks for text patterns resembling dependency specifications and implements only a minimal amount of the ebuild file format (basically only dependencies and the \verb|inherit| inclusion statement). This technique is very fast, processing the entire set in 70 minutes, but fails on the newer databases that use complex techniques such as macro's in the dependency specifications.
+The second attempt was to use a custom build metadata extraction program that also supports an older version of the database. This parser looks for text patterns resembling dependency specifications and implements only a minimal amount of the ebuild file format (basically only dependencies and the \verb|inherit| inclusion statement). This technique is very fast, processing the entire set in 70 minutes, but fails on the newer databases that use complex techniques such as macros in the dependency specifications.
 
-The final method is a hybrid of the first two, using the Paludis' \verb|instruo| command to pre-process and expand all the macros to create simplified versions that can be parsed using the custom parser. The \verb|instruo| command was run on every version of the database downloaded. Where the command failed on a package (the older format ones) the original was kept. The total running time of this operation was around four days.
-
-
+The final method is a hybrid of the first two, using the Paludis' \verb|instruo| command to pre-process and expand all the macros to create simplified versions that can be parsed using the custom parser. The \verb|instruo| command was run on every version of the downloaded database. When the command failed on a package (the older format ones), the original was kept. The total running time of this operation was around four days.
 
 \subsection{Producing the Dependency Graphs}
 
@@ -270,18 +268,18 @@ player? (
 \caption{Fragment of the runtime dependencies of the Amarok music player.}\label{fig:amarokruntime}
 \end{wrapfigure}
 
-Now the data is in 154 snapshots of the package database in a simplified text based format. This is several gigabytes and several millions of files large and needs to be processed into dependency graphs. Obviously it is inhumane to do this by hand, therefore more specialized tools were developed.
+Now the data was in 154 snapshots of the package database in a simplified text based format. This is several gigabytes and several millions of files large and needs to be processed into dependency graphs. This is naturally very difficult to do manually, therefore more specialised tools were developed.
 
-By design the database can work with complicated dependency relations, such as ``package \verb|amarok| requires package \verb|phonon-kde|, minimum version \verb|4.3|, but only when feature \verb|player| is required''. This is would be coded as \verb|player?| \verb|(| \verb|>=kde-base/phonon-kde-4.3| \verb|)|. An example of the run time dependencies for the Amarok music player is given in figure~\ref{fig:amarokruntime}. The figure includes more complex rules such as ``either package X or package Y is required'', `` package X is required to contain feature Y'', etcetera.
+By design the database can work with complicated dependency relations, such as ``package \verb|amarok| requires package \verb|phonon-kde|, minimum version \verb|4.3|, but only when feature \verb|player| is required''. This would be coded as \verb|player?| \verb|(| \verb|>=kde-base/phonon-kde-4.3| \verb|)|. An example of the run time dependencies for the Amarok music player is given in figure~\ref{fig:amarokruntime}. The figure includes more complex rules such as ``either package X or package Y is required'', `` package X is required to contain feature Y'', etcetera.
 
 % Ignoring version specifiers, conditionals, blocks, use flags
-These conditional rules are relevant when compiling and running software, but the conditions are not necessary when analysing component use from an innovation perspective. If Amarok has an optional dependency on a package, the developers of Amarok are actively using the innovation provided by that package even though it may not be enabled by the end user in the final product. For this reason, and of simplicity, all the conditionals are ignored when parsing the ebuilds.
+These conditional rules are relevant when compiling and running software, but the conditions are not necessary when analysing component use from an innovation perspective. If Amarok has an optional dependency on a package, the developers of Amarok are actively using the innovation provided by that package even though it may not be enabled by the end user in the final product. For this reason, and for the sake of simplicity, all the conditionals are ignored when parsing the ebuilds.
 
 % Only process latest version at the time of the snapshot
-When a database snapshot contains several versions of the same package, only the latest is used. For some of the analysis techniques presented in the version information might be relevant, but at this point it was decided not to include different versions to simplify processing analysis. When several versions where available in the database at a certain point in time, only the highest version was included. This ensures that each snapshot represents the state of art at that time.
+When a database snapshot contains several versions of the same package, only the latest is used. For some of the analysis techniques presented in the version information might be relevant, but at this point it was decided not to include different versions to simplify processing analysis. When several versions where available in the database at a certain point in time, only the highest version was included. This ensures that each snapshot represents the state of art at that point of time.
 
 % Parsing DEPENDS, RDEPENDS and PDEPENDS
-In the Gentoo Portage database the dependencies are sorted in two kinds, compile time dependencies and runtime dependencies. The first kind are required to build and install the package. The second kind is only required when actually using the package. The reason for this distinction is a technical: it solves installation issues with cyclical dependencies. For the current purposes both kinds of dependencies are considered equal.
+In the Gentoo Portage database, the dependencies are sorted in two kinds, compile time dependencies and runtime dependencies. The first kind is required to build and install the package. The second kind is only required when actually using the package. The reason for this distinction is a technical one: it solves installation issues with cyclical dependencies. For our research purpose, both kinds of dependencies are considered equal.
 
 \begin{wraptable}{r}{0.5\textwidth}
 \vspace{-1em}
@@ -317,12 +315,10 @@ Size & 2 MB \\
 \end{wraptable}
 
 % Package moves
-Sometimes, package get renamed or moved around in the database, this needs to be accounted for. Luckily, to allow users to upgrade from an older version to a newer version the processing of moves and renames has been automated in the Gentoo Portage database. The developers maintain a list of all the moves and renames that have happened in the database in a structured format. The latest version of this list is used to retroactively change all the package names in the historical snapshots to their modern name. This ensures that moves and renames do not harm historical continuity in the dataset.
+Sometimes, packages get renamed or moved around in the database, this needs to be accounted for. Luckily, to allow users to upgrade from an older version to a newer version the processing of moves and renames has been automated in the Gentoo Portage database. The developers maintain a list of all the moves and renames that have occurred in a structured format (in the database). The latest version of this list is used to retroactively change all the package names (in the historical snapshots) to their modern name. This ensures that moves and renames do not harm the historical continuity in the dataset.
 
 % Package provides
 Using all the observations and choices made above, a tool was developed to extract dependency graphs from all the simplified database snapshots. The shear scale of the resulting dataset, $1.3$ million packages and $6.9$ million dependency relations, required a solution to store efficiently. Therefore, a compressed format was developed that only stores the changes between the historical snapshots instead of storing whole snapshots. The extraction process took three hours and resulted in a $29$ megabyte file. Reading this file into memory resident data structures and performing simple queries takes about $4$ seconds. The dataset is now in a usable form. The dataset and the details of the data structure can be seen in Appendix 1.
-
-
 
 \section{Exploration of the Dataset}
 
@@ -333,7 +329,7 @@ Using all the observations and choices made above, a tool was developed to extra
 \caption{Growth of the Gentoo package database over time.}\label{fig:pkgsgrowth}
 \end{figure}
 
-In figure~\ref{fig:pkgsgrowth} the number of packages in the database is plotted over time. One can see how the database started in 2001, underwent a period of rapid growth between 2002---2006 and settled into calm a linear growth from 2006 onwards. In figure~\ref{fig:pkgsgrowthdelta} the rate of introducing and removing packages is plotted over time. This show two spikes, one at the start of 2002 and one in 2005. The cause of these spikes was not thoroughly investigated, but a likely cause is a massive cleanup and refactoring of the database. This is a warning sign that the data exactly at these points might contain a lot of noise. In general, the data before 2006 should be considered with more caution than the data afterwards.
+In figure~\ref{fig:pkgsgrowth} the number of packages in the database is plotted over time. One can see how the database started in 2001, underwent a period of rapid growth between 2002---2006 and settled into calm a linear growth from 2006 onwards. In figure~\ref{fig:pkgsgrowthdelta} the rate of introducing and removing packages is plotted over time. This shows two spikes, one at the start of 2002 and one in 2005. The cause of these spikes was not thoroughly investigated, but a likely cause is a massive cleanup and refactoring of the database. This is a warning sign that the data exactly at these points might contain a lot of noise. In general, the data before 2006 should be considered with more caution than the data afterwards.
 
 The effect of the growth of the entire dataset on the number of dependencies for individual packages was investigated, but no influence was found. Since the total number of packages grows one would expect the `market' for a certain package to grow and thus the number of dependency relations to that package to grow. To compensate for this one could divide the number of dependers by the total number of packages, compare this with using a market-share instead of an absolute number of users. In practice, this only made any significant difference for early data, but that was determined to be unreliable anyway. In the interest of keeping the analysis simple no compensation was made for the growth of the number of packages.
 
@@ -683,15 +679,3 @@ Source distributions will necessarily contain more a more complete dependency gr
 The Gentoo portage database and the FreeBSD ports databases are ideal candidates. Both have all the good qualities of a source based package database. FreeBSD's has the advantage that it has a long history and more packages, Gentoo's has the advantage that it has better time resolution. Since the first author is very familiar with Gentoo's database, this one is chosen.
 
 \end{document}
-
-
-% TODO: Mention papers
-\cite{gonzalez09}
-\cite{german13}
-\cite{wermelinger08}
-\cite{godfrey00}
-
-
-
-
-
