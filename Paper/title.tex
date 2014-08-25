@@ -1,0 +1,54 @@
+\RequirePackage[l2tabu, orthodox]{nag}
+%\documentclass[onecolumn,draft]{svjour3}
+%\documentclass[onecolumn,final]{svjour3}
+\documentclass[smallextended,final]{svjour3}
+\usepackage{amsmath}
+\usepackage[round]{natbib}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{microtype} % Finetunes spacing, load after fonts
+\usepackage{siunitx}
+\usepackage{alltt}
+\usepackage{fancyvrb}
+\usepackage{wrapfig}
+\usepackage[colorlinks=false, pdfborder={0 0 0}]{hyperref} % Should be loaded last
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\usepackage{subfigure}
+\usepackage{cite}
+\usepackage{verbatim}
+\usepackage{tabulary}
+\usepackage{amsmath}
+\usepackage{mdwlist}
+
+\newcommand{\nd}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\tn}{\newline}
+
+\smartqed
+\newbox\sfloat
+
+\begin{document}
+
+
+\title{Diffusion of Innovation in the Open Source Software Ecosystem}
+\subtitle{An Empirical Study of the Gentoo Package Database} 
+\dedication{}
+\author{Remco Bloemen \and Chintan Amrit}
+\institute{University of Twente, The Netherlands}
+
+\maketitle
+
+%\tableofcontents
+
+\begin{abstract}
+Open source software projects have been at the centre of innovation in the software industry. However, the dynamics of open source project innovation and adoption remain under-researched. This is especially the case in large open source software ecosystems, where projects can depend on many projects as well as have many dependers. 
+
+In this paper we make the case that software package dependencies are a form of  adoption of innovation. We then test this on the time-evolution of the Gentoo package dependency graph. We find that the Bass model of innovation diffusion fits the growth of the number of packages depending on a given library with an $\overline{R}^2 > 98\%$. This finding provides open source project users and managers with the information and the possibility to not only identify the innovative open source libraries, but also to predict the the adoption of an open source library over its growth phase.
+\end{abstract}
+
+\begin{keywords}{
+Open Source Adoption; Innovation Diffusion; Open Source package dependency; Bass diffusion model}
+\end{keywords}
+
+
+\end{document}
